@@ -78,13 +78,13 @@ class ThemeConstant {
   );
 
   static const ColorScheme lightScheme = ColorScheme(
-    primary: Color(0xFFD30101),
+    primary: Color(0xFF0F3EB6),
     primaryVariant: Color(0xFF990000),
-    secondary: Color(0xFF8B9299),
+    secondary: Color(0xFFF9F9F9),
     secondaryVariant: Color(0xFFBFBFBF),
-    background: Color(0xFF161F28),
+    background: Color(0xFFFFFFFF),
     surface: Color(0xFF172634),
-    error: Color(0xFFB00020),
+    error: Color(0xFFF44336),
     onPrimary: Color(0xFFFFFFFF),
     onSecondary: Color(0xFFFFFFFF),
     onBackground: Color(0xFFFFFFFF),

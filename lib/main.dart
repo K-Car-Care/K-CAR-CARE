@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
+import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,  
       title: 'Flutter Demo',
       theme: ThemeData(
-      
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomeScreen(),
+      home: const RegistrationScreen(),
     );
   }
 }
