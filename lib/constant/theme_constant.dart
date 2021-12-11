@@ -80,14 +80,14 @@ class ThemeConstant {
   static const ColorScheme lightScheme = ColorScheme(
     primary: Color(0xFF0F3EB6),
     primaryVariant: Color(0xFF990000),
-    secondary: Color(0xFFF9F9F9),
+    secondary: Color(0xFF979797),
     secondaryVariant: Color(0xFFBFBFBF),
     background: Color(0xFFFFFFFF),
     surface: Color(0xFF172634),
     error: Color(0xFFF44336),
     onPrimary: Color(0xFFFFFFFF),
     onSecondary: Color(0xFFFFFFFF),
-    onBackground: Color(0xFFFFFFFF),
+    onBackground: Color(0xFF000000),
     onSurface: Color(0xFFFFFFFF),
     onError: Color(0xFFFFFFFF),
     brightness: Brightness.light,
@@ -176,6 +176,4 @@ class ThemeConstant {
         bodyColor: lightScheme.onSurface,
         decorationColor: lightScheme.onSurface,
       );
-
-
 }
