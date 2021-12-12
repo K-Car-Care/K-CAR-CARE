@@ -5,6 +5,7 @@ import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
 import 'package:k_car_care_project/screen/notification_screen/main_notification.dart';
+import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
 import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
 
 import 'components/card_home_screen.dart';
@@ -89,7 +90,7 @@ class CardWidget extends StatelessWidget {
       "color": const Color(0xff96da45),
       "image": 'assets/service_images/service.svg',
       "title": "Account",
-      "desc": "CustomeR profile,",
+      "desc": "Your Profile",
     },
     {
       "color": const Color(0xffff6968),
@@ -147,6 +148,13 @@ class CardWidget extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (_) => const ServiceScreen())),
+                  }
+                else if (data[index]["title"] == "Account")
+                  {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const ProfileScreen())),
                   }
               },
               child: HomeCard(
