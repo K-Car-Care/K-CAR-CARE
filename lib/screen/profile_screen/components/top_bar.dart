@@ -12,9 +12,10 @@ class TopBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           buildIcon(
-            iconData: Icons.arrow_back,
-            onTap: () => Navigator.pop(context),
-          ),
+              iconData: Icons.arrow_back,
+              onTap: () {
+                Navigator.pop(context);
+              }),
           buildIcon(
             iconData: Icons.logout_outlined,
             onTap: () {
@@ -28,7 +29,9 @@ class TopBar extends StatelessWidget {
 
   Widget buildIcon({required Function onTap, required IconData iconData}) {
     return GestureDetector(
-      onTap: () => onTap,
+      onTap: () {
+        return onTap();
+      },
       child: Container(
           decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.5), shape: BoxShape.circle),
