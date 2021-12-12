@@ -1,7 +1,19 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'screen/home_screen/home_screen.dart';
 
-void main() {
+import 'package:get/get.dart';
+import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -10,13 +22,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+    return GetMaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: ThemeConstant.lightScheme.background,
+        appBarTheme: AppBarTheme(color: ThemeConstant.lightScheme.background),
       ),
-      home: const MyHomeScreen(),
+      debugShowCheckedModeBanner: false,
+      //Hello
+      home: const RegistrationScreen(),
     );
   }
 }

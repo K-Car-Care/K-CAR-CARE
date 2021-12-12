@@ -1,9 +1,13 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, deprecated_member_use
+// ignore_for_file: prefer_const_constructors, avoid_print, deprecated_member_use, unrelated_type_equality_checks
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/screen/authenication_screen/otp_verification_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -17,22 +21,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController controller = TextEditingController();
   String initialCountry = 'CAM';
   PhoneNumber number = PhoneNumber(isoCode: 'KH');
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  String verificationIDRecieved = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeConstant.lightScheme.background,
       body: SafeArea(
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            physics: BouncingScrollPhysics(),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              alignment: Alignment.topLeft,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            alignment: Alignment.topLeft,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              physics: BouncingScrollPhysics(),
               child: Form(
                 key: formKey,
                 child: Column(
@@ -102,6 +109,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 4.0),
                         child: InternationalPhoneNumberInput(
+                          textFieldController: controller,
                           onInputChanged: (PhoneNumber number) {},
                           onInputValidated: (bool value) {
                             print(value);
@@ -116,8 +124,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             fontFamily: "Poppins",
                           ),
                           initialValue: number,
-                          maxLength: 8,
-                          hintText: "e.g 32 123 456",
+                          maxLength: 10,
+                          hintText: "e.g 092 123 456",
                           keyboardType: TextInputType.numberWithOptions(
                             signed: true,
                             decimal: true,
@@ -129,6 +137,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ),
                           onSaved: (PhoneNumber number) {
                             print('On Saved: $number');
+                            setState(() {
+                              controller.toString() == number;
+                            });
                           },
                         ),
                       ),
@@ -143,7 +154,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             splashColor: Colors.white.withOpacity(.25),
                             color: Colors.black,
                             shape: CircleBorder(),
-                            onPressed: () {},
+                            onPressed: () {
+                              print(
+                                  "push to OTP Screen ${controller.text.toString()}");
+                              verifyPhoneNumber();
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(14.0),
                               child: Icon(
@@ -211,9 +226,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .04,
-                    ),
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: Row(
@@ -247,6 +259,30 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
       ),
     );
+  }
+
+  void verifyPhoneNumber() async {
+    await _firebaseAuth.verifyPhoneNumber(
+        phoneNumber: "+855${controller.text.toString()}",
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await _firebaseAuth.signInWithCredential(credential).then((value) {
+            print("success");
+            Get.to(
+              () => OTPVerificationScreen(
+                phoneNum: controller.text.toString(),
+              ), 
+            );
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print(e.message);
+        },
+        codeSent: (String verificationID, int? resendToken) {
+          setState(() {
+            verificationIDRecieved = verificationID;
+          });
+        },
+        codeAutoRetrievalTimeout: (String verfictionID) {});
   }
 
   void getPhoneNumber(String phoneNumber) async {

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "310676766481",
+    "project_id": "k-car-care-project",
+    "storage_bucket": "k-car-care-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310676766481:android:e2017c62e6f1d51b6716b0",
+        "android_client_info": {
+          "package_name": "com.example.k_car_care_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310676766481-43arhmgcts3mnb42lfho7dbqoqvmshhd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.k_car_care_project",
+            "certificate_hash": "15f05ba4a28ee5c57b35612c9a36790e3e516f5c"
+          }
+        },
+        {
+          "client_id": "310676766481-bih63aj382dclp9idesqrc9sm1sgvf51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2tZhKh-ewrNRIZsw5CK3O-YN9kSV3RDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310676766481-bih63aj382dclp9idesqrc9sm1sgvf51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
