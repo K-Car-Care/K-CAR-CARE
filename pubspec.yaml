@@ -44,6 +44,7 @@ dependencies:
 
   #State Management
   get: ^4.5.1
+  provider: ^6.0.1
 
   #OTP Phone Number
   intl_phone_number_input: ^0.7.0+2
@@ -52,6 +53,8 @@ dependencies:
   #Backend
   firebase_auth: ^3.3.3
   firebase_core: ^1.10.5
+  google_sign_in: ^5.2.1
+  
 
 dev_dependencies:
   flutter_test:

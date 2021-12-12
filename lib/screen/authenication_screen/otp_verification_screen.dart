@@ -1,6 +1,4 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names, deprecated_member_use, prefer_const_constructors
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
@@ -24,6 +22,8 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _pinOTPCodeController = TextEditingController();
   final FocusNode _pinOTPcodeFocus = FocusNode();
+
+  final Authentication _authentication = Get.put(Authentication());
 
   @override
   void initState() {
@@ -109,7 +109,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: PinPut(
-                    fieldsCount: 5,
+                    fieldsCount: 6,
                     eachFieldWidth: 40.0,
                     eachFieldHeight: 50.0,
                     focusNode: _pinOTPcodeFocus,
@@ -175,7 +175,13 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                         splashColor: Colors.white.withOpacity(.25),
                         color: ThemeConstant.lightScheme.primary,
                         shape: CircleBorder(),
-                        onPressed: () {},
+                        onPressed: () async {
+                          await _authentication.myCredentials(
+                            _authentication.veri_result,
+                            _pinOTPCodeController.text,
+                          );
+                          print(_pinOTPCodeController);
+                        },
                         child: Padding(
                           padding: const EdgeInsets.all(14.0),
                           child: Icon(
