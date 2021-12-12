@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
+import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,10 +24,8 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(color: ThemeConstant.lightScheme.background),
       ),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-
       //Hello
-      home: const RegistrationScreen(),
+      home: const MyHomeScreen(),
     );
   }
 }

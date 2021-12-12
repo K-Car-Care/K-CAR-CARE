@@ -1,17 +1,174 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
+import 'package:k_car_care_project/screen/notification_screen/main_notification.dart';
+import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
+import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
+
+import 'components/card_home_screen.dart';
 
 class MyHomeScreen extends StatefulWidget {
-  const MyHomeScreen({ Key? key }) : super(key: key);
+  const MyHomeScreen({Key? key}) : super(key: key);
 
   @override
   _MyHomeScreenState createState() => _MyHomeScreenState();
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+        key: scaffoldKey,
+        // backgroundColor: ,
+        drawer: const NavigationDrawerWidget(),
+        appBar: AppBar(
+            elevation: 0,
+            backgroundColor: const Color(0xff0185BE),
+            automaticallyImplyLeading: false,
+            leading: IconButton(
+              onPressed: () {
+                scaffoldKey.currentState!.openDrawer();
+              },
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+            ),
+            centerTitle: true,
+            title: Text('Overview', style: ThemeConstant.textTheme.bodyText1),
+            actions: [
+              IconButton(
+                // ignore: prefer_const_constructors
+                icon: (Icon(Icons.notifications, color: Colors.white)),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const Notifications()));
+                },
+              ),
+            ]),
+        body: CardWidget());
+  }
+}
+
+class CardWidget extends StatelessWidget {
+  List data = [
+    {
+      "color": const Color(0xffff6968),
+      "image": 'assets/service_images/service.svg',
+      "title": "Services",
+      "desc": "Towing,Fuel,Flat Tire,Key Service",
+    },
+    {
+      "color": const Color(0xff7a54ff),
+      "image": 'assets/service_images/repairGarage.svg',
+      "title": "Repair Garage",
+      "desc": "Finding repair garage near you",
+    },
+    {
+      "color": const Color(0xffff8f61),
+      "image": 'assets/service_images/carRelevent.svg',
+      "title": "Repair Cost",
+      "desc": "repair cost estimate",
+    },
+    {
+      "color": const Color(0xff2ac3ff),
+      "image": 'assets/service_images/history.svg',
+      "title": "Car Relevent news",
+      "desc": "Send string to arduino robot via Bluetooth",
+    },
+    {
+      "color": const Color(0xff5a65ff),
+      "image": 'assets/service_images/account.svg',
+      "title": "View History",
+      "desc": "See all your history",
+    },
+    {
+      "color": const Color(0xff96da45),
+      "image": 'assets/service_images/service.svg',
+      "title": "Account",
+      "desc": "Your Profile",
+    },
+    {
+      "color": const Color(0xffff6968),
+      "image": 'assets/service_images/service.svg'
+    },
+    {
+      "color": const Color(0xff7a54ff),
+      "image": 'assets/service_images/service.svg'
+    },
+    {
+      "color": const Color(0xffff8f61),
+      "image": 'assets/service_images/service.svg'
+    },
+    {
+      "color": const Color(0xff2ac3ff),
+      "image": 'assets/service_images/service.svg'
+    },
+    {
+      "color": const Color(0xff5a65ff),
+      "image": 'assets/service_images/service.svg'
+    },
+    {
+      "color": const Color(0xff96da45),
+      "image": 'assets/service_images/service.svg'
+    },
+  ];
+
+  final colorwhite = Colors.white;
+
+  CardWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 5.0),
+      child: StaggeredGridView.countBuilder(
+          physics: const BouncingScrollPhysics(),
+          crossAxisCount: 2,
+          crossAxisSpacing: 0.2,
+          mainAxisSpacing: 0.5,
+          itemCount: 6,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () => {
+                if (data[index]["title"] == "View History")
+                  {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const HisstoryScreen())),
+                  }
+                else if (data[index]["title"] == "Services")
+                  {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const ServiceScreen())),
+                  }
+                else if (data[index]["title"] == "Account")
+                  {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const ProfileScreen())),
+                  }
+              },
+              child: HomeCard(
+                title: data[index]["title"],
+                image: data[index]["image"],
+                color: data[index]["color"],
+                desc: data[index]["desc"],
+              ),
+            );
+          },
+          staggeredTileBuilder: (index) {
+            return StaggeredTile.count(1, index.isEven ? 1.2 : 1.4);
+          }),
+      // );
     );
   }
 }
