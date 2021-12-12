@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, deprecated_member_use, unrelated_type_equality_checks
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:k_car_care_project/auth_services/auth_services.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/screen/authenication_screen/otp_verification_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -21,8 +20,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController controller = TextEditingController();
   String initialCountry = 'CAM';
   PhoneNumber number = PhoneNumber(isoCode: 'KH');
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   String verificationIDRecieved = "";
+
+  final Authentication _authentication = Get.put(Authentication());
+  String? verificationId;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,217 +48,237 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               physics: BouncingScrollPhysics(),
               child: Form(
                 key: formKey,
-                child: Column(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .04,
-                    ),
-                    Text(
-                      "Welcome",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Poppins",
-                        color: Color(0xff979797),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "Fill the form to become our guest",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: "Poppins",
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .1,
-                    ),
-                    Text(
-                      "Fill the form to become our guest",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: "Poppins",
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height * .05),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(.25),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.25),
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 10.0,
-                            spreadRadius: 1.0,
-                          ),
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.25),
-                            offset: Offset(-1.0, -1.0),
-                            blurRadius: 10.0,
-                            spreadRadius: 1.0,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 4.0),
-                        child: InternationalPhoneNumberInput(
-                          textFieldController: controller,
-                          onInputChanged: (PhoneNumber number) {},
-                          onInputValidated: (bool value) {
-                            print(value);
-                          },
-                          selectorConfig: SelectorConfig(
-                            selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                          ),
-                          ignoreBlank: false,
-                          autoValidateMode: AutovalidateMode.disabled,
-                          selectorTextStyle: TextStyle(
-                            color: Colors.black,
-                            fontFamily: "Poppins",
-                          ),
-                          initialValue: number,
-                          maxLength: 10,
-                          hintText: "e.g 092 123 456",
-                          keyboardType: TextInputType.numberWithOptions(
-                            signed: true,
-                            decimal: true,
-                          ),
-                          inputBorder: InputBorder.none,
-                          textStyle: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 16,
-                          ),
-                          onSaved: (PhoneNumber number) {
-                            print('On Saved: $number');
-                            setState(() {
-                              controller.toString() == number;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .05,
-                    ),
-                    Center(
-                      child: Column(
-                        children: [
-                          RaisedButton(
-                            splashColor: Colors.white.withOpacity(.25),
-                            color: Colors.black,
-                            shape: CircleBorder(),
-                            onPressed: () {
-                              print(
-                                  "push to OTP Screen ${controller.text.toString()}");
-                              verifyPhoneNumber();
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: Icon(
-                                Icons.chevron_right,
-                                size: 30,
-                                color: Colors.white,
-                              ),
+                child: Obx(() {
+                  return _authentication.code_sent_result == "no"
+                      ? Column(
+                          // ignore: prefer_const_literals_to_create_immutables
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * .04,
                             ),
-                          ),
-                          Text(
-                            "Next",
-                            style: TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * .02,
-                          ),
-                          Text(
-                            "OR",
-                            style:
-                                TextStyle(fontFamily: "Poppins", fontSize: 14),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * .02,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            print("Google");
-                          },
-                          child: Column(
-                            children: [
-                              SvgPicture.asset("assets/icons/google.svg"),
-                              Text(
-                                "Google",
-                                style: TextStyle(
-                                    fontFamily: "Poppins", fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            print("Facebook");
-                          },
-                          child: Column(
-                            children: [
-                              SvgPicture.asset("assets/icons/google.svg"),
-                              Text(
-                                "Facebook",
-                                style: TextStyle(
-                                    fontFamily: "Poppins", fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Has account yet?",
-                            style:
-                                TextStyle(fontFamily: "Poppins", fontSize: 14),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              print("Login");
-                            },
-                            child: Text(
-                              "Login here",
+                            Text(
+                              "Welcome",
                               style: TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontSize: 14,
-                                  color: ThemeConstant.lightScheme.primary),
+                                fontSize: 18,
+                                fontFamily: "Poppins",
+                                color: Color(0xff979797),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              "Fill the form to become our guest",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontFamily: "Poppins",
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * .1,
+                            ),
+                            Text(
+                              "Fill the form to become our guest",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: "Poppins",
+                                color: Colors.black,
+                              ),
+                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * .05),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Colors.black.withOpacity(.25),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.25),
+                                    offset: Offset(1.0, 1.0),
+                                    blurRadius: 10.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.25),
+                                    offset: Offset(-1.0, -1.0),
+                                    blurRadius: 10.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 4.0),
+                                child: InternationalPhoneNumberInput(
+                                  textFieldController: controller,
+                                  onInputChanged: (PhoneNumber number) {},
+                                  onInputValidated: (bool value) {
+                                    print(value);
+                                  },
+                                  selectorConfig: SelectorConfig(
+                                    selectorType:
+                                        PhoneInputSelectorType.BOTTOM_SHEET,
+                                  ),
+                                  ignoreBlank: false,
+                                  autoValidateMode: AutovalidateMode.disabled,
+                                  selectorTextStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "Poppins",
+                                  ),
+                                  initialValue: number,
+                                  maxLength: 20,
+                                  hintText: "e.g 092 123 456",
+                                  // keyboardType: TextInputType.numberWithOptions(
+                                  //   signed: true,
+                                  //   decimal: true,
+                                  // ),
+                                  keyboardType: TextInputType.text,
+                                  inputBorder: InputBorder.none,
+                                  textStyle: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: 16,
+                                  ),
+                                  onSaved: (PhoneNumber number) {
+                                    print('On Saved: $number');
+                                    setState(() {
+                                      controller.toString() == number;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * .05,
+                            ),
+                            Center(
+                              child: Column(
+                                children: [
+                                  RaisedButton(
+                                    splashColor: Colors.white.withOpacity(.25),
+                                    color: Colors.black,
+                                    shape: CircleBorder(),
+                                    onPressed: () async {
+                                      _authentication.signInwithPhoneNumber(
+                                          my_phone_num:
+                                              "+855${controller.text})");
+                                      print(" +855${controller.text}");
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(14.0),
+                                      child: Icon(
+                                        Icons.chevron_right,
+                                        size: 30,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    "Next",
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        .02,
+                                  ),
+                                  Text(
+                                    "OR",
+                                    style: TextStyle(
+                                        fontFamily: "Poppins", fontSize: 14),
+                                  ),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        .02,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    _authentication.signInWithGoogle();
+
+                                    print("Google");
+                                  },
+                                  child: Column(
+                                    children: [
+                                      SvgPicture.asset(
+                                          "assets/icons/google.svg"),
+                                      Text(
+                                        "Google",
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    print("Facebook");
+                                  },
+                                  child: Column(
+                                    children: [
+                                      SvgPicture.asset(
+                                          "assets/icons/google.svg"),
+                                      Text(
+                                        "Facebook",
+                                        style: TextStyle(
+                                          fontFamily: "Poppins",
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              alignment: Alignment.bottomCenter,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Has account yet?",
+                                    style: TextStyle(
+                                        fontFamily: "Poppins", fontSize: 14),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      print("Login");
+                                    },
+                                    child: Text(
+                                      "Login here",
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        fontSize: 14,
+                                        color:
+                                            ThemeConstant.lightScheme.primary,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : Text("Hello world");
+                }),
               ),
             ),
           ),
@@ -261,29 +287,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 
-  void verifyPhoneNumber() async {
-    await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: "+855${controller.text.toString()}",
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await _firebaseAuth.signInWithCredential(credential).then((value) {
-            print("success");
-            Get.to(
-              () => OTPVerificationScreen(
-                phoneNum: controller.text.toString(),
-              ), 
-            );
-          });
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          print(e.message);
-        },
-        codeSent: (String verificationID, int? resendToken) {
-          setState(() {
-            verificationIDRecieved = verificationID;
-          });
-        },
-        codeAutoRetrievalTimeout: (String verfictionID) {});
-  }
+  // void verifyPhoneNumber() async {
+  //   await _firebaseAuth.verifyPhoneNumber(
+  //       phoneNumber: "+855${controller.text.toString()}",
+  //       verificationCompleted: (PhoneAuthCredential credential) async {
+  //         await _firebaseAuth.signInWithCredential(credential).then((value) {
+  //           print("success");
+  //           Get.to(
+  //             () => OTPVerificationScreen(
+  //               phoneNum: controller.text.toString(),
+  //             ),
+  //           );
+  //         });
+  //       },
+  //       verificationFailed: (FirebaseAuthException e) {
+  //         print(e.message);
+  //       },
+  //       codeSent: (String verificationID, int? resendToken) {
+  //         setState(() {
+  //           verificationIDRecieved = verificationID;
+  //         });
+  //       },
+  //       codeAutoRetrievalTimeout: (String verfictionID) {});
+  // }
 
   void getPhoneNumber(String phoneNumber) async {
     PhoneNumber number =
