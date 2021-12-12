@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ThemeConstant {
@@ -176,4 +178,13 @@ class ThemeConstant {
         bodyColor: lightScheme.onSurface,
         decorationColor: lightScheme.onSurface,
       );
+
+}
+
+const greyColor = Colors.grey;
+
+class ColorRandom {
+  static Color getRandomColor() =>
+      Colors.primaries[Random().nextInt(Colors.primaries.length)];
+
 }
