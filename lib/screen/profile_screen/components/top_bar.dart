@@ -1,3 +1,5 @@
+// ignore_for_file: void_checks
+
 import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget {

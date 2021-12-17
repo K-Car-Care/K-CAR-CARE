@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 
@@ -28,7 +30,7 @@ class CardNotification extends StatelessWidget {
           children: [
             Container(
               child: ListTile(
-                leading: Container(
+                leading: SizedBox(
                   width: 40,
                   height: 40,
                   child: Center(
