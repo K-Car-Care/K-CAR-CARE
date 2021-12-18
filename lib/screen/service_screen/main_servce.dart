@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:k_car_care_project/auth_services/auth_services.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fire.dart';
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
@@ -18,6 +21,10 @@ class ServiceScreen extends StatefulWidget {
 }
 
 class _ServiceScreenState extends State<ServiceScreen> {
+  final Authentication _authentication = Get.put(Authentication());
+  CollectionReference users =
+      FirebaseFirestore.instance.collection('user_phoneNumber');
+
   @override
   void initState() {
     super.initState();
@@ -69,7 +76,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
             IconButton(
               // ignore: prefer_const_constructors
               icon: (Icon(Icons.notifications, color: Colors.white)),
-              onPressed: () {},
+              onPressed: () async {
+                _authentication.signOut();
+              },
             ),
           ]),
       body: SingleChildScrollView(
@@ -78,9 +87,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
             ListTile(
               leading: const ContainerRaduis(
                   assetPath: 'assets/service_images/service_icon.png'),
-              title: Text('ជ្រើសរើសសេវាកម្មដែលអ្នកត្រូវការ',
-                  style: ThemeConstant.textTheme.bodyText1!
-                      .copyWith(fontSize: 18, color: const Color(0xff0185BE))),
+              title: Text(
+                'ជ្រើសរើសសេវាកម្មដែលអ្នកត្រូវការ',
+                style: ThemeConstant.textTheme.bodyText1!.copyWith(
+                  fontSize: 18,
+                  color: const Color(0xff0185BE),
+                ),
+              ),
             ),
             const SizedBox(
               height: 5,
@@ -142,5 +155,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> addUser() {
+    // Call the user's CollectionReference to add a new user
+    return users
+        .add({
+          'country': "Thailand",
+          'phoneNumber': "095291097", // Stokes and Sons
+          // 42
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
   }
 }
