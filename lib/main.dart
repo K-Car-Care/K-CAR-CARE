@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(color: ThemeConstant.lightScheme.background,),
       ),
       debugShowCheckedModeBanner: false,
-      
       home:  RegistrationScreen(),
     );
   }
