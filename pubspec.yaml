@@ -84,6 +84,7 @@ flutter:
     - assets/empty_icons/
     - assets/icons/
     - assets/service_images/
+    - assets/icons/facebook.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
