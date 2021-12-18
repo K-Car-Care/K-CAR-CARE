@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 
 void main() async {
@@ -21,11 +22,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: ThemeConstant.lightScheme.background,
-        appBarTheme: AppBarTheme(color: ThemeConstant.lightScheme.background),
+        appBarTheme: AppBarTheme(color: ThemeConstant.lightScheme.background,),
       ),
       debugShowCheckedModeBanner: false,
       //Hello
-      home: const MyHomeScreen(),
+      home:  RegistrationScreen(),
     );
   }
 }
