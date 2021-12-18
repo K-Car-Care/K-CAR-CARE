@@ -1,9 +1,11 @@
-// ignore_for_file: unnecessary_null_comparison, prefer_const_constructors
+// ignore_for_file: unnecessary_null_comparison, prefer_const_constructors, avoid_print
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/model/user_info_model.dart';
+import 'package:k_car_care_project/screen/profile_screen/add_more_info_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'components/card_item_profile.dart';
@@ -19,9 +21,10 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   List<UserInfos> notificationList = [
     const UserInfos(
-        icon: Icon(Icons.email_outlined),
-        title: 'user@gmail.com',
-        subtitle: 'Email'),
+      icon: Icon(Icons.email_outlined),
+      title: 'user@gmail.com',
+      subtitle: 'Email',
+    ),
     const UserInfos(
         icon: Icon(Icons.email_outlined),
         title: '017 238 008',
@@ -41,7 +44,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getRecenProfileFromSharedPrefsFolder();
   }
@@ -81,21 +83,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           title: "Gmail",
                         ),
-                        CardItem(
-                          subtitle: itemProfile['gmail'] != null
-                              ? '${itemProfile['gmail']}'
-                              : "សូមបញ្ជូលលេខទូរស័ព្ទរបស់លោកអ្នក",
-                          icon: Icon(
-                            Icons.phone,
+                        itemProfile['phone'] != null
+                            ? CardItem(
+                                subtitle: itemProfile['gmail'] != null
+                                    ? '${itemProfile['gmail']}'
+                                    : "សូមបញ្ជូលលេខទូរស័ព្ទរបស់លោកអ្នក",
+                                icon: Icon(
+                                  Icons.phone,
+                                ),
+                                title: "Phone Number",
+                              )
+                            : SizedBox(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 18,
+                            vertical: 14,
                           ),
-                          title: "Phone Number",
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Add Your Location",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              IconButton(
+                                splashColor: Color(0xFF2196F3).withOpacity(.25),
+                                onPressed: () { 
+                                  Get.to(
+                                    () => AddMoreInfoScreen(
+                                      image: itemProfile['profile'].toString(),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.add,
+                                  color: ThemeConstant.lightScheme.primary,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+
                       ],
                     );
                   },
                 )
               : SizedBox(
-                  child: Center(child: Text("Empty")),
+                  child: Center(
+                    child: Text("Empty"),
+                  ),
                 ),
         ),
       ),

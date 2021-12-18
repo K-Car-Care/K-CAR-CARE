@@ -1,16 +1,14 @@
 // ignore_for_file: avoid_print
-
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:k_car_care_project/auth_services/auth_services.dart';
-import 'package:k_car_care_project/model/userData/google_model.dart';
+
+import 'package:k_car_care_project/helpers/save_user_data.dart';
+
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -19,6 +17,8 @@ class LoginController extends GetxController {
   static Authentication instance = Get.find();
   late Rx<User?> firebaseUser;
   late Rx<GoogleSignInAccount?> googleSignInAccount;
+
+  final SaveUserData _saveUserData = SaveUserData();
 
   @override
   void onReady() {
@@ -67,8 +67,10 @@ class LoginController extends GetxController {
               googleSignInAccount.photoUrl.toString());
           print("Gmail User: ${googleSignInAccount.email}");
           print("Profile User: ${googleSignInAccount.photoUrl}");
-          _saveUserData(googleSignInAccount.email,
-              googleSignInAccount.photoUrl.toString(),googleSignInAccount.displayName.toString(),);
+          _saveUserData.saveUserData( gmail: googleSignInAccount.email,
+            profileUrl: googleSignInAccount.photoUrl.toString(),
+            username: googleSignInAccount.displayName.toString(),
+            phone: "",);
         }).catchError((onErr) {
           print(onErr);
         });
@@ -102,19 +104,20 @@ class LoginController extends GetxController {
   }
 
   // Save User Data using SharePreference
-  void _saveUserData(String gmail, String profileUrl,String username) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> _prevList = prefs.getStringList('recents') ?? [];
-    // ignore: unnecessary_null_comparison
-    gmail != null && profileUrl != null
-        ? _prevList.add(jsonEncode({
-            "gmail": gmail,
-            "profile": profileUrl,
-            "userName":username,
-          }))
-        : () {};
-    prefs
-        .setStringList("recents", _prevList)
-        .then((value) => print("done Saving to Prefs"));
-  }
+  // void _saveUserData(String? gmail, String? profileUrl,String? username,String? phone) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   List<String> _prevList = prefs.getStringList('recents') ?? [];
+  //   // ignore: unnecessary_null_comparison
+  //   gmail != null && profileUrl != null
+  //       ? _prevList.add(jsonEncode({
+  //           "gmail": gmail,
+  //           "profile": profileUrl,
+  //           "userName":username,
+  //           "phoneNumber":phone,
+  //         }))
+  //       : () {};
+  //   prefs
+  //       .setStringList("recents", _prevList)
+  //       .then((value) => print("done Saving to Prefs"));
+  // }
 }
