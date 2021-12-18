@@ -12,6 +12,7 @@ import 'package:k_car_care_project/screen/towing_service_screen/main_towning_ser
 import 'package:k_car_care_project/widget/reuse_circle_image.dart';
 import 'package:k_car_care_project/widget/reuse_contact_section.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({Key? key}) : super(key: key);
@@ -25,9 +26,22 @@ class _ServiceScreenState extends State<ServiceScreen> {
   CollectionReference users =
       FirebaseFirestore.instance.collection('user_phoneNumber');
 
+  List<String> _recentTranlates = [];
+
+  _getRecentsFromSharedPrefsFolder() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> _prevList = prefs.getStringList("recents") ?? [];
+    setState(() {
+      _recentTranlates = _prevList;
+      print(_recentTranlates);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _getRecentsFromSharedPrefsFolder();
   }
 
   List data = [
@@ -78,6 +92,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
               icon: (Icon(Icons.notifications, color: Colors.white)),
               onPressed: () async {
                 _authentication.signOut();
+                SharedPreferences preferences =
+                    await SharedPreferences.getInstance();
+                await preferences.remove('recents');
               },
             ),
           ]),
@@ -155,17 +172,5 @@ class _ServiceScreenState extends State<ServiceScreen> {
         ),
       ),
     );
-  }
-
-  Future<void> addUser() {
-    // Call the user's CollectionReference to add a new user
-    return users
-        .add({
-          'country': "Thailand",
-          'phoneNumber': "095291097", // Stokes and Sons
-          // 42
-        })
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
   }
 }

@@ -22,6 +22,8 @@ class Authentication extends GetxController {
   String get code_sent_result => code_sent.value;
   String get veri_result => verificatoin_id.value;
 
+  var isLoading = false.obs;
+
   final DataPhoneNumber _dataPhoneNumber = DataPhoneNumber();
 
   CollectionReference users =
@@ -60,6 +62,7 @@ class Authentication extends GetxController {
   void signInWithGoogle() async {
     try {
       GoogleSignInAccount? googleSignInAccount = await googleSign.signIn();
+      isLoading(true);
       if (googleSignInAccount != null) {
         GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
@@ -73,9 +76,13 @@ class Authentication extends GetxController {
               googleSignInAccount.photoUrl.toString());
           print(googleSignInAccount.email);
           print(googleSignInAccount.photoUrl);
-        }).catchError((onErr) => print(onErr));
+        }).catchError((onErr) {
+          print(onErr);
+          isLoading(false);
+        });
       }
     } catch (e) {
+      isLoading(false);
       Get.snackbar(
         "Error",
         e.toString(),
@@ -99,8 +106,9 @@ class Authentication extends GetxController {
   }
 
   // SignOut Google Account
-  void signOut() async {
+  Future<void> signOut() async {
     await auth.signOut();
+    isLoading(false);
   }
 
   // SigInwithPhone Number

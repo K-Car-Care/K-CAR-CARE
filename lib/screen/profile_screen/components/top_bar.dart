@@ -1,14 +1,24 @@
 // ignore_for_file: void_checks
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:k_car_care_project/auth_services/auth_services.dart';
+import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class TopBar extends StatelessWidget {
+class TopBar extends StatefulWidget {
   const TopBar({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<TopBar> createState() => _TopBarState();
+}
+
+class _TopBarState extends State<TopBar> {
+  @override
   Widget build(BuildContext context) {
+    final Authentication _auth = Get.put(Authentication());
     return SafeArea(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,6 +32,17 @@ class TopBar extends StatelessWidget {
             iconData: Icons.logout_outlined,
             onTap: () {
               //Go  Logout
+
+              _auth.signOut().then(
+                (value) async {
+                  SharedPreferences preferences =
+                      await SharedPreferences.getInstance();
+                  await preferences.remove('recents');
+                  Get.to(
+                    () => const RegistrationScreen(),
+                  );
+                },
+              );
             },
           ),
         ],
