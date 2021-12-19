@@ -57,7 +57,7 @@ class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
               // ignore: prefer_const_constructors
               Align(
                 alignment: Alignment.topLeft,
-                child: Text("User Information"),
+                child: const Text("User Information"),
               )
             ],
           ),
