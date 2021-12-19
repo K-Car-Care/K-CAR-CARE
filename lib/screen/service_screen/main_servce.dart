@@ -30,6 +30,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
   _getRecentsFromSharedPrefsFolder() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+     final Authentication _auth = Get.put(Authentication());
 
     List<String> _prevList = prefs.getStringList("recents") ?? [];
     setState(() {
@@ -91,10 +92,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
               // ignore: prefer_const_constructors
               icon: (Icon(Icons.notifications, color: Colors.white)),
               onPressed: () async {
-                _authentication.signOut();
-                SharedPreferences preferences =
-                    await SharedPreferences.getInstance();
-                await preferences.remove('recents');
               },
             ),
           ]),

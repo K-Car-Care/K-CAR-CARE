@@ -16,9 +16,10 @@ class TopBar extends StatefulWidget {
 }
 
 class _TopBarState extends State<TopBar> {
+  final Authentication _auth = Get.put(Authentication());
   @override
   Widget build(BuildContext context) {
-    final Authentication _auth = Get.put(Authentication());
+    
     return SafeArea(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

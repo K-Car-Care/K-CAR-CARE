@@ -21,7 +21,7 @@ class CardItem extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
+            horizontal: 1.0,
             vertical: 21.0,
           ),
           child: Row(
@@ -31,21 +31,28 @@ class CardItem extends StatelessWidget {
                 onPressed: () {},
                 icon: icon,
               ),
-              SizedBox(width: 24.0),
+              SizedBox(width: 10.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
                     title,
+                    maxLines: 1,
                     style: ThemeConstant.textTheme.bodyText1!
                         .copyWith(color: Colors.black),
+                    overflow: TextOverflow.clip,
                   ),
                   const SizedBox(height: 4.0),
-                  Text(
-                    subtitle,
-                    style: ThemeConstant.textTheme.bodyText2!
-                        .copyWith(color: Colors.grey),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 110,
+                    child: Text(
+                      subtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: ThemeConstant.textTheme.bodyText2!
+                          .copyWith(color: Colors.grey),
+                    ),
                   ),
                 ],
               ),

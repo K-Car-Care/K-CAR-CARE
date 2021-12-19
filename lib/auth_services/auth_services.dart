@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:k_car_care_project/helpers/save_user_data.dart';
 import 'package:k_car_care_project/model/userData/phone_number_model.dart';
 import 'package:k_car_care_project/screen/authenication_screen/otp_verification_screen.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
@@ -25,6 +26,8 @@ class Authentication extends GetxController {
   var isLoading = false.obs;
 
   final DataPhoneNumber _dataPhoneNumber = DataPhoneNumber();
+   final SaveUserData _saveUserData = SaveUserData();
+
 
   CollectionReference users =
       FirebaseFirestore.instance.collection('user_phoneNumber');
@@ -130,6 +133,10 @@ class Authentication extends GetxController {
         print(code_sent.value);
         print(verificatoinID);
         verificatoin_id.value = verificatoinID;
+        _saveUserData.saveUserData( gmail:"",
+            profileUrl: "",
+            username: '',
+            phone: my_phone_num,);
         Get.to(OTPVerificationScreen(phoneNum: my_phone_num));
       },
       codeAutoRetrievalTimeout: (String verificationId) {
