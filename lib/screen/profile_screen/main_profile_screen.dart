@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/helpers/get_current_location.dart';
 import 'package:k_car_care_project/helpers/save_user_data.dart';
 import 'package:k_car_care_project/model/user_info_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +33,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ];
   List<String> _recentProfile = [];
   String? userLocation = 'Get Your Current Lcoation';
-  final GetUserLocation _getUserLocation = GetUserLocation();
   Position? position;
   List<Placemark>? placeMarks;
   _getRecenProfileFromSharedPrefsFolder() async {
@@ -178,7 +176,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future getCurrentLocation() async {
-    SharedPreferences _pref = await SharedPreferences.getInstance();
     Position newPosition = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );

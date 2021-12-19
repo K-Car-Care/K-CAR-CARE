@@ -1,9 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:k_car_care_project/auth_services/auth_services.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fire.dart';
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
@@ -22,7 +22,6 @@ class ServiceScreen extends StatefulWidget {
 }
 
 class _ServiceScreenState extends State<ServiceScreen> {
-  final Authentication _authentication = Get.put(Authentication());
   CollectionReference users =
       FirebaseFirestore.instance.collection('user_phoneNumber');
 
@@ -30,7 +29,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
   _getRecentsFromSharedPrefsFolder() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-     final Authentication _auth = Get.put(Authentication());
 
     List<String> _prevList = prefs.getStringList("recents") ?? [];
     setState(() {
