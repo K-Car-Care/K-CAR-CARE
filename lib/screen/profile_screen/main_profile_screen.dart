@@ -4,9 +4,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/helpers/save_user_data.dart';
 import 'package:k_car_care_project/model/user_info_model.dart';
+import 'package:k_car_care_project/screen/profile_screen/add_more_info_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'components/card_item_profile.dart';
@@ -120,9 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         userLocation == "Get Your Current Lcoation"
                             ? IconButton(
                                 splashColor: Color(0xFF2196F3).withOpacity(.25),
-                                onPressed: ()  {
-                                  
-                                },
+                                onPressed: () {},
                                 icon: Icon(
                                   Icons.add,
                                   color: ThemeConstant.lightScheme.primary,
@@ -155,8 +155,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         IconButton(
                           splashColor: Color(0xFF2196F3).withOpacity(.25),
-                          onPressed: () async {
-                            await getCurrentLocation();
+                          onPressed: () {
+                            Get.to(() => AddMoreInfoScreen());
                           },
                           icon: Icon(
                             Icons.add,
