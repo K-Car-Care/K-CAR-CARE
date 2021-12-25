@@ -63,6 +63,9 @@ dependencies:
 
   #Pick Image
   image_picker: ^0.8.4+4
+
+  # Push Notification Message
+  onesignal_flutter: ^3.0.0
   
 
 dev_dependencies:
