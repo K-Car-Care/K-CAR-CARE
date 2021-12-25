@@ -63,6 +63,10 @@ dependencies:
 
   #Pick Image
   image_picker: ^0.8.4+4
+
+  #Magazine Notification
+  overlay_support: ^1.2.1
+  firebase_messaging: ^11.2.4
   
 
 dev_dependencies:
