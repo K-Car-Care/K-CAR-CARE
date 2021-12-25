@@ -61,16 +61,26 @@ class LoginController extends GetxController {
         AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
+          
         );
         await auth.signInWithCredential(credential).then((value) {
-          addUserToFireStore(googleSignInAccount.email,
-              googleSignInAccount.photoUrl.toString());
+          
+          
+          //Add data to Firestore in Firebase 
+          addUserToFireStore(
+            googleSignInAccount.email,
+            googleSignInAccount.photoUrl.toString(),
+          );
           print("Gmail User: ${googleSignInAccount.email}");
           print("Profile User: ${googleSignInAccount.photoUrl}");
-          _saveUserData.saveUserData( gmail: googleSignInAccount.email,
+
+          // Save Data into Share Preference 
+          _saveUserData.saveUserData(
+            gmail: googleSignInAccount.email,
             profileUrl: googleSignInAccount.photoUrl.toString(),
             username: googleSignInAccount.displayName.toString(),
-            phone: "",);
+            phone: "",
+          );
         }).catchError((onErr) {
           print(onErr);
         });
@@ -85,12 +95,17 @@ class LoginController extends GetxController {
     }
   }
 
+
+  // Function To Store data into FirebaseFirestore
   Future<void> addUserToFireStore(String gmail, String profileUrl) async {
+    User? user = FirebaseAuth.instance.currentUser;
     CollectionReference googleUsers =
         FirebaseFirestore.instance.collection('user_google');
 
     await googleUsers
-        .add({
+        .doc(user?.uid)
+        .set({
+          'uid': user?.uid.toString(),
           'gmail': gmail,
           'profileUrl': profileUrl,
         })
