@@ -8,6 +8,7 @@ import 'package:k_car_care_project/screen/authenication_screen/registration_scre
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/translation_example_screen/messages.dart';
 import 'package:k_car_care_project/translation_example_screen/translation_veiw.dart';
+import 'package:k_car_care_project/screen/notification_screen/detail_notification_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
@@ -66,14 +67,24 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
 
     OneSignal.shared.setAppId(onesignalAppId);
     OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
-      // print("Accepted permission: $accepted");
+      print("Accepted permission: $accepted");
     });
     OneSignal.shared
         .setNotificationOpenedHandler((OSNotificationOpenedResult result) {});
     OneSignal.shared.setNotificationOpenedHandler((openedResult) {
-      var data = openedResult.notification.title;
-      print(data);
-      Get.to(() => MyHomeScreen());
+      var title = openedResult.notification.title;
+      var image = openedResult.notification.bigPicture;
+      var date = DateTime.now().toString();
+      var desc =
+          "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content";
+      print("subtitle : ${openedResult.notification.subtitle}");
+
+      Get.to(() => DetailNotificationScreen(
+            title: title,
+            image: image,
+            datetime: date,
+            desc: desc,
+          ));
     });
   }
 }
