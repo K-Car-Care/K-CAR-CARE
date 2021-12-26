@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/model/notification_model.dart';
-import 'package:k_car_care_project/screen/notification_screen/detail_notification_screen.dart';
 import 'components/card_notification.dart';
 import 'empty_screen.dart';
 

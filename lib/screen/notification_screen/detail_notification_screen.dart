@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable
+// ignore_for_file: prefer_const_constructors, must_be_immutable, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/widget/circle_button.dart';
@@ -169,7 +169,7 @@ class DetailNotificationScreen extends StatelessWidget {
 class Status extends StatelessWidget {
   final IconData? icon;
   final String? total;
-  Status({this.icon, this.total});
+  const Status({this.icon, this.total});
   @override
   Widget build(BuildContext context) {
     return Row(

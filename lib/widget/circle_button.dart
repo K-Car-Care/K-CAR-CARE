@@ -1,10 +1,12 @@
 
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 
 class CircleButton extends StatelessWidget {
   final IconData? icon;
   final Function()? onTap;
-  CircleButton({this.icon, this.onTap});
+  CircleButton({Key? key, this.icon, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class CircleButton extends StatelessWidget {
       child: Container(
         width: 50.0,
         height: 50.0,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
         ),
         child: Card(
