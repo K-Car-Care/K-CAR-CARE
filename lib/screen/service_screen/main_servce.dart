@@ -1,14 +1,16 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_const_constructors
 
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fire.dart';
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
 import 'package:k_car_care_project/screen/key_service_screen/main_key_service.dart';
 import 'package:k_car_care_project/screen/towing_service_screen/main_towning_service.dart';
+import 'package:k_car_care_project/translation/translations_controller.dart';
 import 'package:k_car_care_project/widget/reuse_circle_image.dart';
 import 'package:k_car_care_project/widget/reuse_contact_section.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
@@ -66,6 +68,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
     },
   ];
 
+  final messageController = Get.put(MessageController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,16 +88,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
             ),
           ),
           centerTitle: true,
-          title: Text('Service', style: ThemeConstant.textTheme.bodyText1),
+          title:
+              Text('name_service'.tr, style: ThemeConstant.textTheme.bodyText1),
           actions: [
             IconButton(
               // ignore: prefer_const_constructors
               icon: (Icon(Icons.notifications, color: Colors.white)),
-              onPressed: () async {
-              },
+              onPressed: () async {},
             ),
           ]),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             ListTile(
@@ -113,46 +118,62 @@ class _ServiceScreenState extends State<ServiceScreen> {
             Container(
               height: MediaQuery.of(context).size.height / 2,
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: GridView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: data.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  // crossAxisSpacing: 10
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      if (index == 0) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const TowingServiceScreen()));
-                      } else if (index == 1) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const FuelServiceScreen()));
-                      } else if (index == 2) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const KeyServiceScreen()));
-                      } else if (index == 3) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const FlatFireServiceScreen()));
-                      }
-                    },
-                    child: MainCardService(
-                      title: data[index]["title"],
-                      image: data[index]["image"],
-                      color: data[index]["color"],
-                    ),
-                  );
-                },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      MainCardService(
+                        image: "assets/service_images/towing.png",
+                        color: Color(0xff2ac3ff),
+                        title: "title",
+                      ),
+                    ],
+                  ),
+                ],
               ),
+              // child: GridView.builder(
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   itemCount: data.length,
+              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              //     crossAxisCount: 2,
+              //     // crossAxisSpacing: 10
+              //   ),
+              //   itemBuilder: (context, index) {
+              //     return GestureDetector(
+              //       onTap: () {
+              //         if (index == 0) {
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (_) => const TowingServiceScreen(),
+              //             ),
+              //           );
+              //         } else if (index == 1) {
+              //           Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                   builder: (_) => const FuelServiceScreen()));
+              //         } else if (index == 2) {
+              //           Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                   builder: (_) => const KeyServiceScreen()));
+              //         } else if (index == 3) {
+              //           Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                   builder: (_) => const FlatFireServiceScreen()));
+              //         }
+              //       },
+              //       child: MainCardService(
+              //         title: data[index]["title"],
+              //         image: data[index]["image"],
+              //         color: data[index]["color"],
+              //       ),
+              //     );
+              //   },
+              // ),
             ),
             Container(
               height: 180,

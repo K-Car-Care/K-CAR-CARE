@@ -16,10 +16,12 @@ class MainCardService extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
+        width: MediaQuery.of(context).size.width * .4,
+        height: MediaQuery.of(context).size.height * .4,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: color, width: 1)),
+            border: Border.all(color: color, width: 1),),
         // shape: RoundedRectangleBorder(
         //     borderRadius: BorderRadius.circular(20)),
         child: Padding(
@@ -29,17 +31,18 @@ class MainCardService extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  alignment: Alignment.center,
-                  // padding: const EdgeInsets.only(right: 10, top: 15),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Image.asset(
-                      image,
-                      color: color,
-                      width: 60,
-                      height: 60,
-                    ),
-                  )),
+                alignment: Alignment.center,
+                // padding: const EdgeInsets.only(right: 10, top: 15),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Image.asset(
+                    image,
+                    color: color,
+                    width: 60,
+                    height: 60,
+                  ),
+                ),
+              ),
               ListTile(
                 title: Text(
                   title,
