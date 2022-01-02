@@ -1,5 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:k_car_care_project/apis/key_service_api.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/model/main_services_models.dart/key_service_model.dart';
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
 class KeyServiceScreen extends StatefulWidget {
@@ -10,8 +14,11 @@ class KeyServiceScreen extends StatefulWidget {
 }
 
 class _KeyServiceScreenState extends State<KeyServiceScreen> {
+  Future<KeyServiceModel>? _keyServicemodel;
+  final KeyServiceApi _keyServiceApi = KeyServiceApi();
   @override
   void initState() {
+    _keyServicemodel = _keyServiceApi.readKeyService();
     super.initState();
   }
 
@@ -35,7 +42,7 @@ class _KeyServiceScreenState extends State<KeyServiceScreen> {
           title: Text('key Service', style: ThemeConstant.textTheme.bodyText1),
           actions: [
             IconButton(
-              // ignore: prefer_const_constructors
+             
               icon: (Icon(Icons.notifications, color: Colors.white)),
               onPressed: () {},
             ),
@@ -43,17 +50,32 @@ class _KeyServiceScreenState extends State<KeyServiceScreen> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) {
-              return const CardService(
-                color: Color(0xff7a54ff),
-                icon: 'assets/service_images/service_icon.png',
-                desc:
-                    '#248, Preah Monivong Blvd. (Street 93), Sangkat Boeung Raing, Khan Daun. Penh, Phnom Penh, Cambodia.',
-                title: 'Fast Towing',
-                phoneNumber: '017 238 008',
+        child: FutureBuilder<KeyServiceModel>(
+            future: _keyServicemodel,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text("Error while read data from api key service"),
+                );
+              }
+              if (snapshot.hasData) {
+                var result = snapshot.data!.payload;
+                return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: result?.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardService(
+                      color: const Color(0xffff6968),
+                      icon: result![index].img.toString(),
+                      desc: result[index].location.toString(),
+                      title: result[index].name.toString(),
+                      phoneNumber: result[index].phone.toString(),
+                    );
+                  },
+                );
+              }
+              return Center(
+                child: CircularProgressIndicator(),
               );
             }),
       ),

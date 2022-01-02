@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:k_car_care_project/apis/flate_service_api.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/model/main_services_models.dart/flate_model.dart';
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
 class FlatFireServiceScreen extends StatefulWidget {
@@ -10,8 +12,12 @@ class FlatFireServiceScreen extends StatefulWidget {
 }
 
 class _FlatFireServiceScreenState extends State<FlatFireServiceScreen> {
+  Future<FlateTireServiceModel>? _flateTireModel;
+  final FlateTireServiceApi _flateTireServiceApi = FlateTireServiceApi();
+
   @override
   void initState() {
+    _flateTireModel = _flateTireServiceApi.readFlateServiceApi();
     super.initState();
   }
 
@@ -44,19 +50,35 @@ class _FlatFireServiceScreenState extends State<FlatFireServiceScreen> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) {
-              return const CardService(
-                color: Color(0xffff8f61),
-                icon: 'assets/service_images/service_icon.png',
-                desc:
-                    '#248, Preah Monivong Blvd. (Street 93), Sangkat Boeung Raing, Khan Daun. Penh, Phnom Penh, Cambodia.',
-                title: 'Fast Towing',
-                phoneNumber: '017 238 008',
+        child: FutureBuilder<FlateTireServiceModel>(
+            future: _flateTireModel,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Center(
+                  child: Text(
+                      "Error while read data from api in Flate Tire Service"),
+                );
+              }
+
+              if (snapshot.hasData) {
+                var result = snapshot.data!.payload;
+                return ListView.builder(
+                itemCount: result?.length,
+                itemBuilder: (context, index) {
+                  return CardService(
+                    color: const Color(0xffff6968),
+                    icon: result![index].img.toString(),
+                    desc: result[index].location.toString(),
+                    title: result[index].name.toString(),
+                    phoneNumber: result[index].phone.toString(),
+                  );
+                },
               );
-            }),
+              }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+            },),
       ),
     );
   }

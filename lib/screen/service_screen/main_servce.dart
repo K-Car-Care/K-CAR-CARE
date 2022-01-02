@@ -1,10 +1,11 @@
 // ignore_for_file: avoid_print
 
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:k_car_care_project/apis/main_service_api.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/model/main_services_models.dart/main_model.dart';
 import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fire.dart';
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
 import 'package:k_car_care_project/screen/key_service_screen/main_key_service.dart';
@@ -22,6 +23,10 @@ class ServiceScreen extends StatefulWidget {
 }
 
 class _ServiceScreenState extends State<ServiceScreen> {
+  Future<MainServiceModel>? _mainServiceModel;
+
+  final MainServiceApi _serviceApi = MainServiceApi();
+
   CollectionReference users =
       FirebaseFirestore.instance.collection('user_phoneNumber');
 
@@ -34,13 +39,14 @@ class _ServiceScreenState extends State<ServiceScreen> {
     setState(() {
       _recentTranlates = _prevList;
       print(_recentTranlates);
-    });
+    },);
   }
 
   @override
   void initState() {
     super.initState();
     _getRecentsFromSharedPrefsFolder();
+    _mainServiceModel = _serviceApi.readMainServiceApi();
   }
 
   List data = [
@@ -89,8 +95,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
             IconButton(
               // ignore: prefer_const_constructors
               icon: (Icon(Icons.notifications, color: Colors.white)),
-              onPressed: () async {
-              },
+              onPressed: () async {},
             ),
           ]),
       body: SingleChildScrollView(
@@ -110,49 +115,63 @@ class _ServiceScreenState extends State<ServiceScreen> {
             const SizedBox(
               height: 5,
             ),
-            Container(
-              height: MediaQuery.of(context).size.height / 2,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: GridView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: data.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  // crossAxisSpacing: 10
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      if (index == 0) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const TowingServiceScreen()));
-                      } else if (index == 1) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const FuelServiceScreen()));
-                      } else if (index == 2) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const KeyServiceScreen()));
-                      } else if (index == 3) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const FlatFireServiceScreen()));
-                      }
-                    },
-                    child: MainCardService(
-                      title: data[index]["title"],
-                      image: data[index]["image"],
-                      color: data[index]["color"],
+            FutureBuilder<MainServiceModel>(
+              future: _mainServiceModel,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text("Error read data from api"),
+                  );
+                }
+                if (snapshot.hasData) {
+                  var result = snapshot.data!.payload;
+
+                  return Container(
+                    height: MediaQuery.of(context).size.height / 2,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: GridView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: result?.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        // crossAxisSpacing: 10
+                      ),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            if (result![index].name?.toUpperCase() ==
+                                "TOWING") {
+                              Get.to(() => const TowingServiceScreen());
+                            } else if (result[index].name?.toUpperCase() ==
+                                "FUEL") {
+                              Get.to(() => const FuelServiceScreen());
+                            } else if (result[index].name?.toUpperCase() ==
+                                "KEY SERVICE") {
+                              Get.to(() => const KeyServiceScreen());
+                            } else if (result[index].name?.toUpperCase() ==
+                                "FLATE TIRE") {
+                              Get.to(() =>const FlatFireServiceScreen());
+                            }
+                          },
+                          child: MainCardService(
+                            title: "${result?[index].name}",
+                            image: "${result?[index].img.toString()}",
+                            color: data[index]['color'],
+                          ),
+                        );
+                      },
                     ),
                   );
-                },
-              ),
+                }
+                return SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - 190,
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              },
             ),
             Container(
               height: 180,

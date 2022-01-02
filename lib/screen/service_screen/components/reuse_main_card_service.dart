@@ -33,9 +33,9 @@ class MainCardService extends StatelessWidget {
                   // padding: const EdgeInsets.only(right: 10, top: 15),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Image.asset(
+                    child: Image.network(
                       image,
-                      color: color,
+                      // color: color,
                       width: 60,
                       height: 60,
                     ),
