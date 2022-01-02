@@ -1,7 +1,8 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -9,7 +10,7 @@ import 'package:k_car_care_project/screen/history_screen.dart/main_history_scree
 import 'package:k_car_care_project/screen/notification_screen/main_notification.dart';
 import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
 import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
-
+import 'package:k_car_care_project/translation/translations_controller.dart';
 import 'components/card_home_screen.dart';
 
 class MyHomeScreen extends StatefulWidget {
@@ -21,38 +22,40 @@ class MyHomeScreen extends StatefulWidget {
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final messagecontroller = Get.put(MessageController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: scaffoldKey,
-        // backgroundColor: ,
-        drawer: const NavigationDrawerWidget(),
-        appBar: AppBar(
-            elevation: 0,
-            backgroundColor: const Color(0xff0185BE),
-            automaticallyImplyLeading: false,
-            leading: IconButton(
-              onPressed: () {
-                scaffoldKey.currentState!.openDrawer();
-              },
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
+      key: scaffoldKey,
+      // backgroundColor: ,
+      drawer: const NavigationDrawerWidget(),
+      appBar: AppBar(
+          elevation: 0,
+          backgroundColor: const Color(0xff0185BE),
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            onPressed: () {
+              scaffoldKey.currentState!.openDrawer();
+            },
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.white,
             ),
-            centerTitle: true,
-            title: Text('Overview', style: ThemeConstant.textTheme.bodyText1),
-            actions: [
-              IconButton(
-                // ignore: prefer_const_constructors
-                icon: (Icon(Icons.notifications, color: Colors.white)),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const Notifications()));
-                },
-              ),
-            ]),
-        body: CardWidget());
+          ),
+          centerTitle: true,
+          title: Text('page'.tr, style: ThemeConstant.textTheme.bodyText1),
+          actions: [
+            IconButton(
+              // ignore: prefer_const_constructors
+              icon: (Icon(Icons.notifications, color: Colors.white)),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const Notifications()));
+              },
+            ),
+          ]),
+      body: CardWidget(),
+    );
   }
 }
 
@@ -61,7 +64,7 @@ class CardWidget extends StatelessWidget {
     {
       "color": const Color(0xffff6968),
       "image": 'assets/service_images/service.svg',
-      "title": "Services",
+      "title": 'Services'.tr,
       "desc": "Towing,Fuel,Flat Tire,Key Service",
     },
     {
@@ -126,6 +129,7 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final messagecontroller = Get.put(MessageController());
     return Padding(
       padding: const EdgeInsets.only(top: 5.0),
       child: StaggeredGridView.countBuilder(
@@ -140,30 +144,34 @@ class CardWidget extends StatelessWidget {
                 if (data[index]["title"] == "View History")
                   {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const HisstoryScreen())),
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const HisstoryScreen(),
+                      ),
+                    ),
                   }
                 else if (data[index]["title"] == "Services")
                   {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const ServiceScreen())),
+                            builder: (_) => const ServiceScreen(),),),
                   }
                 else if (data[index]["title"] == "Account")
                   {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const ProfileScreen())),
+                            builder: (_) => const ProfileScreen(),),),
                   }
               },
               child: HomeCard(
-                title: data[index]["title"],
+                // title: data[index]['title'],
                 image: data[index]["image"],
                 color: data[index]["color"],
-                desc: data[index]["desc"],
+                // desc: data[index]["desc"],
+                title: 'name_service'.tr,
+                desc: 'des_service'.tr,
               ),
             );
           },

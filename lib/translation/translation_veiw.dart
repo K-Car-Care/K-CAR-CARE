@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/translation_example_screen/translations_controller.dart';
+import 'package:k_car_care_project/translation/translations_controller.dart';
 
 class MessageView extends StatefulWidget {
   const MessageView({Key? key}) : super(key: key);
