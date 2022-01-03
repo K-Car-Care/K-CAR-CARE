@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CardService extends StatelessWidget {
   final Color color;
@@ -36,7 +37,7 @@ class CardService extends StatelessWidget {
               child: Image.network(
                 icon,
                 fit: BoxFit.fill,
-                
+
                 // color: Colors.white,
               ),
             ),
@@ -53,14 +54,27 @@ class CardService extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title,
-                  //'Fast Towing',
-                  style: ThemeConstant.textTheme.bodyText1!.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.w500)),
-              Text(phoneNumber,
-                  //'017 238 008',
-                  style: ThemeConstant.textTheme.bodyText2!
-                      .copyWith(color: color)),
+              Text(
+                title,
+                //'Fast Towing',
+                style: ThemeConstant.textTheme.bodyText1!.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  final url = 'tel:$phoneNumber';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  }
+                },
+                child: Text(
+                  phoneNumber,
+                  style:
+                      ThemeConstant.textTheme.bodyText2!.copyWith(color: color),
+                ),
+              ),
             ],
           ),
         ),

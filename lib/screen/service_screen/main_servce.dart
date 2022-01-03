@@ -11,7 +11,6 @@ import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.
 import 'package:k_car_care_project/screen/key_service_screen/main_key_service.dart';
 import 'package:k_car_care_project/screen/towing_service_screen/main_towning_service.dart';
 import 'package:k_car_care_project/widget/reuse_circle_image.dart';
-import 'package:k_car_care_project/widget/reuse_contact_section.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,10 +35,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     List<String> _prevList = prefs.getStringList("recents") ?? [];
-    setState(() {
-      _recentTranlates = _prevList;
-      print(_recentTranlates);
-    },);
+    setState(
+      () {
+        _recentTranlates = _prevList;
+        print(_recentTranlates);
+      },
+    );
   }
 
   @override
@@ -127,7 +128,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   var result = snapshot.data!.payload;
 
                   return Container(
-                    height: MediaQuery.of(context).size.height / 2,
+                    height: MediaQuery.of(context).size.height / 1.5,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: GridView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -151,7 +152,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                               Get.to(() => const KeyServiceScreen());
                             } else if (result[index].name?.toUpperCase() ==
                                 "FLATE TIRE") {
-                              Get.to(() =>const FlatFireServiceScreen());
+                              Get.to(() => const FlatFireServiceScreen());
                             }
                           },
                           child: MainCardService(
@@ -166,22 +167,22 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 }
                 return SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 190,
+                  height: MediaQuery.of(context).size.height - 180,
                   child: const Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
               },
             ),
-            Container(
-              height: 180,
-              margin: const EdgeInsets.only(top: 50),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: const BoxDecoration(
-                color: Color(0xffff6968),
-              ),
-              child: const ContactSection(),
-            ),
+            // Container(
+            //   height: 180,
+            //   margin: const EdgeInsets.only(top: 50),
+            //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            //   decoration: const BoxDecoration(
+            //     color: Color(0xffff6968),
+            //   ),
+            //   child: const ContactSection(),
+            // ),
           ],
         ),
       ),
