@@ -1,6 +1,11 @@
 {
     "vscode-corda.isCordaProject": false,
     "cSpell.words": [
-        "onesignal"
+        "Avastar",
+        "cupertino",
+        "firestore",
+        "geolocator",
+        "onesignal",
+        "pinput"
     ]
 }

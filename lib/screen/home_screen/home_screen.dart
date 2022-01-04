@@ -8,6 +8,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
 import 'package:k_car_care_project/screen/notification_screen/main_notification.dart';
 import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
+import 'package:k_car_care_project/screen/repair_garage_maps/google_map_flutter.dart';
 import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
 
 import 'components/card_home_screen.dart';
@@ -24,35 +25,36 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: scaffoldKey,
-        // backgroundColor: ,
-        drawer: const NavigationDrawerWidget(),
-        appBar: AppBar(
-            elevation: 0,
-            backgroundColor: const Color(0xff0185BE),
-            automaticallyImplyLeading: false,
-            leading: IconButton(
-              onPressed: () {
-                scaffoldKey.currentState!.openDrawer();
-              },
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
+      key: scaffoldKey,
+      // backgroundColor: ,
+      drawer: const NavigationDrawerWidget(),
+      appBar: AppBar(
+          elevation: 0,
+          backgroundColor: const Color(0xff0185BE),
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            onPressed: () {
+              scaffoldKey.currentState!.openDrawer();
+            },
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.white,
             ),
-            centerTitle: true,
-            title: Text('Overview', style: ThemeConstant.textTheme.bodyText1),
-            actions: [
-              IconButton(
-                // ignore: prefer_const_constructors
-                icon: (Icon(Icons.notifications, color: Colors.white)),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const Notifications()));
-                },
-              ),
-            ]),
-        body: CardWidget());
+          ),
+          centerTitle: true,
+          title: Text('Overview', style: ThemeConstant.textTheme.bodyText1),
+          actions: [
+            IconButton(
+              // ignore: prefer_const_constructors
+              icon: (Icon(Icons.notifications, color: Colors.white)),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const Notifications()));
+              },
+            ),
+          ]),
+      body: CardWidget(),
+    );
   }
 }
 
@@ -157,6 +159,13 @@ class CardWidget extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (_) => const ProfileScreen())),
+                  }
+                else if (data[index]['title'] == "Repair Garage")
+                  {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const FindingRepairGarageScreen())),
                   }
               },
               child: HomeCard(
