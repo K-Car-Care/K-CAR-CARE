@@ -71,8 +71,9 @@ class CardService extends StatelessWidget {
                 },
                 child: Text(
                   phoneNumber,
-                  style:
-                      ThemeConstant.textTheme.bodyText2!.copyWith(color: color),
+                  style: ThemeConstant.textTheme.bodyText2!.copyWith(
+                    color: color,
+                  ),
                 ),
               ),
             ],
