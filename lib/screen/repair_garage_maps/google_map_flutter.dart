@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class FindingRepairGarageScreen extends StatefulWidget {
@@ -12,37 +13,54 @@ class FindingRepairGarageScreen extends StatefulWidget {
   _FindingRepairGarageScreenState createState() =>
       _FindingRepairGarageScreenState();
 }
-  
+
 class _FindingRepairGarageScreenState extends State<FindingRepairGarageScreen> {
   final Completer<GoogleMapController> _controller = Completer();
+  Set<Marker> marker = {};
   List<Marker> markers = [];
+  LatLng? currentLocation;
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(11.562108, 104.888535),
-    zoom: 10,
-  );
-
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(11.552426,104.8793192),
-      tilt: 59.440717697143555,
-      zoom: 20);
+  void getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      currentLocation = LatLng(position.latitude, position.longitude);
+      marker.add(
+        Marker(
+          markerId: MarkerId('12'),
+          position: currentLocation!,
+          infoWindow: InfoWindow(title: "Your Current Location"),
+        ),
+      );
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     initilize();
+    getCurrentLocation();
   }
 
   @override
   void dispose() {
     super.dispose();
   }
+  // static final CameraPosition _kGooglePlex = CameraPosition(
+  //   target: LatLng(11.562108, 104.888535),
+  //   zoom: 10,
+  // );
+
+  // static final CameraPosition _kLake = CameraPosition(
+  //     bearing: 192.8334901395799,
+  //     target: LatLng(11.552426, 104.8793192),
+  //     tilt: 59.440717697143555,
+  //     zoom: 20);
 
   initilize() {
     Marker first = Marker(
       markerId: MarkerId("first"),
-      position: LatLng(11.552727,104.880601),
+      position: LatLng(11.552727, 104.880601),
       infoWindow: InfoWindow(
         title: "Title",
         snippet: "Hello",
@@ -61,7 +79,7 @@ class _FindingRepairGarageScreenState extends State<FindingRepairGarageScreen> {
 
     Marker third = Marker(
       markerId: MarkerId("third"),
-      position: LatLng(11.5523974,104.8785865),
+      position: LatLng(11.5523974, 104.8785865),
       infoWindow: InfoWindow(
         title: "Title",
         snippet: "Hello",
@@ -88,24 +106,29 @@ class _FindingRepairGarageScreenState extends State<FindingRepairGarageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-        markers: markers.map((e) => e).toSet(),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To Phnom Penh'),
-        icon: Icon(Icons.directions_boat),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: currentLocation != null
+            ? GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: CameraPosition(
+                  target: currentLocation!,
+                  zoom: 15,
+                  
+                ),
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+                markers: marker,
+              )
+            : SizedBox.shrink(),
       ),
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }
+  // Future<void> _goToTheLake() async {
+  //   final GoogleMapController controller = await _controller.future;
+  //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  // }
 }
