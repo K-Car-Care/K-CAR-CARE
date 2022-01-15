@@ -7,9 +7,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/helpers/save_user_data.dart';
-import 'package:k_car_care_project/model/user_info_model.dart';
 import 'package:k_car_care_project/screen/profile_screen/add_more_info_screen.dart';
+import 'package:k_car_care_project/screen/profile_screen/edit_user_profile_screen.dart';
 import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
+import 'package:k_car_care_project/services/user_profile_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'components/card_item_profile.dart';
@@ -23,27 +24,19 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  List<UserInfos> notificationList = [
-    const UserInfos(
-      icon: Icon(Icons.email_outlined),
-      title: 'user@gmail.com',
-      subtitle: 'Email',
-    ),
-    const UserInfos(
-        icon: Icon(Icons.email_outlined),
-        title: '017 238 008',
-        subtitle: 'Phone Number')
-  ];
   List<String> _recentProfile = [];
+  List<String> _carStoreInfo = [];
   String? userLocation = 'Get Your Current Lcoation';
   Position? position;
   List<Placemark>? placeMarks;
   _getRecenProfileFromSharedPrefsFolder() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> _prevList = prefs.getStringList("recents") ?? [];
+    List<String> _carList = prefs.getStringList('carStore') ?? [];
     String? currentLocation = prefs.getString("userlocation");
 
     setState(() {
+      _carStoreInfo = _carList;
       userLocation = currentLocation;
       _recentProfile = _prevList;
       print(_recentProfile);
@@ -51,9 +44,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   final SaveUserData _saveUserData = SaveUserData();
+  UserProfileApi _api = UserProfileApi();
   @override
   void initState() {
+    _api.readTowingService();
     super.initState();
+
     CheckInternet().checkConnection(context);
     _getRecenProfileFromSharedPrefsFolder();
   }
@@ -90,6 +86,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     cover:
                         "https://images.perthnow.com.au/publication/C-861981/e4fe792eca190bb10a6456b13046ade92f3764f7-4x3-x0y0w664h500.jpg",
                     role: "Member ship",
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      print("Edit");
+                      Get.to(() => EditUserProfileScreen());
+                    },
+                    icon: Icon(Icons.edit),
                   ),
                   itemProfile['gmail'] != ""
                       ? CardItem(
@@ -174,6 +177,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
+                  ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: _carStoreInfo.length,
+                      itemBuilder: (context, index) {
+                        var _itemList = json.decode(_carStoreInfo[index]);
+                        print(_itemList.toString());
+                        return CardItem(
+                          subtitle: userLocation.toString(),
+                          icon: Icon(
+                            Icons.gps_fixed,
+                          ),
+                          title: _itemList['year'],
+                        );
+                      })
                 ],
               );
             },
