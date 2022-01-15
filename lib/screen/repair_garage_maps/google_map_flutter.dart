@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 
 class FindingRepairGarageScreen extends StatefulWidget {
   const FindingRepairGarageScreen({Key? key}) : super(key: key);
@@ -39,23 +40,15 @@ class _FindingRepairGarageScreenState extends State<FindingRepairGarageScreen> {
   void initState() {
     super.initState();
     initilize();
+    CheckInternet().checkConnection(context);
     getCurrentLocation();
   }
 
   @override
   void dispose() {
+    CheckInternet().listener!.cancel();
     super.dispose();
   }
-  // static final CameraPosition _kGooglePlex = CameraPosition(
-  //   target: LatLng(11.562108, 104.888535),
-  //   zoom: 10,
-  // );
-
-  // static final CameraPosition _kLake = CameraPosition(
-  //     bearing: 192.8334901395799,
-  //     target: LatLng(11.552426, 104.8793192),
-  //     tilt: 59.440717697143555,
-  //     zoom: 20);
 
   initilize() {
     Marker first = Marker(
@@ -115,7 +108,6 @@ class _FindingRepairGarageScreenState extends State<FindingRepairGarageScreen> {
                 initialCameraPosition: CameraPosition(
                   target: currentLocation!,
                   zoom: 15,
-                  
                 ),
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);

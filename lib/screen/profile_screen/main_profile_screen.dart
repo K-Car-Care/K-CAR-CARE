@@ -9,6 +9,7 @@ import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/helpers/save_user_data.dart';
 import 'package:k_car_care_project/model/user_info_model.dart';
 import 'package:k_car_care_project/screen/profile_screen/add_more_info_screen.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'components/card_item_profile.dart';
@@ -53,7 +54,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
+    CheckInternet().checkConnection(context);
     _getRecenProfileFromSharedPrefsFolder();
+  }
+
+  @override
+  void dispose() {
+    CheckInternet().listener!.cancel();
+    super.dispose();
   }
 
   @override

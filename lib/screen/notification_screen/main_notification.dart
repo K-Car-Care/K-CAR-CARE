@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/model/notification_model.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 import 'components/card_notification.dart';
 import 'empty_screen.dart';
 
@@ -45,7 +46,14 @@ class _NotificationsState extends State<Notifications>
 
   @override
   void initState() {
+    CheckInternet().checkConnection(context);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    CheckInternet().listener!.cancel();
+    super.dispose();
   }
 
   @override
@@ -84,7 +92,7 @@ class _NotificationsState extends State<Notifications>
             }
             return InkWell(
               onTap: () {
-               // Get.to(() => ReadNewsView());
+                // Get.to(() => ReadNewsView());
               },
               child: CardNotification(
                 isLoading: false,

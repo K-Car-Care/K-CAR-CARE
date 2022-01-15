@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/model/main_services_models.dart/key_service_model.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 import 'package:k_car_care_project/services/key_service_api.dart';
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
@@ -18,8 +19,15 @@ class _KeyServiceScreenState extends State<KeyServiceScreen> {
   final KeyServiceApi _keyServiceApi = KeyServiceApi();
   @override
   void initState() {
+    CheckInternet().checkConnection(context);
     _keyServicemodel = _keyServiceApi.readKeyService();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    CheckInternet().listener!.cancel();
+    super.dispose();
   }
 
   @override
@@ -42,7 +50,6 @@ class _KeyServiceScreenState extends State<KeyServiceScreen> {
           title: Text('key Service', style: ThemeConstant.textTheme.bodyText1),
           actions: [
             IconButton(
-             
               icon: (Icon(Icons.notifications, color: Colors.white)),
               onPressed: () {},
             ),

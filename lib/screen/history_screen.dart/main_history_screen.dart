@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
 class HisstoryScreen extends StatefulWidget {
@@ -12,7 +13,13 @@ class HisstoryScreen extends StatefulWidget {
 class _HisstoryScreenState extends State<HisstoryScreen> {
   @override
   void initState() {
+     CheckInternet().checkConnection(context);
     super.initState();
+  }
+  @override
+  void dispose() {
+    
+    super.dispose();
   }
 
   @override

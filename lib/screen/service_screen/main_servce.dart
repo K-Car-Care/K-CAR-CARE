@@ -9,6 +9,7 @@ import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fir
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
 import 'package:k_car_care_project/screen/key_service_screen/main_key_service.dart';
 import 'package:k_car_care_project/screen/towing_service_screen/main_towning_service.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 import 'package:k_car_care_project/services/main_service_api.dart';
 import 'package:k_car_care_project/widget/reuse_circle_image.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
@@ -48,6 +49,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     super.initState();
     _getRecentsFromSharedPrefsFolder();
     _mainServiceModel = _serviceApi.readMainServiceApi();
+    CheckInternet().checkConnection(context);
   }
 
   List data = [
@@ -72,6 +74,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
       "title": "FLAT TIRE",
     },
   ];
+
+  @override
+  void dispose() {
+    CheckInternet().listener!.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

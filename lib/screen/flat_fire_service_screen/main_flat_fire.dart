@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/model/main_services_models.dart/flate_model.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 import 'package:k_car_care_project/services/flate_service_api.dart';
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
@@ -17,8 +18,15 @@ class _FlatFireServiceScreenState extends State<FlatFireServiceScreen> {
 
   @override
   void initState() {
+    CheckInternet().checkConnection(context);
     _flateTireModel = _flateTireServiceApi.readFlateServiceApi();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    CheckInternet().checkConnection(context);
+    super.dispose();
   }
 
   @override
@@ -51,18 +59,18 @@ class _FlatFireServiceScreenState extends State<FlatFireServiceScreen> {
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: FutureBuilder<FlateTireServiceModel>(
-            future: _flateTireModel,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return const Center(
-                  child: Text(
-                      "Error while read data from api in Flate Tire Service"),
-                );
-              }
+          future: _flateTireModel,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text(
+                    "Error while read data from api in Flate Tire Service"),
+              );
+            }
 
-              if (snapshot.hasData) {
-                var result = snapshot.data!.payload;
-                return ListView.builder(
+            if (snapshot.hasData) {
+              var result = snapshot.data!.payload;
+              return ListView.builder(
                 itemCount: result?.length,
                 itemBuilder: (context, index) {
                   return CardService(
@@ -74,11 +82,12 @@ class _FlatFireServiceScreenState extends State<FlatFireServiceScreen> {
                   );
                 },
               );
-              }
+            }
             return const Center(
               child: CircularProgressIndicator(),
             );
-            },),
+          },
+        ),
       ),
     );
   }

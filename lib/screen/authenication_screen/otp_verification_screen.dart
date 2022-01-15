@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names, deprecated_member_use, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 import 'package:k_car_care_project/auth_services/auth_services.dart';
@@ -27,7 +28,14 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   @override
   void initState() {
+    CheckInternet().checkConnection(context);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    CheckInternet().listener!.cancel();
+    super.dispose();
   }
 
   @override
