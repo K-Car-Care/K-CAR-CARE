@@ -77,7 +77,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
 
   @override
   void dispose() {
-    CheckInternet().listener!.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 

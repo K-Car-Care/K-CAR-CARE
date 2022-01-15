@@ -52,7 +52,7 @@ class _NotificationsState extends State<Notifications>
 
   @override
   void dispose() {
-    CheckInternet().listener!.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 

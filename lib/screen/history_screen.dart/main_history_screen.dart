@@ -13,12 +13,13 @@ class HisstoryScreen extends StatefulWidget {
 class _HisstoryScreenState extends State<HisstoryScreen> {
   @override
   void initState() {
-     CheckInternet().checkConnection(context);
+    CheckInternet().checkConnection(context);
     super.initState();
   }
+
   @override
   void dispose() {
-    
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 

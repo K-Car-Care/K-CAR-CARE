@@ -26,7 +26,7 @@ class _KeyServiceScreenState extends State<KeyServiceScreen> {
 
   @override
   void dispose() {
-    CheckInternet().listener!.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 

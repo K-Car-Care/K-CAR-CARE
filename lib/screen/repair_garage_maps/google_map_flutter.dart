@@ -46,7 +46,7 @@ class _FindingRepairGarageScreenState extends State<FindingRepairGarageScreen> {
 
   @override
   void dispose() {
-    CheckInternet().listener!.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 

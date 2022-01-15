@@ -28,7 +28,7 @@ class _TowingServiceScreenState extends State<TowingServiceScreen> {
 
   @override
   void dispose() {
-    CheckInternet().listener!.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 

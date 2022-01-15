@@ -297,7 +297,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   void dispose() {
     controller.dispose();
-      CheckInternet().listener!.cancel();
+      CheckInternet().listener?.cancel();
     super.dispose();
   }
 }

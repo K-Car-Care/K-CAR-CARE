@@ -25,7 +25,7 @@ class _FlatFireServiceScreenState extends State<FlatFireServiceScreen> {
 
   @override
   void dispose() {
-    CheckInternet().checkConnection(context);
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 

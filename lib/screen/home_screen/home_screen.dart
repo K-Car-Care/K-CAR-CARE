@@ -32,7 +32,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   @override
   void dispose() {
-    CheckInternet().listener!.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 
