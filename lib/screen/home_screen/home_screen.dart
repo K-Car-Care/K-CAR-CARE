@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/google_map/screens/search_map_screen.dart';
 import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
 import 'package:k_car_care_project/screen/notification_screen/main_notification.dart';
 import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
-import 'package:k_car_care_project/screen/repair_garage_maps/google_map_flutter.dart';
 import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
 
 import 'components/card_home_screen.dart';
@@ -165,7 +165,7 @@ class CardWidget extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => const FindingRepairGarageScreen())),
+                            builder: (_) => const GoogleMapScreen())),
                   }
               },
               child: HomeCard(
