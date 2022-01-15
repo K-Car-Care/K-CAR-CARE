@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 
@@ -39,7 +41,7 @@ class CustomInfoWindow extends StatefulWidget {
   /// Width of [CustomInfoWindow].
   final double width;
 
-   CustomInfoWindow({
+   const CustomInfoWindow({
     required this.controller,
     this.offset = 50,
     this.height = 50,
@@ -112,7 +114,7 @@ class _CustomInfoWindowState extends State<CustomInfoWindow> {
         visible: (_showNow == false || (_leftMargin == 0 && _topMargin == 0) || _child == null || _latLng == null)
             ? false
             : true,
-        child: Container(
+        child: SizedBox(
           child: _child,
           height: widget.height,
           width: widget.width,
