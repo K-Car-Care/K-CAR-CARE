@@ -70,7 +70,11 @@ dependencies:
   onesignal_flutter: ^3.0.0
   http: ^0.13.4
   url_launcher: ^6.0.17
-  
+
+  #Check Internet and Open Setting 
+  internet_connection_checker: ^0.0.1+3
+  app_settings: ^4.1.1
+  connectivity: ^3.0.6
 
   
 

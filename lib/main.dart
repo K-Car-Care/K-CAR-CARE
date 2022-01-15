@@ -29,11 +29,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-
       translations: Messages(),
-    // translations will be displayed in that locale
-      locale: const Locale('en','US'),
-      fallbackLocale: const Locale('en','US'),
+      // translations will be displayed in that locale
+      locale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
       home: ScreenWrapper(),
     );
   }
@@ -41,14 +40,12 @@ class MyApp extends StatelessWidget {
 
 class ScreenWrapper extends StatefulWidget {
   const ScreenWrapper({Key? key}) : super(key: key);
-
   @override
   State<ScreenWrapper> createState() => _ScreenWrapperState();
 }
 
 class _ScreenWrapperState extends State<ScreenWrapper> {
   static const String onesignalAppId = "1b12b2c6-3f18-4b25-aad5-3a75135485ff";
-
   @override
   void initState() {
     initPlatform();
@@ -62,27 +59,30 @@ class _ScreenWrapperState extends State<ScreenWrapper> {
 
   Future<void> initPlatform() async {
     OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-
     OneSignal.shared.setAppId(onesignalAppId);
     OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
       print("Accepted permission: $accepted");
     });
     OneSignal.shared
         .setNotificationOpenedHandler((OSNotificationOpenedResult result) {});
-    OneSignal.shared.setNotificationOpenedHandler((openedResult) {
-      var title = openedResult.notification.title;
-      var image = openedResult.notification.bigPicture;
-      var date = DateTime.now().toString();
-      var desc =
-          "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content";
-      print("subtitle : ${openedResult.notification.subtitle}");
+    OneSignal.shared.setNotificationOpenedHandler(
+      (openedResult) {
+        var title = openedResult.notification.title;
+        var image = openedResult.notification.bigPicture;
+        var date = DateTime.now().toString();
+        var desc =
+            "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content";
+        print("subtitle : ${openedResult.notification.subtitle}");
 
-      Get.to(() => DetailNotificationScreen(
+        Get.to(
+          () => DetailNotificationScreen(
             title: title,
             image: image,
             datetime: date,
             desc: desc,
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 }

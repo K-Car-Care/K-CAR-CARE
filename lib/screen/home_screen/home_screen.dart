@@ -10,6 +10,7 @@ import 'package:k_car_care_project/screen/history_screen.dart/main_history_scree
 import 'package:k_car_care_project/screen/notification_screen/main_notification.dart';
 import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
 import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 
 import 'components/card_home_screen.dart';
 
@@ -22,11 +23,23 @@ class MyHomeScreen extends StatefulWidget {
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    CheckInternet().checkConnection(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    CheckInternet().listener!.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      // backgroundColor: ,
       drawer: const NavigationDrawerWidget(),
       appBar: AppBar(
           elevation: 0,

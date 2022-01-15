@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
   const NavigationDrawerWidget({Key? key}) : super(key: key);
@@ -18,14 +19,15 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   @override
   void initState() {
+      CheckInternet().checkConnection(context);
     super.initState();
   }
 
-  // bool get _showTitle {
-  //   return _scrollController.hasClients &&
-  //       _scrollController.offset > expandedHeight - (kToolbarHeight * 3);
-  // }
-
+  @override
+  void dispose() {
+    CheckInternet().listener!.cancel();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Drawer(
