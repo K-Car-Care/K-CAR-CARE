@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/auth_services/auth_services.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
+import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TopBar extends StatefulWidget {
@@ -19,7 +20,6 @@ class _TopBarState extends State<TopBar> {
   final Authentication _auth = Get.put(Authentication());
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,7 +27,7 @@ class _TopBarState extends State<TopBar> {
           buildIcon(
               iconData: Icons.arrow_back,
               onTap: () {
-                Navigator.pop(context);
+                Get.to(() => MyHomeScreen());
               }),
           buildIcon(
             iconData: Icons.logout_outlined,

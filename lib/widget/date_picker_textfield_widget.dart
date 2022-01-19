@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 
 import 'package:k_car_care_project/constant/theme_constant.dart';
 
-class TextFieldItem extends StatelessWidget {
+class TPickerTextField extends StatelessWidget {
   final String? hint;
   final String? title;
   final TextEditingController? textEditingController;
-  const TextFieldItem({
+  final Widget? leading;
+  const TPickerTextField({
     Key? key,
     this.hint,
     this.title,
     this.textEditingController,
+    this.leading,
   }) : super(key: key);
 
   @override
@@ -30,9 +32,19 @@ class TextFieldItem extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        TextField(
+        TextFormField(
+          onTap: () async {
+            DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(
+                    2000), //DateTime.now() - not to allow to choose before today.
+                lastDate: DateTime(2101),);
+          },
+          readOnly: true,
           controller: textEditingController,
           decoration: InputDecoration(
+            prefixIcon: leading,
             border: OutlineInputBorder(),
             isDense: true,
             contentPadding: EdgeInsets.all(18.0),

@@ -6,7 +6,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/helpers/save_user_data.dart';
+import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 import 'package:k_car_care_project/screen/profile_screen/add_more_info_screen.dart';
 import 'package:k_car_care_project/screen/profile_screen/edit_user_profile_screen.dart';
 import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
@@ -44,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   final SaveUserData _saveUserData = SaveUserData();
-  UserProfileApi _api = UserProfileApi();
+  final UserProfileApi _api = UserProfileApi();
   @override
   void initState() {
     _api.readTowingService();
@@ -106,14 +106,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         )
                       : SizedBox(),
                   itemProfile['phone'] != ""
-                      ? CardItem(
-                          subtitle: itemProfile['phoneNumber'] != ""
-                              ? '${itemProfile['phoneNumber']}'
-                              : "សូមបញ្ជូលលេខទូរស័ព្ទរបស់លោកអ្នក",
-                          icon: Icon(
-                            Icons.phone,
+                      ? InkWell(
+                          onTap: () {
+                            Get.to(() => EditUserProfileScreen());
+                          },
+                          child: CardItem(
+                            subtitle: itemProfile['phoneNumber'] != ""
+                                ? '${itemProfile['phoneNumber']}'
+                                : "សូមបញ្ជូលលេខទូរស័ព្ទរបស់លោកអ្នក",
+                            icon: Icon(
+                              Icons.phone,
+                            ),
+                            title: "Phone Number",
                           ),
-                          title: "Phone Number",
                         )
                       : SizedBox(),
                   Padding(
@@ -130,16 +135,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fontSize: 18,
                           ),
                         ),
-                        userLocation == "Get Your Current Lcoation"
-                            ? IconButton(
-                                splashColor: Color(0xFF2196F3).withOpacity(.25),
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.add,
-                                  color: ThemeConstant.lightScheme.primary,
-                                ),
-                              )
-                            : SizedBox(),
+                        IconButton(
+                          splashColor: Color(0xFF2196F3).withOpacity(.25),
+                          onPressed: () {
+                            getCurrentLocation();
+                          },
+                          icon: Icon(
+                            Icons.add,
+                            color: ThemeConstant.lightScheme.primary,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -185,9 +190,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         var _itemList = json.decode(_carStoreInfo[index]);
                         print(_itemList.toString());
                         return CardItem(
-                          subtitle: userLocation.toString(),
+                          subtitle: _itemList['make'],
                           icon: Icon(
-                            Icons.gps_fixed,
+                            Icons.car_rental,
                           ),
                           title: _itemList['year'],
                         );

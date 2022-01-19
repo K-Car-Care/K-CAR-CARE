@@ -1,44 +1,30 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_print
-import 'dart:io';
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-
 import 'package:k_car_care_project/screen/profile_screen/components/textfield_item.dart';
-import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
-import 'package:k_car_care_project/storage_data/user_profile_storage/store_care_information.dart';
-
-class AddMoreInfoScreen extends StatefulWidget {
-  const AddMoreInfoScreen({Key? key}) : super(key: key);
+class EditOptionScreen extends StatefulWidget {
+  const EditOptionScreen({Key? key}) : super(key: key);
 
   @override
-  _AddMoreInfoScreenState createState() => _AddMoreInfoScreenState();
+  _EditOptionScreenState createState() => _EditOptionScreenState();
 }
 
-class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
+class _EditOptionScreenState extends State<EditOptionScreen> {
   TextEditingController? yearcontroller;
   TextEditingController? makeController;
   TextEditingController? modelController;
   TextEditingController? colorController;
   TextEditingController? carTypeController;
-  String? year = 'One Thousand';
-
-  List<String?> years = ['2002', ' 2004', ' 2006'];
-
-  XFile? imageFile;
-  final ImagePicker _imagePicker = ImagePicker();
-  StoreCarInformation _storeCarInfo = StoreCarInformation();
-
   @override
   void initState() {
     super.initState();
     yearcontroller = TextEditingController();
     makeController = TextEditingController();
     carTypeController = TextEditingController();
-    modelController = TextEditingController();
-    colorController = TextEditingController();
+
   }
 
   @override
@@ -54,7 +40,7 @@ class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
           backgroundColor: const Color(0xff0185BE),
           leading: IconButton(
             onPressed: () {
-              Get.off(() =>ProfileScreen());
+              Get.back();
             },
             icon: Icon(
               Icons.arrow_back,
@@ -93,28 +79,18 @@ class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
                 ),
                 TextFieldItem(
                   textEditingController: yearcontroller,
-                  title: "Year",
-                  hint: "2022",
+                  title: "Title",
+                  hint: "Input your problem here",
                 ),
                 TextFieldItem(
                   textEditingController: makeController,
-                  title: "Make",
-                  hint: "Toyota",
+                  title: "Description",
+                  hint: "Input your detail information",
                 ),
                 TextFieldItem(
                   textEditingController: modelController,
-                  title: "Model",
-                  hint: "2022 Toyota... ",
-                ),
-                TextFieldItem(
-                  textEditingController: colorController,
-                  title: "Color",
-                  hint: "Black",
-                ),
-                TextFieldItem(
-                  textEditingController: carTypeController,
-                  title: "CarType",
-                  hint: "Van/Minivan",
+                  title: "price",
+                  hint: "\$00",
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,17 +101,11 @@ class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                       ),
-                      child: imageFile == null
-                          ? Image.asset(
-                              "assets/service_images/gallery_image.png")
-                          : Image.file(
-                              File(imageFile!.path),
-                              fit: BoxFit.fill,
-                            ),
+                     
                     ),
                     TextButton(
                       onPressed: () async {
-                        await _getImage();
+                       
                       },
                       child: Text(
                         "Add Image",
@@ -154,14 +124,7 @@ class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _storeCarInfo.carstorageInfo(
-                      year: yearcontroller?.text,
-                      make: makeController?.text,
-                      model: modelController?.text,
-                      color: colorController?.text,
-                      cartype: carTypeController?.text,
-                    );
-                    Get.offAll(() => ProfileScreen());
+                  
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -182,14 +145,4 @@ class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
     );
   }
 
-  Future<void> _getImage() async {
-    final XFile? selectimage =
-        await _imagePicker.pickImage(source: ImageSource.gallery);
-    print(selectimage!.path);
-    setState(
-      () {
-        imageFile = selectimage;
-      },
-    );
-  }
 }

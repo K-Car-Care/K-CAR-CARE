@@ -131,7 +131,7 @@ class Authentication extends GetxController {
         verificatoin_id.value = verificatoinID;
         _saveUserData.saveUserData(
           gmail: "",
-          profileUrl: "",
+          profileUrl: "", 
           username: '',
           phone: my_phone_num,
         );
