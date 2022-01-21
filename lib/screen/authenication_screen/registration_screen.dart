@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:k_car_care_project/auth_services/auth_services.dart';
-import 'package:k_car_care_project/auth_services/google_login_service.dart';
+
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/controllers/login_controller.dart';
 import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
-import 'package:provider/provider.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String verificationIDRecieved = "";
 
   final Authentication _authentication = Get.put(Authentication());
-  final LoginController _loginController = Get.put(LoginController());
+  final LoginController1 _loginController1 = Get.put(LoginController1());
 
   String? verificationId;
 
@@ -216,7 +216,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       children: [
                         InkWell(
                           onTap: () async {
-                            await _loginController.signInWithGoogle();
+                       //     await _loginController.signInWithGoogle();
+                            _loginController1.login();
 
                             print("Google");
                           },
@@ -297,7 +298,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   void dispose() {
     controller.dispose();
-      CheckInternet().listener?.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/model/info_window_model/infoWindowType.dart';
 
@@ -59,7 +61,7 @@ class CustomWindow extends StatelessWidget {
                       // .paddingAll(8)
 
                       ),
-                  // ignore: prefer_const_constructors
+              
                   Icon(Icons.arrow_forward_ios,
                       size: 16, color: Color(0xFF3E3D3D)),
                   const SizedBox(width: 4),

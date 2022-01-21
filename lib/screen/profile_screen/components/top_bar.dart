@@ -1,4 +1,4 @@
-// ignore_for_file: void_checks
+// ignore_for_file: void_checks, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

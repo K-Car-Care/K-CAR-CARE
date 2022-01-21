@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, avoid_unnecessary_containers
 
 import 'dart:async';
+import 'dart:typed_data';
+
 import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:ui' as ui;
 
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({Key? key}) : super(key: key);
@@ -14,17 +18,31 @@ class GoogleMapScreen extends StatefulWidget {
   State<GoogleMapScreen> createState() => _GoogleMapScreenState();
 }
 
-class _GoogleMapScreenState extends State<GoogleMapScreen> {
+class _GoogleMapScreenState extends State<GoogleMapScreen>
+    with WidgetsBindingObserver {
   final Completer<GoogleMapController> _controller = Completer();
-  GoogleMapController? newGoogleMapController;
   MapType _mapType = MapType.normal;
   Position? currentPosition;
-  var geoLocator = Geolocator();
-
+  BitmapDescriptor? customIcon;
 
   @override
   void initState() {
+    getGeoLocationPosition();
     super.initState();
+  }
+
+  createMarker(context) {
+    if (customIcon == null) {
+      ImageConfiguration configuration = createLocalImageConfiguration(context);
+      BitmapDescriptor.fromAssetImage(configuration, "assets/maps/pin.png")
+          .then(
+        (value) {
+          setState(() {
+            customIcon = value;
+          });
+        },
+      );
+    }
   }
 
   @override
@@ -65,12 +83,22 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          _googleMap(),
-          _buildContainer(),
-        ],
-      ),
+      body: currentPosition == null
+          ? Center(
+              child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: SizedBox(
+                      width: 10,
+                      height: 10,
+                      child: CircularProgressIndicator())),
+            )
+          : Stack(
+              children: [
+                _googleMap(),
+                _buildContainer(),
+              ],
+            ),
     );
   }
 
@@ -87,10 +115,11 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: _boxes(
-                  "https://i.pinimg.com/550x/48/a1/43/48a1431a8a4345575d3dce035d4452d9.jpg",
-                  11.575895,
-                  104.922046,
-                  "Garage"),
+                "https://i.pinimg.com/550x/48/a1/43/48a1431a8a4345575d3dce035d4452d9.jpg",
+                11.575895,
+                104.922046,
+                "Garage",
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(8.0),
@@ -138,8 +167,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
   Widget _boxes(String _image, double lat, double lon, String title) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         _gotoLocation(lat, lon);
+        // currentPosition = await getGeoLocationPosition();
+        // await getAddressFromLatLong(currentPosition!);
+        print(currentPosition?.latitude.toString());
+        print(currentPosition?.longitude.toString());
       },
       child: Container(
         child: FittedBox(
@@ -181,13 +214,14 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Container(
-              child: Text(
-            restaurantName,
-            style: TextStyle(
-                color: Color(0xff6200ee),
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold),
-          )),
+            child: Text(
+              restaurantName,
+              style: TextStyle(
+                  color: Color(0xff6200ee),
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
         SizedBox(height: 5.0),
         Container(
@@ -250,7 +284,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         SizedBox(height: 5.0),
         Container(
             child: Text(
-          "American \u00B7 \u0024\u0024 \u00B7 1.6 mi",
+          "American /u00B7 /u0024/u0024 /u00B7 1.6 mi",
           style: TextStyle(
             color: Colors.black54,
             fontSize: 18.0,
@@ -259,7 +293,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         SizedBox(height: 5.0),
         Container(
             child: Text(
-          "Closed \u00B7 Opens 17:00 Thu",
+          "Closed /u00B7 Opens 17:00 Thu",
           style: TextStyle(
               color: Colors.black54,
               fontSize: 18.0,
@@ -280,12 +314,16 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         height: MediaQuery.of(context).size.height - 200,
         child: GoogleMap(
           compassEnabled: true,
-          myLocationButtonEnabled: true,
+          myLocationEnabled: true,
+          
           mapType: _mapType,
-          initialCameraPosition: CameraPosition(target: LatLng(0, 0),),
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
+          initialCameraPosition: CameraPosition(
+            target: currentPosition == null
+                ? LatLng(11.5793306, 104.7500993)
+                : LatLng(currentPosition!.latitude, currentPosition!.longitude),
+            zoom: currentPosition == null ? 10.0 : 12.0,
+          ),
+          onMapCreated: _onMapCreated,
           markers: {
             firstPlace,
             secondPlace,
@@ -297,14 +335,51 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     );
   }
 
+  void _onMapCreated(GoogleMapController controller) {
+    _controller.complete(controller);
+  }
+
   Marker firstPlace = Marker(
     markerId: MarkerId("firstPlace"),
     position: LatLng(11.575895, 104.922046),
     infoWindow: InfoWindow(
       title: "First Place",
     ),
-    icon: BitmapDescriptor.defaultMarker,
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
   );
+  Future<Position> getGeoLocationPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high)
+        .then((value) {
+      print(
+          "Get Current Location Success ${value.latitude}, ${value.longitude} ");
+      setState(() {
+        currentPosition = value;
+        print("go");
+      });
+
+      return value;
+    });
+    return position;
+  }
 
   Marker secondPlace = Marker(
     markerId: MarkerId("secondPlace"),
@@ -312,7 +387,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     infoWindow: InfoWindow(
       title: "Second Place",
     ),
-    icon: BitmapDescriptor.defaultMarker,
+    // icon: BitmapDescriptor.defaultMarkerWithHue(hue),
   );
 
   Marker thirdPlace = Marker(
@@ -336,28 +411,19 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     icon: BitmapDescriptor.defaultMarker,
   );
 
-  Future<Position> getGeoLocationPosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      await Geolocator.openLocationSettings();
-      return Future.error('Location services are disabled.');
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+  // Future<void> getAddressFromLatLong(Position position) async {
+  //   List<Placemark> placemarks =
+  //       await placemarkFromCoordinates(position.latitude, position.longitude);
+  //   print(placemarks);
+  //   Placemark place = placemarks[0];
 
-    return position;
-  }
+  //   Address =
+  //       '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
+  //   setState(
+  //     () {
+  //       print(Address.toString());
+  //     },
+  //   );
+  // }
+
 }
