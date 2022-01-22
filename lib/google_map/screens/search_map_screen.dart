@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, avoid_print, avoid_unnecessary_containers, unnecessary_null_comparison
 
 import 'dart:async';
 import 'dart:typed_data';
@@ -23,12 +23,18 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
   final Completer<GoogleMapController> _controller = Completer();
   MapType _mapType = MapType.normal;
   Position? currentPosition;
-  BitmapDescriptor? customIcon;
+  BitmapDescriptor customIcon = BitmapDescriptor.defaultMarker;
 
   @override
   void initState() {
     getGeoLocationPosition();
+    setCustomMarker();
     super.initState();
+  }
+
+  void setCustomMarker() async {
+    mapMarker = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(), "assets/maps/pin.png");
   }
 
   createMarker(context) {
@@ -38,12 +44,17 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
           .then(
         (value) {
           setState(() {
-            customIcon = value;
+            customIcon =
+                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan);
           });
         },
       );
     }
   }
+
+  Set<Marker> _markers = {};
+
+  BitmapDescriptor mapMarker = BitmapDescriptor.defaultMarker;
 
   @override
   Widget build(BuildContext context) {
@@ -315,7 +326,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
         child: GoogleMap(
           compassEnabled: true,
           myLocationEnabled: true,
-          
           mapType: _mapType,
           initialCameraPosition: CameraPosition(
             target: currentPosition == null
@@ -325,11 +335,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
           ),
           onMapCreated: _onMapCreated,
           markers: {
-            firstPlace,
+            // firstPlace,
             secondPlace,
             thirdPlace,
             fourPlace,
           },
+          // markers: _markers,
         ),
       ),
     );
@@ -337,16 +348,31 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
 
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
+    setState(() {
+      _markers.add(
+        Marker(
+          markerId: MarkerId(
+            "sinat",
+          ),
+          infoWindow: InfoWindow(
+            title: "Hello",
+            snippet: "DSKLfjsl;dfkjsadf",
+          ),
+          icon: mapMarker,
+          position: LatLng(11.575895, 104.922046),
+        ),
+      );
+    });
   }
 
-  Marker firstPlace = Marker(
-    markerId: MarkerId("firstPlace"),
-    position: LatLng(11.575895, 104.922046),
-    infoWindow: InfoWindow(
-      title: "First Place",
-    ),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
-  );
+  // Marker firstPlace = Marker(
+  //   markerId: MarkerId("firstPlace"),
+  //   position: LatLng(11.575895, 104.922046),
+  //   infoWindow: InfoWindow(
+  //     title: "First Place",
+  //   ),
+  //   icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
+  // );
   Future<Position> getGeoLocationPosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -387,7 +413,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
     infoWindow: InfoWindow(
       title: "Second Place",
     ),
-    // icon: BitmapDescriptor.defaultMarkerWithHue(hue),
+    icon: BitmapDescriptor.defaultMarker,
   );
 
   Marker thirdPlace = Marker(
