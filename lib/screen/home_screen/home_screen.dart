@@ -8,6 +8,7 @@ import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
 import 'package:k_car_care_project/screen/manage_expense_screen/expense_list_screen.dart';
+import 'package:k_car_care_project/screen/manage_expense_screen/manage_expense_screen.dart';
 import 'package:k_car_care_project/screen/notification_screen/main_notification.dart';
 import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
 import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
@@ -186,7 +187,7 @@ class CardWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const ExpenseListScreen(),
+                        builder: (_) => const ManageExpenseScreen(),
                       ),
                     ),
                   }
