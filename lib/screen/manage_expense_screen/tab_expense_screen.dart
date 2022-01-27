@@ -10,57 +10,47 @@ class TabExpenseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
+      // width: MediaQuery.of(context).size.width,
+      // height: MediaQuery.of(context).size.height,
+      height: 30,
       //  color: Colors.black,
-      child: ListView.separated(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        separatorBuilder: (context, index) => Divider(
-          color: Colors.black,
-        ),
-        itemCount: 20,
-        itemBuilder: (context, index) => Padding(
-          padding: EdgeInsets.all(8.0),
-          child: TExpenseWidget(
-            onTapEdit: () {
-              Get.to(() => EditOptionScreen());
-            },
-            onTapDelete: () {
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text("Are you sure?"),
-                  content: Text("You have raised a Alert Dialog Box"),
-                  actions: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                      child: Text(
-                        "No",
-                        style: TextStyle(
-                          color: Colors.red,
-                        ),
-                      ),
+      child: TExpenseWidget(
+        onTapEdit: () {
+          Get.to(() => EditOptionScreen());
+        },
+        onTapDelete: () {
+          showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: Text("Are you sure?"),
+              content: Text("You have raised a Alert Dialog Box"),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Text(
+                    "No",
+                    style: TextStyle(
+                      color: Colors.red,
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.of(ctx).pop();
-                      },
-                      child: Text("Yes"),
-                    ),
-                  ],
+                  ),
                 ),
-              );
-            },
-            image: DecorationImage(
-              image: NetworkImage(
-                "http://marchforsciencenorway.com/wp-content/uploads/2020/12/s-l-n-s-towing-service-tumkur-car-towing-services-cjn1zdvk41.jpg",
-              ),
-              fit: BoxFit.cover,
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Text("Yes"),
+                ),
+              ],
             ),
+          );
+        },
+        image: DecorationImage(
+          image: NetworkImage(
+            "http://marchforsciencenorway.com/wp-content/uploads/2020/12/s-l-n-s-towing-service-tumkur-car-towing-services-cjn1zdvk41.jpg",
           ),
+          fit: BoxFit.cover,
         ),
       ),
     );

@@ -2,7 +2,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:k_car_care_project/helpers/chart_counter_helper.dart';
 import 'package:k_car_care_project/widget/chart_flutter.dart';
+
+import 'expense_list_screen.dart';
 
 class ManageExpenseScreen extends StatefulWidget {
   const ManageExpenseScreen({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class _ManageExpenseScreenState extends State<ManageExpenseScreen> {
   int cout = 0;
   List<String> date = ["7-DAYS", "1-MONTH", "3-MONTHS", "1-YEAR"];
 
+  final CounterHelper _counterHelper = Get.put(CounterHelper());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +55,9 @@ class _ManageExpenseScreenState extends State<ManageExpenseScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ChartFlutter(
-                    count: cout,
+                  
                   ),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Divider(
@@ -63,7 +68,10 @@ class _ManageExpenseScreenState extends State<ManageExpenseScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: TextButton(
                       onPressed: () {
-                        print("Show more Data");
+              
+                    
+
+                        _counterHelper.changeCounter();
                       },
                       child: Text(
                         "Show More".toUpperCase(),
@@ -233,7 +241,7 @@ class _ManageExpenseScreenState extends State<ManageExpenseScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        print("Show more Data");
+                        Get.to(() => ExpenseListScreen());
                       },
                       child: Text(
                         "Show More".toUpperCase(),

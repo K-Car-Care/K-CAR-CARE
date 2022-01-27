@@ -28,9 +28,10 @@ class TExpenseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
@@ -39,7 +40,6 @@ class TExpenseWidget extends StatelessWidget {
                 height: 100,
                 width: 90,
                 decoration: BoxDecoration(
-                  color: Color(0xff0F3EB6),
                   image: image,
                   border: Border.all(
                     color: Colors.grey,
@@ -47,38 +47,37 @@ class TExpenseWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      title ?? "No Title",
-                      style: ThemeConstant.textTheme.headline6!.copyWith(
-                        color: Colors.black,
+              SizedBox(
+                width: 30,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title ?? "No Title",
+                    style: ThemeConstant.textTheme.headline6!.copyWith(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    subtitle ?? "No Description",
+                    style: ThemeConstant.textTheme.headline6!.copyWith(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    color: Color(0xff0F3EB6),
+                    child: Text(
+                      price ?? "\$0.00",
+                      style: ThemeConstant.textTheme.subtitle2!.copyWith(
+                        color: Colors.white,
                       ),
                     ),
-                    Text(
-                      subtitle ?? "No Description",
-                      style: ThemeConstant.textTheme.headline6!.copyWith(
-                        color: Colors.black,
-                      ),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                      color: Color(0xff0F3EB6),
-                      child: Text(
-                        price ?? "\$0.0",
-                        style: ThemeConstant.textTheme.subtitle2!.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+                  ),
+                ],
+              ),
             ],
           ),
           Column(

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       // translations will be displayed in that locale
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
-      home:ManageExpenseScreen(),
+      home:ScreenWrapper(),
     );
   }
 }
