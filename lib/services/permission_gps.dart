@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, non_constant_identifier_names, avoid_print, unused_local_variable
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 

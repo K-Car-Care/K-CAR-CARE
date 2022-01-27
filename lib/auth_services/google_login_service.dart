@@ -4,11 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:k_car_care_project/auth_services/auth_services.dart';
-
-import 'package:k_car_care_project/helpers/save_user_data.dart';
-
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
+import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 
 class LoginController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -17,7 +15,6 @@ class LoginController extends GetxController {
   static Authentication instance = Get.find();
   late Rx<User?> firebaseUser;
   late Rx<GoogleSignInAccount?> googleSignInAccount;
-
   final SaveUserData _saveUserData = SaveUserData();
 
   @override

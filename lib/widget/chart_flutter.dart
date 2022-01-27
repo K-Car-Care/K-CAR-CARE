@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/helpers/chart_counter_helper.dart';
+import 'package:k_car_care_project/utils/helpers/chart_counter_helper.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ChartFlutter extends StatefulWidget {

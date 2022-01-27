@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
-import 'package:k_car_care_project/screen/manage_expense_screen/manage_expense_screen.dart';
-import 'package:k_car_care_project/translation_example_screen/messages.dart';
+
 import 'package:k_car_care_project/screen/notification_screen/detail_notification_screen.dart';
+import 'package:k_car_care_project/translation_screen/messages.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {

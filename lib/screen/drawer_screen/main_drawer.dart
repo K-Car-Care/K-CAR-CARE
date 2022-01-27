@@ -25,7 +25,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   @override
   void dispose() {
-    CheckInternet().listener!.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
   @override

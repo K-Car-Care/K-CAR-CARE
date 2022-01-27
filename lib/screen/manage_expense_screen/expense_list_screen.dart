@@ -5,9 +5,8 @@ import 'package:get/get.dart';
 import 'package:k_car_care_project/model/expense_models/expense_model.dart';
 import 'package:k_car_care_project/screen/manage_expense_screen/add_expense_screen/add_expense_data_screen.dart';
 import 'package:k_car_care_project/screen/manage_expense_screen/list_expense_by_category_screen.dart';
-import 'package:k_car_care_project/screen/manage_expense_screen/tab_expense_screen.dart';
 import 'package:k_car_care_project/services/expense_apis/expense_api.dart';
-import 'package:k_car_care_project/widget/t_expense_widget.dart';
+
 
 class ExpenseListScreen extends StatefulWidget {
   const ExpenseListScreen({Key? key}) : super(key: key);

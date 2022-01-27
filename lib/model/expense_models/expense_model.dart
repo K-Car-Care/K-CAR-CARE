@@ -2,7 +2,7 @@
 //
 //     final expenseModel = expenseModelFromJson(jsonString);
 
-// ignore_for_file: prefer_null_aware_operators
+// ignore_for_file: prefer_null_aware_operators, prefer_if_null_operators
 
 import 'dart:convert';
 

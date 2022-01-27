@@ -1,15 +1,10 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, avoid_unnecessary_containers, unnecessary_null_comparison
-
 import 'dart:async';
-import 'dart:typed_data';
-
 import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:ui' as ui;
 
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({Key? key}) : super(key: key);
@@ -52,7 +47,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
     }
   }
 
-  Set<Marker> _markers = {};
+  final Set<Marker> _markers = {};
 
   BitmapDescriptor mapMarker = BitmapDescriptor.defaultMarker;
 
@@ -102,7 +97,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
                   child: SizedBox(
                       width: 10,
                       height: 10,
-                      child: CircularProgressIndicator())),
+                      child: CircularProgressIndicator(),),),
             )
           : Stack(
               children: [
@@ -246,7 +241,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
                 color: Colors.black54,
                 fontSize: 18.0,
               ),
-            )),
+            ),),
             Container(
               child: Icon(
                 Icons.star,

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:k_car_care_project/model/expense_models/expense_model.dart';

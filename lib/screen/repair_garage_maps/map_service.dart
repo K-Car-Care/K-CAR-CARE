@@ -8,12 +8,12 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:k_car_care_project/helpers/code_generation.dart';
-import 'package:k_car_care_project/helpers/images_asset.dart';
 import 'package:k_car_care_project/model/info_window_model/infoWindowType.dart';
 import 'package:k_car_care_project/screen/repair_garage_maps/info_window/custom_infowindow.dart';
 import 'package:k_car_care_project/screen/repair_garage_maps/info_window/custom_window.dart';
 import 'package:http/http.dart' as http;
+import 'package:k_car_care_project/utils/helpers/code_generation.dart';
+import 'package:k_car_care_project/utils/helpers/images_asset.dart';
 
 class MapService {
   MapService._();
