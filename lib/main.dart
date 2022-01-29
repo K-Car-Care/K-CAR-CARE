@@ -7,6 +7,7 @@ import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 
 import 'package:k_car_care_project/screen/notification_screen/detail_notification_screen.dart';
+import 'package:k_car_care_project/splash_screen.dart';
 import 'package:k_car_care_project/translation_screen/messages.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       // translations will be displayed in that locale
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
-      home:ScreenWrapper(),
+      home:SplashScreen(),
     );
   }
 }
