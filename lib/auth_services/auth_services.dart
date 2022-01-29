@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/screen/authenication_screen/otp_verification_screen.dart';
+import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 
 class Authentication extends GetxController {
-
   var status_string = "Welcome".obs;
   var code_sent = "no".obs;
   var verificatoin_id = "1".obs;
@@ -14,10 +14,11 @@ class Authentication extends GetxController {
   String get code_sent_result => code_sent.value;
   String get veri_result => verificatoin_id.value;
 
-  
   // SignOut Google Account
   Future<void> signOut() async {
-    await auth.signOut();
+    await auth.signOut().then((value) {
+      Get.off(() => RegistrationScreen());
+    });
   }
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -32,36 +33,34 @@ class Authentication extends GetxController {
   Future<void> signInwithPhoneNumber({required String my_phone_num}) async {
     await auth
         .verifyPhoneNumber(
-      phoneNumber: my_phone_num,
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        await auth.signInWithCredential(credential);
-      },
-      verificationFailed: (FirebaseException exception) {
-        status_string.value = "Error verifying your phone number";
-        if (exception.code == 'invalid-phone-number') {
-          print('The provided phone number is not valid.');
-        }
-      },
-      codeSent: (String verificatoinID, int? resendToken) {
-        code_sent.value = "yes";
-        print(code_sent.value);
-        print(verificatoinID);
-        verificatoin_id.value = verificatoinID;
-        _saveUserData.saveUserData(
-          gmail: "",
-          profileUrl: "", 
-          username: '',
-          phone: my_phone_num,
-        );
-        Get.to(OTPVerificationScreen(phoneNum: my_phone_num));
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        // Auto-resolution timed out...
-      },
-    )
-        .then((value) {
-    
-    });
+          phoneNumber: my_phone_num,
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            await auth.signInWithCredential(credential);
+          },
+          verificationFailed: (FirebaseException exception) {
+            status_string.value = "Error verifying your phone number";
+            if (exception.code == 'invalid-phone-number') {
+              print('The provided phone number is not valid.');
+            }
+          },
+          codeSent: (String verificatoinID, int? resendToken) {
+            code_sent.value = "yes";
+            print(code_sent.value);
+            print(verificatoinID);
+            verificatoin_id.value = verificatoinID;
+            _saveUserData.saveUserData(
+              gmail: "",
+              profileUrl: "",
+              username: '',
+              phone: my_phone_num,
+            );
+            Get.to(OTPVerificationScreen(phoneNum: my_phone_num));
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {
+            // Auto-resolution timed out...
+          },
+        )
+        .then((value) {});
   }
 
   myCredentials(String verID, String userInput) {

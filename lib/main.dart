@@ -11,6 +11,8 @@ import 'package:k_car_care_project/splash_screen.dart';
 import 'package:k_car_care_project/translation_screen/messages.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
+import 'auth_services/auth_services.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
       // translations will be displayed in that locale
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
-      home:SplashScreen(),
+      home: RegistrationScreen(),
     );
   }
 }
@@ -48,9 +50,11 @@ class ScreenWrapper extends StatefulWidget {
 
 class _ScreenWrapperState extends State<ScreenWrapper> {
   static const String onesignalAppId = "1b12b2c6-3f18-4b25-aad5-3a75135485ff";
+ 
   @override
   void initState() {
     initPlatform();
+
     super.initState();
   }
 

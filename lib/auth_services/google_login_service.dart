@@ -60,7 +60,7 @@ class LoginController extends GetxController {
           idToken: googleSignInAuthentication.idToken,
           
         );
-        await auth.signInWithCredential(credential).then((value) {
+        await auth.signInWithCredential(credential).then((value) async{
           
           
           //Add data to Firestore in Firebase 
@@ -70,6 +70,7 @@ class LoginController extends GetxController {
           );
           print("Gmail User: ${googleSignInAccount.email}");
           print("Profile User: ${googleSignInAccount.photoUrl}");
+          print("Profile User: ${googleSignInAccount.id}");
 
           // Save Data into Share Preference 
           _saveUserData.saveUserData(
