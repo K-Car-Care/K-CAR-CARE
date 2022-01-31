@@ -52,7 +52,7 @@ class HomeCard extends StatelessWidget {
                     child: SvgPicture.asset(
                       image,
                       width: 50,
-                      height: 50,
+                      height: 37,
                       color: Colors.white,
                     ),
                   ))
