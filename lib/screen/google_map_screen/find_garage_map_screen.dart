@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:k_car_care_project/model/map_model/map_model.dart';
+import 'package:k_car_care_project/services/map_apis/map_api.dart';
 
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({Key? key}) : super(key: key);
@@ -19,15 +21,19 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
   MapType _mapType = MapType.normal;
   Position? currentPosition;
   BitmapDescriptor customIcon = BitmapDescriptor.defaultMarker;
+  final MapApi _mapApi = MapApi();
+  Future<MapModel>? _mapModel;
+  List<Payload>? _listMap;
 
   @override
   void initState() {
+    _mapModel = _mapApi.readMapApi();
     getGeoLocationPosition();
     setCustomMarker();
     super.initState();
   }
 
-  void setCustomMarker() async {
+ setCustomMarker() async {
     mapMarker = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(), "assets/maps/pin.png");
   }
@@ -92,12 +98,10 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
       body: currentPosition == null
           ? Center(
               child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: SizedBox(
-                      width: 10,
-                      height: 10,
-                      child: CircularProgressIndicator(),),),
+                width: 10,
+                height: 10,
+                child: CircularProgressIndicator(),
+              ),
             )
           : Stack(
               children: [
@@ -114,44 +118,32 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
         height: 125,
-        child: ListView(
-          physics: BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: _boxes(
-                "https://i.pinimg.com/550x/48/a1/43/48a1431a8a4345575d3dce035d4452d9.jpg",
-                11.575895,
-                104.922046,
-                "Garage",
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: _boxes(
-                  "https://i.pinimg.com/550x/48/a1/43/48a1431a8a4345575d3dce035d4452d9.jpg",
-                  11.575454,
-                  104.920095,
-                  "Garage"),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: _boxes(
-                  "https://i.pinimg.com/550x/48/a1/43/48a1431a8a4345575d3dce035d4452d9.jpg",
-                  11.575183,
-                  104.913076,
-                  "Garage"),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: _boxes(
-                  "https://i.pinimg.com/550x/48/a1/43/48a1431a8a4345575d3dce035d4452d9.jpg",
-                  11.563219,
-                  104.883367,
-                  "Garage"),
-            ),
-          ],
+        child: FutureBuilder<MapModel>(
+          future: _mapModel,
+          builder: (context, snapshot) {
+            _listMap = snapshot.data?.payload;
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Error"),
+              );
+            }
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: _listMap?.length,
+                itemBuilder: (context, index) {
+                  return _boxes(
+                    _listMap![index].logo.toString(),
+                    _listMap![index].coordinate!.x!.toDouble(),
+                    _listMap![index].coordinate!.y!.toDouble(),
+                    _listMap![index].name.toString(),
+                  );
+                },
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         ),
       ),
     );
@@ -181,6 +173,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
         print(currentPosition?.longitude.toString());
       },
       child: Container(
+        height: 120,
         child: FittedBox(
           child: Material(
             color: Colors.white,
@@ -213,108 +206,115 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
     );
   }
 
-  Widget myDetailsContainer1(String restaurantName) {
+  Widget myDetailsContainer1(String name) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Container(
             child: Text(
-              restaurantName,
+              name,
               style: TextStyle(
                   color: Color(0xff6200ee),
-                  fontSize: 24.0,
+                  fontSize: 28.0,
                   fontWeight: FontWeight.bold),
             ),
           ),
         ),
         SizedBox(height: 5.0),
         Container(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
                 child: Text(
-              "4.1",
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 18.0,
+                  "4.1",
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 18.0,
+                  ),
+                ),
               ),
-            ),),
-            Container(
-              child: Icon(
-                Icons.star,
-                color: Colors.amber,
-                size: 15.0,
+              Container(
+                child: Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                  size: 15.0,
+                ),
               ),
-            ),
-            Container(
-              child: Icon(
-                Icons.star,
-                color: Colors.amber,
-                size: 15.0,
+              Container(
+                child: Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                  size: 15.0,
+                ),
               ),
-            ),
-            Container(
-              child: Icon(
-                Icons.star,
-                color: Colors.amber,
-                size: 15.0,
+              Container(
+                child: Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                  size: 15.0,
+                ),
               ),
-            ),
-            Container(
-              child: Icon(
-                Icons.star,
-                color: Colors.amber,
-                size: 15.0,
+              Container(
+                child: Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                  size: 15.0,
+                ),
               ),
-            ),
-            Container(
-              child: Icon(
-                Icons.star_half,
-                color: Colors.amber,
-                size: 15.0,
+              Container(
+                child: Icon(
+                  Icons.star_half,
+                  color: Colors.amber,
+                  size: 15.0,
+                ),
               ),
-            ),
-            Container(
-                child: Text(
-              "(946)",
+              Container(
+                  child: Text(
+                "(946)",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 18.0,
+                ),
+              )),
+            ],
+          ),
+        ),
+        SizedBox(height: 5.0),
+        Container(
+            width: MediaQuery.of(context).size.width - 40,
+            child: Text(
+              "American /u00B7 /u0024/u0024 /u00B7 1.6 mi",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 18.0,
               ),
             )),
-          ],
-        )),
         SizedBox(height: 5.0),
         Container(
+            width: MediaQuery.of(context).size.width - 40,
             child: Text(
-          "American /u00B7 /u0024/u0024 /u00B7 1.6 mi",
-          style: TextStyle(
-            color: Colors.black54,
-            fontSize: 18.0,
-          ),
-        )),
-        SizedBox(height: 5.0),
-        Container(
-            child: Text(
-          "Closed /u00B7 Opens 17:00 Thu",
-          style: TextStyle(
-              color: Colors.black54,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold),
-        )),
+              "Closed /u00B7 Opens 17:00 Thu",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold),
+            )),
       ],
     );
   }
+  
 
   _googleMap() {
     return InkWell(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-        print("object");
-      },
+      onTap: () {},
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height - 200,
@@ -360,6 +360,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
     });
   }
 
+
+ 
   // Marker firstPlace = Marker(
   //   markerId: MarkerId("firstPlace"),
   //   position: LatLng(11.575895, 104.922046),
@@ -432,19 +434,5 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
     icon: BitmapDescriptor.defaultMarker,
   );
 
-  // Future<void> getAddressFromLatLong(Position position) async {
-  //   List<Placemark> placemarks =
-  //       await placemarkFromCoordinates(position.latitude, position.longitude);
-  //   print(placemarks);
-  //   Placemark place = placemarks[0];
-
-  //   Address =
-  //       '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
-  //   setState(
-  //     () {
-  //       print(Address.toString());
-  //     },
-  //   );
-  // }
-
+  
 }

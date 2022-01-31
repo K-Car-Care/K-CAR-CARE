@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/screen/google_map_screen/search_map_screen.dart';
+import 'package:k_car_care_project/screen/google_map_screen/find_garage_map_screen.dart';
 import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';

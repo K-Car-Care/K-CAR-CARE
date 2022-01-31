@@ -39,6 +39,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    CheckInternet().listener?.cancel();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -216,7 +224,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       children: [
                         InkWell(
                           onTap: () async {
-                       //     await _loginController.signInWithGoogle();
+                            //     await _loginController.signInWithGoogle();
                             _loginController1.login();
 
                             print("Google");
@@ -295,10 +303,4 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     });
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
-    CheckInternet().listener?.cancel();
-    super.dispose();
-  }
 }
