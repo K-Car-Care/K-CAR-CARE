@@ -172,7 +172,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
         print(currentPosition?.latitude.toString());
         print(currentPosition?.longitude.toString());
       },
-      child: Container(
+      child: SizedBox(
         height: 120,
         child: FittedBox(
           child: Material(
@@ -284,7 +284,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
           ),
         ),
         SizedBox(height: 5.0),
-        Container(
+        SizedBox(
             width: MediaQuery.of(context).size.width - 40,
             child: Text(
               "American /u00B7 /u0024/u0024 /u00B7 1.6 mi",
@@ -296,7 +296,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
               ),
             )),
         SizedBox(height: 5.0),
-        Container(
+        SizedBox(
             width: MediaQuery.of(context).size.width - 40,
             child: Text(
               "Closed /u00B7 Opens 17:00 Thu",

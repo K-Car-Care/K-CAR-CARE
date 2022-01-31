@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/auth_services/auth_services.dart';
@@ -28,7 +30,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
     super.initState();
   }
 
-  Authentication _authentication = Get.put(Authentication());
+  final Authentication _authentication = Get.put(Authentication());
   @override
   void dispose() {
     CheckInternet().listener?.cancel();
@@ -81,7 +83,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     // ...
                   },
                 )
-              : CircularProgressIndicator(),
+              : const CircularProgressIndicator(),
           ListTile(
             title: const Text('Item 2'),
             onTap: () {

@@ -3,12 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:k_car_care_project/auth_services/auth_services.dart';
-
+import 'package:k_car_care_project/auth_services/google_login_service.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/controllers/login_controller.dart';
 import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -26,7 +24,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String verificationIDRecieved = "";
 
   final Authentication _authentication = Get.put(Authentication());
-  final LoginController1 _loginController1 = Get.put(LoginController1());
+  final LoginController _loginController = Get.put(LoginController());
 
   String? verificationId;
 
@@ -44,7 +42,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     CheckInternet().listener?.cancel();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +148,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ),
                           initialValue: number,
                           maxLength: 12,
-                          hintText: "ឧ​.ទា 123 456 7",
+                          hintText: "ឧទាហរណ៍ 123 456 7",
                           keyboardType: TextInputType.numberWithOptions(
                             signed: true,
                             decimal: true,
@@ -224,8 +221,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       children: [
                         InkWell(
                           onTap: () async {
-                            //     await _loginController.signInWithGoogle();
-                            _loginController1.login();
+                            await _loginController.signInWithGoogle();
+                            // _loginController1.login();
 
                             print("Google");
                           },
@@ -302,5 +299,4 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       this.number = number;
     });
   }
-
 }

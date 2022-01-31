@@ -34,7 +34,7 @@ class CardService extends StatelessWidget {
             alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.all(2.0),
-              child: Image.network(
+              child: Image.asset(
                 icon,
                 fit: BoxFit.fill,
 

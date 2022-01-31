@@ -31,6 +31,7 @@ class StackContainer extends StatelessWidget {
             child: Container(
               height: 300.0,
               decoration: BoxDecoration(
+                color: Colors.black,
                 image: DecorationImage(
                   image: NetworkImage(cover),
                   fit: BoxFit.cover,
@@ -54,6 +55,7 @@ class StackContainer extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 21.0,
                     fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
                 Text(

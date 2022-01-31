@@ -49,7 +49,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     _api.readTowingService();
     super.initState();
-
     CheckInternet().checkConnection(context);
     _getRecenProfileFromSharedPrefsFolder();
   }
@@ -68,16 +67,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         scrollDirection: Axis.vertical,
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: _recentProfile.length,
             itemBuilder: (context, index) {
               final itemProfile = json.decode(_recentProfile[index]);
+
               return Column(
                 children: [
                   StackContainer(
-                    fullName: itemProfile['userName'] != ""
+                    fullName: itemProfile['userName'] != "User Guest"
                         ? '${itemProfile['userName']}'
                         : "User Guest",
                     profileImage: itemProfile['profile'] != ""

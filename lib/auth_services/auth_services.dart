@@ -17,7 +17,7 @@ class Authentication extends GetxController {
   // SignOut Google Account
   Future<void> signOut() async {
     await auth.signOut().then((value) {
-      Get.off(() => RegistrationScreen());
+      Get.off(() => const RegistrationScreen());
     });
   }
 
