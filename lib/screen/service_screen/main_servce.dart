@@ -9,11 +9,12 @@ import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fir
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
 import 'package:k_car_care_project/screen/key_service_screen/main_key_service.dart';
 import 'package:k_car_care_project/screen/towing_service_screen/main_towning_service.dart';
-import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
-import 'package:k_car_care_project/services/main_service_api.dart';
 import 'package:k_car_care_project/widget/reuse_circle_image.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../data/check_connectivity/check_connectivity.dart';
+import '../../data/main_service_api.dart';
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({Key? key}) : super(key: key);

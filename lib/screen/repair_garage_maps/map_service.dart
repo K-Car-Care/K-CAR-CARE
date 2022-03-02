@@ -12,8 +12,10 @@ import 'package:k_car_care_project/model/info_window_model/infoWindowType.dart';
 import 'package:k_car_care_project/screen/repair_garage_maps/info_window/custom_infowindow.dart';
 import 'package:k_car_care_project/screen/repair_garage_maps/info_window/custom_window.dart';
 import 'package:http/http.dart' as http;
-import 'package:k_car_care_project/utils/helpers/code_generation.dart';
-import 'package:k_car_care_project/utils/helpers/images_asset.dart';
+
+import '../../utils/code_generation.dart';
+import '../../utils/images_asset.dart';
+
 
 class MapService {
   MapService._();

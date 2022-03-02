@@ -9,10 +9,11 @@ import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 import 'package:k_car_care_project/screen/profile_screen/add_more_info_screen.dart';
 import 'package:k_car_care_project/screen/profile_screen/edit_user_profile_screen.dart';
-import 'package:k_car_care_project/services/check_connectivity/check_connectivity.dart';
-import 'package:k_car_care_project/services/user_profile_api.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/check_connectivity/check_connectivity.dart';
+import '../../data/user_profile_api.dart';
 import 'components/card_item_profile.dart';
 import 'components/stack_container.dart';
 

@@ -3,8 +3,9 @@
 import 'dart:convert';
 
 import 'package:k_car_care_project/model/expense_models/expense_model.dart';
-import 'package:k_car_care_project/services/base_repository_api.dart';
 import 'package:http/http.dart' as http;
+
+import '../base_repository_api.dart';
 
 class ExpenseApi extends ApiRepository {
   Future<ExpenseModel> readListExpenseApi() async {

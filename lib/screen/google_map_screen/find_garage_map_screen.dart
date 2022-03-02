@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:k_car_care_project/model/map_model/map_model.dart';
-import 'package:k_car_care_project/services/map_apis/map_api.dart';
 
+import '../../data/map_apis/map_api.dart';
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({Key? key}) : super(key: key);
 

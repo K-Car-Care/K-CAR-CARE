@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:k_car_care_project/model/google_login_models/goole_login_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:k_car_care_project/services/base_repository_api.dart';
+import '../base_repository_api.dart';
 
 class GoogleLogin extends ApiRepository {
   Future<GoogleLoginModel> googlelogin(

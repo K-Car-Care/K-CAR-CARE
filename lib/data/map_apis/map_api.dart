@@ -3,8 +3,9 @@
 import 'dart:convert';
 
 import 'package:k_car_care_project/model/map_model/map_model.dart';
-import 'package:k_car_care_project/services/base_repository_api.dart';
 import 'package:http/http.dart' as http;
+
+import '../base_repository_api.dart';
 
 class MapApi extends ApiRepository {
   Future<MapModel> readMapApi() async {
