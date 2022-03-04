@@ -9,7 +9,10 @@ import 'base_repository_api.dart';
 class TowingServiceApi extends ApiRepository {
   Future<TowingServiceModel> readTowingService() async {
     http.Response response = await http.get(
-      Uri.parse('${url}services?type=towing'),
+      Uri.parse('https://k-car-care.herokuapp.com/api/v1/services?type=towing'),
+      headers: <String,String>{
+        'Content-type':'maltipart/form-data'
+      }
     );
     if (response.statusCode == 200) {
       return TowingServiceModel.fromJson(jsonDecode(response.body));

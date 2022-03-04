@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/screen/profile_screen/components/top_bar.dart';

@@ -7,9 +7,8 @@ import 'base_repository_api.dart';
 class FlateTireServiceApi extends ApiRepository {
   Future<FlateTireServiceModel> readFlateServiceApi() async {
     http.Response response = await http.get(
-      Uri.parse('${url}services?type=flate_tire'),
+      Uri.parse('$url/services?type=flate_tire'),
     );
-
     if (response.statusCode == 200) {
       return FlateTireServiceModel.fromJson(jsonDecode(response.body));
     } else {
