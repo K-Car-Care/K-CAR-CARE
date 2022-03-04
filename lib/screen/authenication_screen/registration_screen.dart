@@ -181,8 +181,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             color: Colors.black,
                             shape: CircleBorder(),
                             onPressed: () async {
-                              _authentication.signInwithPhoneNumber(
-                                  my_phone_num: "$dialCode${controller.text}");
+                              // _authentication.signInwithPhoneNumber(
+                              //     my_phone_num: "$dialCode${controller.text}");
                               print("$dialCode${controller.text}");
                             },
                             child: Padding(

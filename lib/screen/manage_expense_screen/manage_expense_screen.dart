@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/widget/chart_flutter.dart';

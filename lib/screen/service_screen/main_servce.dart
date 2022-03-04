@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unrelated_type_equality_checks
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -31,24 +31,23 @@ class _ServiceScreenState extends State<ServiceScreen> {
   CollectionReference users =
       FirebaseFirestore.instance.collection('user_phoneNumber');
 
-  List<String> _recentTranlates = [];
+  // List<String> _recentTranlates = [];
+  // _getRecentsFromSharedPrefsFolder() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  _getRecentsFromSharedPrefsFolder() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    List<String> _prevList = prefs.getStringList("recents") ?? [];
-    setState(
-      () {
-        _recentTranlates = _prevList;
-        print(_recentTranlates);
-      },
-    );
-  }
+  //   List<String> _prevList = prefs.getStringList("recents") ?? [];
+  //   setState(
+  //     () {
+  //       _recentTranlates = _prevList;
+  //       print(_recentTranlates);
+  //     },
+  //   );
+  // }
 
   @override
   void initState() {
     super.initState();
-    _getRecentsFromSharedPrefsFolder();
+    // _getRecentsFromSharedPrefsFolder();
     _mainServiceModel = _serviceApi.readMainServiceApi();
     CheckInternet().checkConnection(context);
   }
@@ -135,7 +134,6 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 }
                 if (snapshot.hasData) {
                   var result = snapshot.data!.payload;
-
                   return Container(
                     height: MediaQuery.of(context).size.height / 1.5,
                     padding: const EdgeInsets.symmetric(horizontal: 10),

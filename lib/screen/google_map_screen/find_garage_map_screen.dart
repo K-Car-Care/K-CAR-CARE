@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, avoid_unnecessary_containers, unnecessary_null_comparison
 import 'dart:async';
-import 'dart:ui';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

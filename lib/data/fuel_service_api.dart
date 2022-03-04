@@ -8,7 +8,7 @@ import 'base_repository_api.dart';
 class FuelServiceApi extends ApiRepository {
   Future<FuelService> readFuelService() async {
     http.Response response = await http.get(
-      Uri.parse("${url}services?type=fuel"),
+      Uri.parse("$url/services?type=fuel"),
     );
     if (response.statusCode == 200) {
       return FuelService.fromJson(

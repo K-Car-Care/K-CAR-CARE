@@ -1,6 +1,4 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, use_full_hex_values_for_flutter_colors
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
