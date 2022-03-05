@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:k_car_care_project/auth_services/auth_services.dart';
-import 'package:k_car_care_project/auth_services/google_login_service.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 
 import '../../data/check_connectivity/check_connectivity.dart';
+import '../../services/auth_services/auth_services.dart';
+import '../../services/auth_services/google_login_service.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -181,8 +181,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             color: Colors.black,
                             shape: CircleBorder(),
                             onPressed: () async {
-                              // _authentication.signInwithPhoneNumber(
-                              //     my_phone_num: "$dialCode${controller.text}");
+                              _authentication.signInwithPhoneNumber(
+                                  my_phone_num: "$dialCode${controller.text}");
                               print("$dialCode${controller.text}");
                             },
                             child: Padding(
@@ -223,8 +223,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         InkWell(
                           onTap: () async {
                             await _loginController.signInWithGoogle();
-                            // _loginController1.login();
-
+                           //  _loginController1.login();
                             print("Google");
                           },
                           child: Column(

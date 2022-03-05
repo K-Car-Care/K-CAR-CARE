@@ -33,7 +33,7 @@ class Authentication extends GetxController {
   Future<void> signInwithPhoneNumber({required String my_phone_num}) async {
     await auth
         .verifyPhoneNumber(
-          phoneNumber: my_phone_num,
+          phoneNumber: "+85595291097",
           verificationCompleted: (PhoneAuthCredential credential) async {
             await auth.signInWithCredential(credential);
           },
@@ -54,7 +54,7 @@ class Authentication extends GetxController {
               username: '',
               phone: my_phone_num,
             );
-            Get.to(OTPVerificationScreen(phoneNum: my_phone_num));
+            Get.to(OTPVerificationScreen(phoneNum: "95291097"));
           },
           codeAutoRetrievalTimeout: (String verificationId) {
             // Auto-resolution timed out...

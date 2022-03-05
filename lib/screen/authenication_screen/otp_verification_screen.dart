@@ -2,11 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-
-import 'package:k_car_care_project/auth_services/auth_services.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 
 import '../../data/check_connectivity/check_connectivity.dart';
+import '../../services/auth_services/auth_services.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
   final String phoneNum;
@@ -35,7 +34,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   @override
   void dispose() {
-    CheckInternet().listener!.cancel();
+    CheckInternet().listener?.cancel();
     super.dispose();
   }
 

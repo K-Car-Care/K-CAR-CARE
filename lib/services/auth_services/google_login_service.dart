@@ -3,10 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:k_car_care_project/auth_services/auth_services.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
+
+import 'auth_services.dart';
 
 class LoginController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
