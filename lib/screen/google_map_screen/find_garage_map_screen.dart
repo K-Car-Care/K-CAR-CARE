@@ -96,8 +96,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
       body: currentPosition == null
           ? Center(
               child: SizedBox(
-                width: 10,
-                height: 10,
+                width: 40,
+                height: 40,
                 child: CircularProgressIndicator(),
               ),
             )
@@ -139,7 +139,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
               );
             }
             return Center(
-              child: CircularProgressIndicator(),
+              child: Container(
+                child: CircularProgressIndicator()),
             );
           },
         ),
@@ -160,7 +161,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
       ),
     );
   }
-
   Widget _boxes(String _image, double lat, double lon, String title) {
     return InkWell(
       onTap: () async {

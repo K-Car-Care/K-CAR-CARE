@@ -27,7 +27,6 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
     CheckInternet().listener?.cancel();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,11 +57,11 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: GestureDetector(
           onVerticalDragStart: (details) => {
-           // print(details),
+            print(details),
           },
           onVerticalDragEnd: (velocity) {
-          //  var sinat = velocity;
-          //  print(sinat);
+            var sinat = velocity;
+            print(sinat);
           },
           child: Container(
             width: 200,

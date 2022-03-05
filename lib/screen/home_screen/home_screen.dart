@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/screen/car_relevent_new_screen/car_relevent_news_screen.dart';
 import 'package:k_car_care_project/screen/google_map_screen/find_garage_map_screen.dart';
 import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -186,6 +187,15 @@ class CardWidget extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (_) => const ManageExpenseScreen(),
+                      ),
+                    ),
+                  }
+                else if (data[index]['title'] == "Car Relevent news")
+                  {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const CarReleventNewsScreen(),
                       ),
                     ),
                   }

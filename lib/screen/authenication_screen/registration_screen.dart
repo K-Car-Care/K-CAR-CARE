@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, deprecated_member_use, unrelated_type_equality_checks
+// ignore_for_file: prefer_const_constructors, avoid_print, deprecated_member_use, unrelated_type_equality_checks, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

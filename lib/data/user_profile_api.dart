@@ -8,7 +8,7 @@ import 'base_repository_api.dart';
 class UserProfileApi extends ApiRepository {
   Future readTowingService() async {
     http.Response response = await http.get(
-      Uri.parse('https://k-car-care.herokuapp.com/api/v1/users'),
+      Uri.parse('$url/users'),
     );
     var responseJson = jsonDecode(response.body);
 
