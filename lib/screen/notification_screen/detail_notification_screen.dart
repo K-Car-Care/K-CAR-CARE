@@ -52,19 +52,19 @@ class DetailNotificationScreen extends StatelessWidget {
         child: ListView(
           children: [
             const SizedBox(height: 12.0),
-            Hero(
-              tag: "sdf",
-              child: Container(
-                height: 220.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  image: DecorationImage(
-                    image: NetworkImage(image.toString()),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
+            // Hero(
+            //   tag: "sdf",
+            //   child: Container(
+            //     height: 220.0,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(15.0),
+            //       image: DecorationImage(
+            //         image: NetworkImage(image.toString()),
+            //         fit: BoxFit.fill,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 15.0),
             Row(
               children: [

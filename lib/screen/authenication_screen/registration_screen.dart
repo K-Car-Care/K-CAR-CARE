@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/data/notification_api/notification_api.dart';
 
 import '../../data/check_connectivity/check_connectivity.dart';
+import '../../data/login_api/login_token_api.dart';
 import '../../services/auth_services/auth_services.dart';
 import '../../services/auth_services/google_login_service.dart';
 
@@ -30,6 +32,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String? verificationId;
 
   String? dialCode;
+  final AccessToken _accessToken = AccessToken();
 
   @override
   void initState() {
@@ -181,8 +184,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             color: Colors.black,
                             shape: CircleBorder(),
                             onPressed: () async {
-                              _authentication.signInwithPhoneNumber(
-                                  my_phone_num: "$dialCode${controller.text}");
+                              // _authentication.signInwithPhoneNumber(
+                              //     my_phone_num: "$dialCode${controller.text}");
+                              _accessToken.accessToken("phoneNumber");
                               print("$dialCode${controller.text}");
                             },
                             child: Padding(
@@ -223,7 +227,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         InkWell(
                           onTap: () async {
                             await _loginController.signInWithGoogle();
-                           //  _loginController1.login();
+                            //  await _loginController.signup(context);
+                            //  _loginController1.login();
                             print("Google");
                           },
                           child: Column(
