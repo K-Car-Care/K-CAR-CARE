@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/app_images.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/google_map_screen/find_garage_map_screen.dart';
 
 import '../../core/model/home_screen_model/home_screen_model.dart';
@@ -35,12 +36,12 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   // ignore: prefer_final_fields
   List<MainModel> _mainBox = [
-    MainModel(name: 'CAR SERVICE', image: AppImages.carServiceImg),
-    MainModel( name: 'REPAIR SERVICE', image: AppImages.repairService),
-    MainModel(name: 'REPAIR COST', image: AppImages.repairCostImg),
-    MainModel(name: 'CAR RELVENT NEW',image: AppImages.carReleventNews),
-    MainModel( name: 'VIEW HISTORY', image: AppImages.historyImg),
-    MainModel(name: 'ACCOUNT', image:AppImages.profileImg),
+    MainModel(name: 'CAR SERVICE', image: AppImages.carServiceImg, color: Color(0xFF1976D2)),
+    MainModel( name: 'REPAIR SERVICE', image: AppImages.repairService,color:Colors.green),
+    MainModel(name: 'REPAIR COST', image: AppImages.repairCostImg,color:Color(0xFFfea832) ),
+    MainModel(name: 'CAR RELVENT NEW',image: AppImages.carReleventNews,color: Color(0xFFB00020)),
+    MainModel( name: 'VIEW HISTORY', image: AppImages.historyImg,color: Color(0xFFff0066)),
+    MainModel(name: 'ACCOUNT', image:AppImages.profileImg,color:Color(0xFF0F3EB6)),
   ];
   
   navigate(int index) {
@@ -175,6 +176,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     navigate(index);
                   },
                   child: BBoxWidget(
+                    color:_mainBox[index].color,
                     tag: _mainBox[index].name.toUpperCase(),
                     name: _mainBox[index].name.toUpperCase(),
                     image: _mainBox[index].image.toString(),

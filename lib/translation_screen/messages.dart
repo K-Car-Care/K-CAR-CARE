@@ -21,11 +21,6 @@ class Messages extends Translations {
       'WELCOME_REGISTER':'សូមស្វាគមន៍មកកាន់ទីនេះ',
       'PLEASE_FILL':'បំពេញទម្រង់បែបបទដើម្បីក្លាយជាភ្ញៀវរបស់យើង',
       'EXAMPLE':'ជ្រើសរើស កូដប្រទេស លេខទូរស័ព្ទ'
-
-
-
-      
- 
     },
   };
 }

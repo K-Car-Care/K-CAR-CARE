@@ -10,10 +10,12 @@ class BBoxWidget extends StatelessWidget {
     Key? key,
     this.name,
     this.image, this.tag,
+    this.color,
   }) : super(key: key);
   final String? name;
   final String? image;
   final String? tag;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class BBoxWidget extends StatelessWidget {
             height: 3,
             color:defaultColor,
           ),
-          Container(
+          SizedBox(
             width: 80,
             height: 80,
             // decoration: BoxDecoration(
@@ -51,7 +53,7 @@ class BBoxWidget extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            child: Image.asset("$image",color:defaultColor),
+            child: Image.asset("$image",color:color),
           ),
           Hero(
             tag: tag.toString(),
@@ -64,7 +66,7 @@ class BBoxWidget extends StatelessWidget {
                 fontSize: 18,
                 fontFamily: 'Vollkorn',
                 fontWeight: FontWeight.w500,
-                color:defaultColor,
+                color:color,
               ),
             ),
           ),
