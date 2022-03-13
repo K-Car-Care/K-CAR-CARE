@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
+// import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../screen/notification_screen/detail_notification_screen.dart';
@@ -18,7 +18,6 @@ class OnsignalNotificationService {
 
     OneSignal.shared.setNotificationOpenedHandler(
       (openedResult) {
-        print("adflkjadlfkjadfalsdkf $openedResult");
         var title = openedResult.notification.title;
       //  var subtitle = openedResult.notification.additionalData?["feedback_id"];
       //   print("titleasdfasdfadfadfsd:$title");

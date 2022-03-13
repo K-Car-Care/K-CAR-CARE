@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
-import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
-import 'package:k_car_care_project/screen/translate_screen/translation_screen.dart';
+// import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
+// import 'package:k_car_care_project/screen/translate_screen/translation_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

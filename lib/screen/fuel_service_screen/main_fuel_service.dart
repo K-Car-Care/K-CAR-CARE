@@ -34,7 +34,7 @@ class _FuelServiceScreenState extends State<FuelServiceScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xff0185BE),
+        backgroundColor: defaultColor,
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -57,7 +57,7 @@ class _FuelServiceScreenState extends State<FuelServiceScreen> {
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding:const EdgeInsets.all(5),
         child: FutureBuilder<FuelService>(
           future: _fuelService,
           builder: (context, snapshot) {

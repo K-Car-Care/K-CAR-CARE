@@ -15,7 +15,7 @@ class MapApi extends ApiRepository {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWUyNDRiMGZlYTYzMjRlZWRkNDgyNjMiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjQzNDIzNzc3LCJleHAiOjE2NDM2ODI5Nzd9.ILAWBhW3GIs3ETVx8RL4HR5xqei3jU5Xb190K3skvzM',
     });
     if (response.statusCode == 200) {
-      print(response.body);
+      // print(response.body);
       return MapModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Failed map api");

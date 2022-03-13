@@ -29,7 +29,7 @@ class _CarReleventNewsScreenState extends State<CarReleventNewsScreen> {
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: const Color(0xff0185BE),
+          backgroundColor: defaultColor,
           automaticallyImplyLeading: false,
           leading: IconButton(
             onPressed: () {

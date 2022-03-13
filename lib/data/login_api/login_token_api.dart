@@ -9,10 +9,13 @@ class AccessToken extends ApiRepository {
         .post(Uri.parse("$url/auth/login"), body: {'phone': "+85512345678"});
     var jsonResponse = json.decode(response.body);
     if (response.statusCode == 201) {
-      print("Success");
+      // ignore: avoid_print
+      // print("Success");
     }
     if (response.statusCode == 200) {
-      print("adfjlksdjfl;sadf $jsonResponse");
+      // ignore: avoid_print
+      // print("adfjlksdjfl;sadf $jsonResponse");
+      return jsonResponse;
     } else {
       throw Exception();
     }

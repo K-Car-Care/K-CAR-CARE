@@ -182,6 +182,7 @@ class ThemeConstant {
 }
 
 const greyColor = Colors.grey;
+const defaultColor=  Color(0xff3F6DE0);
 
 class ColorRandom {
   static Color getRandomColor() =>

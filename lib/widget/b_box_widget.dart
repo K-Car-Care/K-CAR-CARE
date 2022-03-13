@@ -3,6 +3,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:k_car_care_project/constant/theme_constant.dart';
 
 class BBoxWidget extends StatelessWidget {
   const BBoxWidget({
@@ -38,18 +39,19 @@ class BBoxWidget extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width / 2 - 2,
             height: 3,
-            color: const Color(0xff0F3EB6),
+            color:defaultColor,
           ),
           Container(
             width: 80,
             height: 80,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  "$image",
-                ),
-              ),
-            ),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage(
+            //       "$image",
+            //     ),
+            //   ),
+            // ),
+            child: Image.asset("$image",color:defaultColor),
           ),
           Hero(
             tag: tag.toString(),
@@ -62,7 +64,7 @@ class BBoxWidget extends StatelessWidget {
                 fontSize: 18,
                 fontFamily: 'Vollkorn',
                 fontWeight: FontWeight.w500,
-                color: Color(0xff0F3EB6),
+                color:defaultColor,
               ),
             ),
           ),

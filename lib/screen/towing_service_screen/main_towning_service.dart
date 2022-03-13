@@ -37,7 +37,7 @@ class _TowingServiceScreenState extends State<TowingServiceScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xff0185BE),
+        backgroundColor:defaultColor,
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -59,7 +59,7 @@ class _TowingServiceScreenState extends State<TowingServiceScreen> {
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.all(5),
         child: FutureBuilder<TowingServiceModel>(
           future: _towingModel,
           builder: (context, snapshot) {

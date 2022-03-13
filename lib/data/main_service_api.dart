@@ -17,13 +17,12 @@ class MainServiceApi extends ApiRepository {
       },
     );
     if (response.statusCode == 200) {
-      print(response.body);
       return MainServiceModel.fromJson(
         jsonDecode(response.body),
       );
     } else {
       throw Exception((e) {
-        print("Error ${e.toString()}");
+        return e;
       });
     }
   }

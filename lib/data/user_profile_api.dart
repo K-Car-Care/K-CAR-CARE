@@ -13,7 +13,7 @@ class UserProfileApi extends ApiRepository {
     var responseJson = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      print(responseJson.toString());
+      // print(responseJson.toString());
       return responseJson;
     } else {
       throw Exception("Error read data from api");

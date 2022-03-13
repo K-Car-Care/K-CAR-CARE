@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/widget/chart_flutter.dart';
 
 import '../../utils/chart_counter_helper.dart';
@@ -23,7 +24,7 @@ class _ManageExpenseScreenState extends State<ManageExpenseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff000000),
+        backgroundColor: defaultColor,
         title: Text("Manage Expense"),
       ),
       body: SingleChildScrollView(

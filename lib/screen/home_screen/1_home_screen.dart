@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:k_car_care_project/constant/app_images.dart';
+import 'package:k_car_care_project/screen/google_map_screen/find_garage_map_screen.dart';
 
 import '../../model/home_screen_model/home_screen_model.dart';
 import '../../widget/b_box_widget.dart';
@@ -20,29 +23,26 @@ class MyHomeScreen extends StatefulWidget {
 class _MyHomeScreenState extends State<MyHomeScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-  // ignore: prefer_final_fields
-  List<String> _carouselImage = [
-    "https://cdn3.vectorstock.com/i/1000x1000/40/42/car-service-vector-3874042.jpg",
-    "https://cdn3.vectorstock.com/i/1000x1000/40/42/car-service-vector-3874042.jpg",
-    "https://cdn3.vectorstock.com/i/1000x1000/40/42/car-service-vector-3874042.jpg"
+
+  List<String> _carouselImage =[
+    AppImages.sliderImg1,
+    AppImages.sliderImg2,
+    AppImages.sliderImg3,
+    AppImages.sliderImg4,
+    AppImages.sliderImg5,
+    AppImages.sliderImg6
   ];
 
   // ignore: prefer_final_fields
   List<MainModel> _mainBox = [
-    MainModel(
-        name: 'CAR SERVICE', image: 'assets/service_images/service_icon.png'),
-    MainModel(
-        name: 'REPAIR SERVICE',
-        image: 'assets/service_images/service_icon.png'),
-    MainModel(
-        name: 'REPAIR COST', image: 'assets/service_images/service_icon.png'),
-    MainModel(
-        name: 'CAR RELVENT NEW',
-        image: 'assets/service_images/service_icon.png'),
-    MainModel(
-        name: 'VIEW HISTORY', image: 'assets/service_images/service_icon.png'),
-    MainModel(name: 'ACCOUNT', image: 'assets/service_images/service_icon.png'),
+    MainModel(name: 'CAR SERVICE', image: AppImages.carServiceImg),
+    MainModel( name: 'REPAIR SERVICE', image: AppImages.repairService),
+    MainModel(name: 'REPAIR COST', image: AppImages.repairCostImg),
+    MainModel(name: 'CAR RELVENT NEW',image: AppImages.carReleventNews),
+    MainModel( name: 'VIEW HISTORY', image: AppImages.historyImg),
+    MainModel(name: 'ACCOUNT', image:AppImages.profileImg),
   ];
+  
   navigate(int index) {
     if (_mainBox[index].name.toUpperCase() == "car service".toUpperCase()) {
       Navigator.push(
@@ -50,7 +50,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
     } else if (_mainBox[index].name.toUpperCase() ==
         "REPAIR SERVICE".toUpperCase()) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (_) => const ServiceScreen()));
+          context, MaterialPageRoute(builder: (_) => const GoogleMapScreen())
+    );
     } else if (_mainBox[index].name.toUpperCase() ==
         "repair cost".toUpperCase()) {
       Navigator.push(
@@ -144,7 +145,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: NetworkImage(i),
+                          image:AssetImage(i),
                         ),
                         color: Colors.blue,
                       ),
@@ -167,7 +168,6 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
               shrinkWrap: true,
               crossAxisCount: 2,
               physics: const NeverScrollableScrollPhysics(),
-              // ignore: prefer_const_literals_to_create_immutables
               children: List.generate(
                 _mainBox.length,
                 (index) => InkWell(
