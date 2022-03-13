@@ -4,11 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
-import 'package:k_car_care_project/screen/notification_screen/detail_notification_screen.dart';
+
+import 'package:k_car_care_project/screen/home_screen/1_home_screen.dart';
 import 'package:k_car_care_project/services/notification_service/notification_service.dart';
+
 import 'package:k_car_care_project/translation_screen/messages.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
       // translations will be displayed in that locale
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
-      home: RegistrationScreen(),
+      home: MyHomeScreen(),
     );
   }
 }

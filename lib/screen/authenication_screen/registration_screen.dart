@@ -75,7 +75,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: MediaQuery.of(context).size.height * .04,
                     ),
                     Text(
-                      "សូមស្វាគមន៍មកកាន់ទីនេះ",
+                      "WELCOME_REGISTER".tr,
                       style: TextStyle(
                         fontSize: 18,
                         fontFamily: "Poppins",
@@ -86,7 +86,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: 15,
                     ),
                     Text(
-                      "បំពេញទម្រង់បែបបទដើម្បីក្លាយជាភ្ញៀវរបស់យើង",
+                      "PLEASE_FILL".tr,
                       style: TextStyle(
                         fontSize: 24,
                         fontFamily: "Poppins",
@@ -98,7 +98,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       height: MediaQuery.of(context).size.height * .1,
                     ),
                     Text(
-                      "សម្រាប់ឧទាហរណ៍​: ជ្រើសរើស កូដប្រទេស​​ លេខទូរសព្ទ័",
+                  //    "សម្រាប់ឧទាហរណ៍​: ជ្រើសរើស កូដប្រទេស​​ លេខទូរសព្ទ័",
+                  "EXAMPLE".tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontFamily: "Poppins",
@@ -184,8 +185,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             color: Colors.black,
                             shape: CircleBorder(),
                             onPressed: () async {
-                              // _authentication.signInwithPhoneNumber(
-                              //     my_phone_num: "$dialCode${controller.text}");
+                              _authentication.signInwithPhoneNumber(
+                                  my_phone_num: "$dialCode${controller.text.trim()}");
                               _accessToken.accessToken("phoneNumber");
                               print("$dialCode${controller.text}");
                             },

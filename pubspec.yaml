@@ -76,6 +76,8 @@ dependencies:
   app_settings: ^4.1.1
   connectivity: ^3.0.6
   syncfusion_flutter_charts: ^19.3.48
+  carousel_slider: ^4.0.0
+  dots_indicator: ^2.1.0
   
 
 dev_dependencies:
@@ -106,6 +108,11 @@ flutter:
     - assets/empty_icons/
     - assets/icons/
     - assets/service_images/
+    - assets/service_images/service_icon.png
+    - assets/service_images/towing.png
+    - assets/service_images/service.svg
+    - assets/service_images/repairGarage.svg
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

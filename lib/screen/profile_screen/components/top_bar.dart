@@ -40,9 +40,6 @@ class _TopBarState extends State<TopBar> {
                   SharedPreferences preferences =
                       await SharedPreferences.getInstance();
                   await preferences.remove('recents');
-                  Get.to(
-                    () => const RegistrationScreen(),
-                  );
                 },
               );
             },
