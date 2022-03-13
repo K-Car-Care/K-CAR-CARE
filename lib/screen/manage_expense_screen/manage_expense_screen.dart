@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/widget/chart_flutter.dart';
 
-import '../../utils/chart_counter_helper.dart';
+import '../../core/utils/chart_counter_helper.dart';
 import 'expense_list_screen.dart';
 
 class ManageExpenseScreen extends StatefulWidget {

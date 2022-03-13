@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 
 class MainCardService extends StatelessWidget {
   final String image;

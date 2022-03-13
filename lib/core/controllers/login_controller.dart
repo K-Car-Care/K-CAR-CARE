@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:k_car_care_project/controllers/home_controller.dart';
+import 'package:k_car_care_project/core/controllers/home_controller.dart';
 import 'package:k_car_care_project/widget/custom_dialog.dart';
 
 class LoginController1 extends GetxController {

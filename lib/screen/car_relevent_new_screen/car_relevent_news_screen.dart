@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/data/car_relevent_news_api.dart';
-import 'package:k_car_care_project/model/car_relevent_news_models/car_relevent_news_model.dart';
+import 'package:k_car_care_project/core/data/car_relevent_news_api.dart';
+// import 'package:k_car_care_project/data/car_relevent_news_api.dart';
+import 'package:k_car_care_project/core/model/car_relevent_news_models/car_relevent_news_model.dart';
 
-import '../../constant/theme_constant.dart';
+import '../../core/constant/theme_constant.dart';
 import '../../widget/reuse_card_service.dart';
 
 class CarReleventNewsScreen extends StatefulWidget {
@@ -16,11 +17,11 @@ class CarReleventNewsScreen extends StatefulWidget {
 
 class _CarReleventNewsScreenState extends State<CarReleventNewsScreen> {
   Future<CarReleventNewsModel>? _carReleventNews;
-  CarReleventNewsApi _carReleventNewsApi = CarReleventNewsApi();
+  CarReleventNewsApi carReleventNewsApi = CarReleventNewsApi();
 
   @override
   void initState() {
-    _carReleventNews = _carReleventNewsApi.readCarReleventNewsApi();
+    _carReleventNews = carReleventNewsApi.readCarReleventNewsApi();
     super.initState();
   }
 

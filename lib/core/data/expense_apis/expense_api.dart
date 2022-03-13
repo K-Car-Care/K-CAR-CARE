@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:k_car_care_project/model/expense_models/expense_model.dart';
+import 'package:k_car_care_project/core/model/expense_models/expense_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../base_repository_api.dart';

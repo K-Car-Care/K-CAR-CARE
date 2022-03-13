@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../data/check_connectivity/check_connectivity.dart';
+import '../../core/data/check_connectivity/check_connectivity.dart';
 
 class FindingRepairGarageScreen extends StatefulWidget {
   const FindingRepairGarageScreen({Key? key}) : super(key: key);

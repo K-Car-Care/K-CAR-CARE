@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 
 class CardItem extends StatelessWidget {
   final Widget icon;

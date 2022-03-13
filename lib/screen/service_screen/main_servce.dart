@@ -4,20 +4,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/constant/app_images.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/model/main_services_models/main_model.dart';
+import 'package:k_car_care_project/core/constant/app_images.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/model/main_services_models/main_model.dart';
 import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fire.dart';
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
 import 'package:k_car_care_project/screen/key_service_screen/main_key_service.dart';
 import 'package:k_car_care_project/screen/towing_service_screen/main_towning_service.dart';
-import 'package:k_car_care_project/shared/typography.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 import 'package:k_car_care_project/widget/reuse_circle_image.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../data/check_connectivity/check_connectivity.dart';
-import '../../data/main_service_api.dart';
+import '../../core/data/check_connectivity/check_connectivity.dart';
+import '../../core/data/main_service_api.dart';
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({Key? key}) : super(key: key);

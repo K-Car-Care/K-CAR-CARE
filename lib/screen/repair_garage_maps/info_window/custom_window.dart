@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/model/info_window_model/infoWindowType.dart';
+import 'package:k_car_care_project/core/model/info_window_model/infoWindowType.dart';
 
 class CustomWindow extends StatelessWidget {
   const CustomWindow({Key? key, required this.info}) : super(key: key);

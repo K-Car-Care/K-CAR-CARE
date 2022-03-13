@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/screen/authenication_screen/otp_verification_screen.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
-import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
+import 'package:k_car_care_project/core/storage_data/user_profile_storage/save_user_data.dart';
 
 class Authentication extends GetxController {
   var status_string = "Welcome".obs;

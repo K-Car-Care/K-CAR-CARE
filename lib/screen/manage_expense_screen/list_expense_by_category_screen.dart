@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/model/expense_models/expense_model.dart';
+import 'package:k_car_care_project/core/model/expense_models/expense_model.dart';
 import 'package:k_car_care_project/widget/t_expense_widget.dart';
 
-import '../../data/expense_apis/expense_api.dart';
+import '../../core/data/expense_apis/expense_api.dart';
 
 class ListExpenseByCategoryScreen extends StatefulWidget {
   const ListExpenseByCategoryScreen({Key? key}) : super(key: key);

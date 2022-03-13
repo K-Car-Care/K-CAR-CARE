@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/constant/app_images.dart';
+import 'package:k_car_care_project/core/constant/app_images.dart';
 import 'package:k_car_care_project/screen/google_map_screen/find_garage_map_screen.dart';
 
-import '../../model/home_screen_model/home_screen_model.dart';
+import '../../core/model/home_screen_model/home_screen_model.dart';
 import '../../widget/b_box_widget.dart';
 import '../../widget/carousel_widget.dart';
 import '../../widget/dot_indicator_widget.dart';

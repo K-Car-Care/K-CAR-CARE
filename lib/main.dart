@@ -3,10 +3,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 
 import 'package:k_car_care_project/screen/home_screen/1_home_screen.dart';
-import 'package:k_car_care_project/services/notification_service/notification_service.dart';
+import 'package:k_car_care_project/core/services/notification_service/notification_service.dart';
 
 import 'package:k_car_care_project/translation_screen/messages.dart';
 

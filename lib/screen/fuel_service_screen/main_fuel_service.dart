@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/model/main_services_models/fuel_model.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/model/main_services_models/fuel_model.dart';
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
-import '../../data/check_connectivity/check_connectivity.dart';
-import '../../data/fuel_service_api.dart';
+import '../../core/data/check_connectivity/check_connectivity.dart';
+import '../../core/data/fuel_service_api.dart';
 
 class FuelServiceScreen extends StatefulWidget {
   const FuelServiceScreen({Key? key}) : super(key: key);

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/profile_screen/components/textfield_item.dart';
 
 class EditUserProfileScreen extends StatefulWidget {

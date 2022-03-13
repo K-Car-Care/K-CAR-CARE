@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/check_connectivity/check_connectivity.dart';
-import '../../data/google_login/google_login_api.dart';
-import '../../services/auth_services/auth_services.dart';
+import '../../core/data/check_connectivity/check_connectivity.dart';
+import '../../core/data/google_login/google_login_api.dart';
+import '../../core/services/auth_services/auth_services.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
   const NavigationDrawerWidget({Key? key}) : super(key: key);

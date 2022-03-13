@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/storage_data/user_profile_storage/save_user_data.dart';
 import 'package:k_car_care_project/screen/profile_screen/add_more_info_screen.dart';
 import 'package:k_car_care_project/screen/profile_screen/edit_user_profile_screen.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../data/check_connectivity/check_connectivity.dart';
-import '../../data/user_profile_api.dart';
+import '../../core/data/check_connectivity/check_connectivity.dart';
+import '../../core/data/user_profile_api.dart';
 import 'components/card_item_profile.dart';
 import 'components/stack_container.dart';
 

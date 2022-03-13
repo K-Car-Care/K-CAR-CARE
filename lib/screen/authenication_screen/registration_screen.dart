@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 // import 'package:k_car_care_project/data/notification_api/notification_api.dart';
 
-import '../../data/check_connectivity/check_connectivity.dart';
-import '../../data/login_api/login_token_api.dart';
-import '../../services/auth_services/auth_services.dart';
-import '../../services/auth_services/google_login_service.dart';
+import '../../core/data/check_connectivity/check_connectivity.dart';
+import '../../core/data/login_api/login_token_api.dart';
+import '../../core/services/auth_services/auth_services.dart';
+import '../../core/services/auth_services/google_login_service.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);

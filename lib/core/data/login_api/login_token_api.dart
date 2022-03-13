@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:k_car_care_project/data/base_repository_api.dart';
+import 'package:k_car_care_project/core/data/base_repository_api.dart';
 
 class AccessToken extends ApiRepository {
   Future<dynamic> accessToken(String phoneNumber) async {

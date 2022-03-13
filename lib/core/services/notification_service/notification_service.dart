@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:k_car_care_project/screen/notification_screen/detail_notification_screen.dart';
 // import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-import '../../screen/notification_screen/detail_notification_screen.dart';
+// import '../../screen/notification_screen/detail_notification_screen.dart';
 
 class OnsignalNotificationService {
   static const String setAppID = "711e896c-e13a-4dad-82c6-40fe033c8939";

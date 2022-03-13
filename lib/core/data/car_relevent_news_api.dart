@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:k_car_care_project/data/base_repository_api.dart';
+import 'package:k_car_care_project/core/data/base_repository_api.dart';
 import 'package:http/http.dart' as http;
-import 'package:k_car_care_project/model/car_relevent_news_models/car_relevent_news_model.dart';
+import 'package:k_car_care_project/core/model/car_relevent_news_models/car_relevent_news_model.dart';
 
 class CarReleventNewsApi extends ApiRepository {
   Future<CarReleventNewsModel> readCarReleventNewsApi() async {

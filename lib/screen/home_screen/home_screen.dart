@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/car_relevent_new_screen/car_relevent_news_screen.dart';
 import 'package:k_car_care_project/screen/google_map_screen/find_garage_map_screen.dart';
 import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
@@ -11,7 +11,7 @@ import 'package:k_car_care_project/screen/manage_expense_screen/manage_expense_s
 import 'package:k_car_care_project/screen/notification_screen/main_notification.dart';
 import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
 import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
-import '../../data/check_connectivity/check_connectivity.dart';
+import '../../core/data/check_connectivity/check_connectivity.dart';
 import 'components/card_home_screen.dart';
 
 class MyHomeScreenProd extends StatefulWidget {

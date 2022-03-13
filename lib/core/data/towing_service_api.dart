@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'package:k_car_care_project/model/main_services_models/towing_model.dart';
+import 'package:k_car_care_project/core/model/main_services_models/towing_model.dart';
 
 import 'base_repository_api.dart';
 

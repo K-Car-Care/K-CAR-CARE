@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 
 class ContactSection extends StatelessWidget {
   const ContactSection({

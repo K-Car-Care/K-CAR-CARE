@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 
 import 'package:k_car_care_project/screen/profile_screen/components/textfield_item.dart';
 import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
-import 'package:k_car_care_project/storage_data/user_profile_storage/store_care_information.dart';
+import 'package:k_car_care_project/core/storage_data/user_profile_storage/store_care_information.dart';
 
 class AddMoreInfoScreen extends StatefulWidget {
   const AddMoreInfoScreen({Key? key}) : super(key: key);

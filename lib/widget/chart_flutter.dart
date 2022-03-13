@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../utils/chart_counter_helper.dart';
+import '../core/utils/chart_counter_helper.dart';
 
 class ChartFlutter extends StatefulWidget {
   const ChartFlutter({

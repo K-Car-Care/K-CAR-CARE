@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/model/notification_model.dart';
-import '../../data/check_connectivity/check_connectivity.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/model/notification_model.dart';
+import '../../core/data/check_connectivity/check_connectivity.dart';
 import 'components/card_notification.dart';
 import 'empty_screen.dart';
 
