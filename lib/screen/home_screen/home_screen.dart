@@ -14,14 +14,14 @@ import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
 import '../../data/check_connectivity/check_connectivity.dart';
 import 'components/card_home_screen.dart';
 
-class MyHomeScreen extends StatefulWidget {
-  const MyHomeScreen({Key? key}) : super(key: key);
+class MyHomeScreenProd extends StatefulWidget {
+  const MyHomeScreenProd({Key? key}) : super(key: key);
 
   @override
-  _MyHomeScreenState createState() => _MyHomeScreenState();
+  _MyHomeScreenProdState createState() => _MyHomeScreenProdState();
 }
 
-class _MyHomeScreenState extends State<MyHomeScreen> {
+class _MyHomeScreenProdState extends State<MyHomeScreenProd> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

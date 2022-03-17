@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:k_car_care_project/constant/theme_constant.dart';
 
 class ContainerRaduis extends StatelessWidget {
   final String assetPath;
@@ -14,12 +15,12 @@ class ContainerRaduis extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: const Color(0xff0185BE).withOpacity(0.1),
+        color: defaultColor.withOpacity(0.1),
       ),
       child: Center(
         child: Image.asset(
           assetPath,
-          color: const Color(0xff2ac3ff),
+          color: defaultColor,
           width: 40,
           height: 40,
         ),

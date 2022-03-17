@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/model/map_model/map_model.dart';
 
 import '../../data/map_apis/map_api.dart';
@@ -59,7 +60,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: defaultColor,
         title: const Text(
           "Find Place",
           style: TextStyle(fontSize: 20),

@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 
+import '../../screen/home_screen/1_home_screen.dart';
 import 'auth_services.dart';
 
 class LoginController extends GetxController {
@@ -66,6 +67,7 @@ class LoginController extends GetxController {
             googleSignInAccount.email,
             googleSignInAccount.photoUrl.toString(),
           );
+          
           print("Gmail User: ${googleSignInAccount.email}");
           print("Profile User: ${googleSignInAccount.photoUrl}");
           print("Profile User: ${googleSignInAccount.id}");
@@ -146,6 +148,7 @@ class LoginController extends GetxController {
       UserCredential result = await auth.signInWithCredential(authCredential);
     User? user = result.user;
 
+      // ignore: unnecessary_null_comparison
       if (result != null) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const MyHomeScreen()));

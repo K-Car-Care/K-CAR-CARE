@@ -12,7 +12,10 @@ class CarReleventNewsApi extends ApiRepository {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWUyNDRiMGZlYTYzMjRlZWRkNDgyNjMiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjQ2MzgwNjA2fQ.TlvTDNhy2rnl2kwEdosAwLBSdfs_zAncYCfNUxUXMY0',
     });
     if (response.statusCode == 200) {
-    //  print(response.body);
+
+      // ignore: avoid_print
+      print(response.body);
+
       return CarReleventNewsModel.fromJson(
         jsonDecode(
           response.body,

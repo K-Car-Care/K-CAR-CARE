@@ -1,7 +1,8 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/constant/theme_constant.dart';
+
+import '../../constant/theme_constant.dart';
 import '../../data/check_connectivity/check_connectivity.dart';
 
 class HisstoryScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: const Color(0xff0185BE),
+          backgroundColor: defaultColor,
           automaticallyImplyLeading: false,
           leading: IconButton(
             onPressed: () {
@@ -48,37 +49,7 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
               onPressed: () {},
             ),
           ]),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: GestureDetector(
-          onVerticalDragStart: (details) => {
-           // print(details),
-          },
-          onVerticalDragEnd: (velocity) {
-          //  var sinat = velocity;
-          //  print(sinat);
-          },
-          child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.black,
-          ),
-        ),
-        // child: ListView.builder(
-        //     physics: const BouncingScrollPhysics(),
-        //     itemCount: 10,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return CardService(
-        //         color: ColorRandom.getRandomColor(),
-        //         icon: 'assets/service_images/service_icon.png',
-        //         desc:
-        //             'Find history icon stock images in HD and millions of other royalty-free stock photos',
-        //         title: 'TELA  POWER',
-        //         phoneNumber: 'May 03, 2021',
-        //       );
-        //     }),
-      ),
+   
     );
   }
 }

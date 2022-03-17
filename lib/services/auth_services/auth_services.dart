@@ -6,6 +6,8 @@ import 'package:k_car_care_project/screen/authenication_screen/registration_scre
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 
+import '../../screen/home_screen/1_home_screen.dart';
+
 class Authentication extends GetxController {
   var verificatoin_id = "1".obs;
   String get veri_result => verificatoin_id.value;

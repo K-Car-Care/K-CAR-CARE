@@ -14,8 +14,8 @@ class CarouselWidget extends StatelessWidget {
     return CarouselSlider(
       options: CarouselOptions(
         height: 200.0,
-        aspectRatio: 14 / 8,
-        viewportFraction: 0.8,
+        aspectRatio: 16/9,
+        viewportFraction: 0.9,
         initialPage: 0,
         enableInfiniteScroll: true,
         reverse: false,

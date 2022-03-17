@@ -17,6 +17,12 @@ class AccessToken extends ApiRepository {
     }
     if (response.statusCode == 200) {
       _token.settoken(jsonResponse['token']);
+
+      // print("Success");
+    }
+    if (response.statusCode == 200) {
+      // print("adfjlksdjfl;sadf $jsonResponse");
+      return jsonResponse;
     } else {
       throw Exception();
     }

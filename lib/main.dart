@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: ThemeConstant.lightScheme.background,
+        scaffoldBackgroundColor: Color(0xFFf5f5f5),
         appBarTheme: AppBarTheme(
           color: ThemeConstant.lightScheme.background,
         ),

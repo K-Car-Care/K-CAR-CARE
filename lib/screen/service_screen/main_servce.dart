@@ -2,13 +2,16 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:k_car_care_project/constant/app_images.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/model/main_services_models/main_model.dart';
 import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fire.dart';
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
 import 'package:k_car_care_project/screen/key_service_screen/main_key_service.dart';
 import 'package:k_car_care_project/screen/towing_service_screen/main_towning_service.dart';
+import 'package:k_car_care_project/shared/typography.dart';
 import 'package:k_car_care_project/widget/reuse_circle_image.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
 import '../../data/check_connectivity/check_connectivity.dart';
@@ -84,7 +87,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: const Color(0xff0185BE),
+          backgroundColor: defaultColor,
           automaticallyImplyLeading: false,
           leading: IconButton(
             onPressed: () {
@@ -109,14 +112,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
         child: Column(
           children: [
             ListTile(
-              leading: const ContainerRaduis(
-                  assetPath: 'assets/service_images/service_icon.png'),
+              leading: ContainerRaduis(assetPath: AppImages.carServiceImg),
               title: Text(
                 'ជ្រើសរើសសេវាកម្មដែលអ្នកត្រូវការ',
-                style: ThemeConstant.textTheme.bodyText1!.copyWith(
-                  fontSize: 18,
-                  color: const Color(0xff0185BE),
-                ),
+                style: subTitleTextStyleBlack.copyWith(color:defaultColor,fontWeight:FontWeight.w600)
               ),
             ),
             const SizedBox(

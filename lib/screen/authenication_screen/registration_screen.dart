@@ -5,11 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
+
 import 'package:k_car_care_project/screen/authenication_screen/otp_verification_screen.dart';
+
 import '../../data/check_connectivity/check_connectivity.dart';
 import '../../data/login_api/login_token_api.dart';
 import '../../services/auth_services/auth_services.dart';
 import '../../services/auth_services/google_login_service.dart';
+
+// import 'package:k_car_care_project/data/notification_api/notification_api.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
