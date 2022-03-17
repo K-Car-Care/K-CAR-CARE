@@ -1,11 +1,14 @@
 // ignore_for_file: void_checks, prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
+import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../services/auth_services/auth_services.dart';
+import '../../../widget/black_button_widget.dart';
 import '../../home_screen/1_home_screen.dart';
 
 class TopBar extends StatefulWidget {
@@ -32,16 +35,65 @@ class _TopBarState extends State<TopBar> {
               }),
           buildIcon(
             iconData: Icons.logout_outlined,
-            onTap: () {
+            onTap: () async {
               //Go  Logout
+              await Get.defaultDialog(
+                titlePadding: EdgeInsets.symmetric(vertical: 20),
+                contentPadding:
+                    EdgeInsets.only(bottom: 30, top: 10, left: 10, right: 10),
+                title: "Logout",
+                content: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Text("Are you sure you want to logout ?"),
+                ),
+                radius: 18.0,
+                actions: [
+                  BlackButton(
+                    height: 10,
+                    backgroundColor: Colors.red,
+                    title: "No",
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  BlackButton(
+                    title: "Yes",
+                    height: 10,
+                    onPressed: () async {
+                      // SharedPreferences pref =
+                      //     await SharedPreferences.getInstance();
+                      // pref.remove("token");
+                      // pref.commit();
+                      // setState(
+                      //   () {
+                      //     // isLoading = !isLoading;
+                      //     Get.back();
+                      //   },
+                      // );
+                      // Timer(
+                      //   Duration(seconds: 1),
+                      //   () {
+                      //     Get.offAll(
+                      //       () => RegistrationScreen(),
+                      //     );
+                      //   },
+                      // );
+                      
 
-              _auth.signOut().then(
-                (value) async {
-                  SharedPreferences preferences =
-                      await SharedPreferences.getInstance();
-                  await preferences.remove('recents');
-                  await preferences.remove('token');
-                },
+                      _auth.signOut().then(
+                        (value) async {
+                          SharedPreferences preferences =
+                              await SharedPreferences.getInstance();
+                          await preferences.remove('recents');
+                          await preferences.remove('token');
+                        },
+                      );
+                    },
+                  ),
+                ],
               );
             },
           ),

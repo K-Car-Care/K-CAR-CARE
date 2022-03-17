@@ -28,7 +28,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   final Authentication _authentication = Get.put(Authentication());
   final AccessToken _accessToken = AccessToken();
-
   @override
   void initState() {
     _authentication.signInwithPhoneNumber(

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
-import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 
 import '../../screen/home_screen/1_home_screen.dart';
@@ -77,7 +76,7 @@ class Authentication extends GetxController {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       print(authCredential.providerId);
-      Get.to(() => const MyHomeScreen());
+      Get.off(() => const MyHomeScreen());
     }).catchError((e) {
       print("Error Message $e");
       Get.snackbar("Hello", e);

@@ -6,7 +6,8 @@ class BBoxWidget extends StatelessWidget {
   const BBoxWidget({
     Key? key,
     this.name,
-    this.image, this.tag,
+    this.image,
+    this.tag,
   }) : super(key: key);
   final String? name;
   final String? image;
@@ -36,9 +37,9 @@ class BBoxWidget extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width / 2 - 2,
             height: 3,
-            color:defaultColor,
+            color: defaultColor,
           ),
-          Container(
+          SizedBox(
             width: 80,
             height: 80,
             // decoration: BoxDecoration(
@@ -48,7 +49,7 @@ class BBoxWidget extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            child: Image.asset("$image",color:defaultColor),
+            child: Image.asset("$image", color: defaultColor),
           ),
           Hero(
             tag: tag.toString(),
@@ -61,7 +62,7 @@ class BBoxWidget extends StatelessWidget {
                 fontSize: 18,
                 fontFamily: 'Vollkorn',
                 fontWeight: FontWeight.w500,
-                color:defaultColor,
+                color: defaultColor,
               ),
             ),
           ),
