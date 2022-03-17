@@ -1,10 +1,9 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unnecessary_null_comparison, unused_local_variable
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 
@@ -26,28 +25,28 @@ class LoginController extends GetxController {
     googleSignInAccount = Rx<GoogleSignInAccount?>(googleSign.currentUser);
 
     firebaseUser.bindStream(auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
+    // ever(firebaseUser, _setInitialScreen);
 
     googleSignInAccount.bindStream(googleSign.onCurrentUserChanged);
-    ever(googleSignInAccount, _setInitialScreenGoogle);
+    // ever(googleSignInAccount, _setInitialScreenGoogle);
   }
 
-  _setInitialScreen(User? user) {
-    if (user == null) {
-      Get.offAll(() => const RegistrationScreen());
-    } else {
-      Get.offAll(() => const MyHomeScreen());
-    }
-  }
+  // _setInitialScreen(User? user) {
+  //   if (user == null) {
+  //     Get.offAll(() => const RegistrationScreen());
+  //   } else {
+  //     Get.offAll(() => const MyHomeScreen());
+  //   }
+  // }
 
-  _setInitialScreenGoogle(GoogleSignInAccount? googleSignInAccount) {
-    print(googleSignInAccount);
-    if (googleSignInAccount == null) {
-      Get.offAll(() => const RegistrationScreen());
-    } else {
-      Get.offAll(() => const MyHomeScreen());
-    }
-  }
+  // _setInitialScreenGoogle(GoogleSignInAccount? googleSignInAccount) {
+  //   print(googleSignInAccount);
+  //   if (googleSignInAccount == null) {
+  //     Get.offAll(() => const RegistrationScreen());
+  //   } else {
+  //     Get.offAll(() => const MyHomeScreen());
+  //   }
+  // }
 
   Future<void> signInWithGoogle() async {
     try {
@@ -145,11 +144,11 @@ class LoginController extends GetxController {
 
       // Getting users credential
       UserCredential result = await auth.signInWithCredential(authCredential);
-      User? user = result.user;
+    User? user = result.user;
 
       if (result != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MyHomeScreen()));
+            context, MaterialPageRoute(builder: (context) => const MyHomeScreen()));
       } // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }

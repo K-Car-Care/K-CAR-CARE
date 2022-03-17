@@ -56,7 +56,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
           ListTile(
             title: const Text('Item 1'),
             onTap: () {
-              _authentication.signOut();
+              // _authentication.signOut();
               setState(() {
                 _islogin = true;
               });

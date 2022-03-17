@@ -4,10 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-
-import 'package:k_car_care_project/screen/home_screen/1_home_screen.dart';
 import 'package:k_car_care_project/services/notification_service/notification_service.dart';
-
+import 'package:k_car_care_project/splash_screen.dart';
 import 'package:k_car_care_project/translation_screen/messages.dart';
 
 void main() async {
@@ -19,7 +17,6 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -30,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   @override
   initState() {
     _notificationService.initPlatformState();
+
     super.initState();
   }
 
@@ -47,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       // translations will be displayed in that locale
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
-      home: MyHomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

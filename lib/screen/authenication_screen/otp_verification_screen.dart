@@ -1,20 +1,22 @@
-// ignore_for_file: avoid_print, non_constant_identifier_names, deprecated_member_use, prefer_const_constructors
+// ignore_for_file: avoid_print, non_constant_identifier_names, deprecated_member_use, prefer_const_constructors, prefer_const_constructors_in_immutables
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 
 import '../../data/check_connectivity/check_connectivity.dart';
+import '../../data/login_api/login_token_api.dart';
 import '../../services/auth_services/auth_services.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
   final String phoneNum;
+  final String diaCode;
 
-  const OTPVerificationScreen({
+  OTPVerificationScreen({
     Key? key,
     required this.phoneNum,
+    required this.diaCode,
   }) : super(key: key);
-
   @override
   _OTPVerificationScreenState createState() => _OTPVerificationScreenState();
 }
@@ -25,9 +27,13 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   final FocusNode _pinOTPcodeFocus = FocusNode();
 
   final Authentication _authentication = Get.put(Authentication());
+  final AccessToken _accessToken = AccessToken();
 
   @override
   void initState() {
+    _authentication.signInwithPhoneNumber(
+        my_phone_num: "${widget.diaCode}${widget.phoneNum}");
+    print("${widget.diaCode}${widget.phoneNum}");
     CheckInternet().checkConnection(context);
     super.initState();
   }
@@ -102,11 +108,15 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                     ),
                     children: [
                       TextSpan(
-                        text: widget.phoneNum.toString(),
-                        style: ThemeConstant.textTheme.bodyText1!.copyWith(
-                          color: ThemeConstant.lightScheme.primary,
-                        ),
-                      ),
+                          text: widget.diaCode.toString(),
+                          style: ThemeConstant.textTheme.bodyText1!.copyWith(
+                            color: ThemeConstant.lightScheme.primary,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: widget.phoneNum.toString(),
+                            )
+                          ]),
                     ],
                   ),
                 ),
@@ -183,12 +193,13 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                         splashColor: Colors.white.withOpacity(.25),
                         color: ThemeConstant.lightScheme.primary,
                         shape: CircleBorder(),
-                        onPressed: () async {
-                          await _authentication.myCredentials(
+                        onPressed: () {
+                          _authentication.myCredentials(
                             _authentication.veri_result,
                             _pinOTPCodeController.text,
                           );
                           print(_pinOTPCodeController);
+                          _accessToken.accessToken("phoneNumber");
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(14.0),

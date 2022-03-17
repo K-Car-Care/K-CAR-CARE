@@ -1,11 +1,7 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
-import 'package:k_car_care_project/widget/reuse_card_service.dart';
-
 import '../../data/check_connectivity/check_connectivity.dart';
 
 class HisstoryScreen extends StatefulWidget {
@@ -57,11 +53,11 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: GestureDetector(
           onVerticalDragStart: (details) => {
-            print(details),
+           // print(details),
           },
           onVerticalDragEnd: (velocity) {
-            var sinat = velocity;
-            print(sinat);
+          //  var sinat = velocity;
+          //  print(sinat);
           },
           child: Container(
             width: 200,

@@ -11,8 +11,6 @@ import 'package:k_car_care_project/screen/key_service_screen/main_key_service.da
 import 'package:k_car_care_project/screen/towing_service_screen/main_towning_service.dart';
 import 'package:k_car_care_project/widget/reuse_circle_image.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../data/check_connectivity/check_connectivity.dart';
 import '../../data/main_service_api.dart';
 

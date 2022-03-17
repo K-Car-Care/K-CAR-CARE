@@ -2,17 +2,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/screen/authenication_screen/otp_verification_screen.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
+import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 
 class Authentication extends GetxController {
-  var status_string = "Welcome".obs;
-  var code_sent = "no".obs;
   var verificatoin_id = "1".obs;
-  String get status_result => status_string.value;
-  String get code_sent_result => code_sent.value;
   String get veri_result => verificatoin_id.value;
+  Rx<bool> isLoading = false.obs;
 
   // SignOut Google Account
   Future<void> signOut() async {
@@ -38,14 +35,15 @@ class Authentication extends GetxController {
             await auth.signInWithCredential(credential);
           },
           verificationFailed: (FirebaseException exception) {
-            status_string.value = "Error verifying your phone number";
+            // status_string.value = "Error verifying your phone number";
             if (exception.code == 'invalid-phone-number') {
               print('The provided phone number is not valid.');
             }
           },
           codeSent: (String verificatoinID, int? resendToken) {
-            code_sent.value = "yes";
-            print(code_sent.value);
+            // code_sent.value = "yes";
+            // print(code_sent.value);
+            isLoading.value = true;
             print(verificatoinID);
             verificatoin_id.value = verificatoinID;
             _saveUserData.saveUserData(
@@ -54,7 +52,7 @@ class Authentication extends GetxController {
               username: '',
               phone: my_phone_num,
             );
-            Get.to(OTPVerificationScreen(phoneNum: my_phone_num));
+            //  Get.to(OTPVerificationScreen(phoneNum: my_phone_num));
           },
           codeAutoRetrievalTimeout: (String verificationId) {
             // Auto-resolution timed out...
@@ -77,7 +75,7 @@ class Authentication extends GetxController {
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
       print(authCredential.providerId);
-      // Get.to(MyHomeScreen());
+      Get.to(() => const MyHomeScreen());
     }).catchError((e) {
       print("Error Message $e");
       Get.snackbar("Hello", e);

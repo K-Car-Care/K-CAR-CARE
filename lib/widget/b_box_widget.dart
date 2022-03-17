@@ -1,7 +1,4 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class BBoxWidget extends StatelessWidget {

@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors
-import 'dart:async';
+// ignore_for_file: prefer_const_constructors, empty_catches
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
-import 'package:k_car_care_project/screen/translate_screen/translation_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,17 +14,25 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late String token;
   @override
   initState() {
-    Timer(
-      Duration(
-        seconds: 5,
-      ),
-      () {
-        Get.to(RegistrationScreen());
-      },
-    );
+    token = '';
+    checkToken();
     super.initState();
+  }
+
+  void checkToken() async {
+    try {
+      final SharedPreferences _pref = await SharedPreferences.getInstance();
+      var token = _pref.getString('token') ?? "";
+      if (token != "") {
+        Get.to(() => MyHomeScreen());
+        _pref.remove("token");
+      } else {
+        Get.to(RegistrationScreen());
+      }
+    } catch (e) {}
   }
 
   @override

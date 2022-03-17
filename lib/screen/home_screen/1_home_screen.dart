@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: file_names
 
+import 'package:flutter/material.dart';
 import '../../model/home_screen_model/home_screen_model.dart';
 import '../../widget/b_box_widget.dart';
 import '../../widget/carousel_widget.dart';

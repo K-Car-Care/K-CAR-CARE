@@ -1,3 +1,5 @@
+// ignore_for_file: use_rethrow_when_possible, body_might_complete_normally_nullable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -17,7 +19,7 @@ class FirebaseService {
       );
       await _auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+    
       throw e;
     }
   }

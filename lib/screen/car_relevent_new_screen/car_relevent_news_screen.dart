@@ -16,7 +16,7 @@ class CarReleventNewsScreen extends StatefulWidget {
 
 class _CarReleventNewsScreenState extends State<CarReleventNewsScreen> {
   Future<CarReleventNewsModel>? _carReleventNews;
-  CarReleventNewsApi _carReleventNewsApi = CarReleventNewsApi();
+  final CarReleventNewsApi _carReleventNewsApi = CarReleventNewsApi();
 
   @override
   void initState() {
@@ -45,7 +45,6 @@ class _CarReleventNewsScreenState extends State<CarReleventNewsScreen> {
               style: ThemeConstant.textTheme.bodyText1),
           actions: [
             IconButton(
-              // ignore: prefer_const_constructors
               icon: (Icon(Icons.notifications, color: Colors.white)),
               onPressed: () {},
             ),
