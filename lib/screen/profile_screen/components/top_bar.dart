@@ -63,26 +63,6 @@ class _TopBarState extends State<TopBar> {
                     title: "Yes",
                     height: 10,
                     onPressed: () async {
-                      // SharedPreferences pref =
-                      //     await SharedPreferences.getInstance();
-                      // pref.remove("token");
-                      // pref.commit();
-                      // setState(
-                      //   () {
-                      //     // isLoading = !isLoading;
-                      //     Get.back();
-                      //   },
-                      // );
-                      // Timer(
-                      //   Duration(seconds: 1),
-                      //   () {
-                      //     Get.offAll(
-                      //       () => RegistrationScreen(),
-                      //     );
-                      //   },
-                      // );
-                      
-
                       _auth.signOut().then(
                         (value) async {
                           SharedPreferences preferences =

@@ -1,24 +1,21 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
 import 'package:k_car_care_project/data/base_repository_api.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/notification_models/notification_model.dart';
-import '../../storage_data/token_storage/token_storage.dart';
-
 import 'package:http/http.dart' as http;
 // import 'package:k_car_care_project/model/notification_models/notification_model.dart';
 
 class NotificationApi extends ApiRepository {
-  final TokenStorage _token = TokenStorage();
   Future<NotificationModel> readNotificationApi() async {
-    var token = _token.gettoken();
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+    var token = _pref.getString("token");
     http.Response response = await http
         .get(Uri.parse("$url/notificationOwns/"), headers: <String, String>{
       'Content-type': "multipart/form-data",
       'token': token.toString(),
     });
     if (response.statusCode == 200) {
-      print("Notification: ${response.body}");
       return NotificationModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception();

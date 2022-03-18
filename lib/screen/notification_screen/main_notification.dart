@@ -1,9 +1,14 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
-import 'package:k_car_care_project/model/notification_model.dart';
+import 'package:k_car_care_project/data/notification_api/notification_api.dart';
+
 import 'package:k_car_care_project/screen/notification_screen/detail_notification_screen.dart';
 import '../../data/check_connectivity/check_connectivity.dart';
+import '../../model/notification_models/notification_model.dart';
 import 'components/card_notification.dart';
 import 'empty_screen.dart';
 
@@ -16,39 +21,13 @@ class Notifications extends StatefulWidget {
 
 class _NotificationsState extends State<Notifications>
     with SingleTickerProviderStateMixin {
-  List<Notificationss> notificationList = [
-    const Notificationss(
-        title: "របៀបបង្កើតគណនីសម្រាប់សាលាគម្ពីរ?",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន   "),
-    const Notificationss(
-        title: "តើធ្វើម្ដេចទើបខ្ញុំអាចបង្កើតសាលាបាន?",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន   "),
-    const Notificationss(
-        title: "របៀបបង្កើតគណនីសម្រាប់សាលាគម្ពីរ?",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន   "),
-    const Notificationss(
-        title: "ការប្រើប្រាស់សាលាគម្ពីរលើកដំបូង!",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន   "),
-    const Notificationss(
-        title: "តើធ្វើម្ដេចទើបខ្ញុំអាចបង្កើតមេរៀនបាន?",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន  "),
-    const Notificationss(
-        title: "ការកំណត់ទូរទៅ!",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន   "),
-    const Notificationss(
-        title: "ការប្រើប្រាស់សាលាគម្ពីរលើកដំបូង!",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន   "),
-    const Notificationss(
-        title: "តើធ្វើម្ដេចទើបខ្ញុំអាចបង្កើតមេរៀនបាន?",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន  "),
-    const Notificationss(
-        title: "ការកំណត់ទូរទៅ!",
-        desc: "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន   "),
-  ];
+  final NotificationApi _notiApi = NotificationApi();
+  Future<NotificationModel>? _notiModel;
 
   @override
-  void initState() {
+  initState() {
     CheckInternet().checkConnection(context);
+    _notiModel = _notiApi.readNotificationApi();
     super.initState();
   }
 
@@ -62,46 +41,67 @@ class _NotificationsState extends State<Notifications>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
-          backgroundColor: const Color(0xff0185BE),
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            onPressed: () {
-              //Go  Back
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
+        elevation: 0,
+        backgroundColor: const Color(0xff0185BE),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            //Go  Back
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
-          centerTitle: true,
-          title:
-              Text('Notifications', style: ThemeConstant.textTheme.bodyText1),
-          actions: [
-            IconButton(
-              // ignore: prefer_const_constructors
-              icon: (Icon(Icons.notifications, color: Colors.white)),
-              onPressed: () {},
-            ),
-          ]),
-      body: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: notificationList.length,
-          itemBuilder: (BuildContext context, int index) {
-            if (notificationList.isEmpty) {
-              return const NotificationsEmpty();
+        ),
+        centerTitle: true,
+        title: Text('Notifications', style: ThemeConstant.textTheme.bodyText1),
+      ),
+      body: FutureBuilder<NotificationModel>(
+          future: _notiModel,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text("Try again"),
+              );
             }
-            return InkWell(
-              onTap: () {
-                Get.to(() => DetailNotificationScreen());
-              },
-              child: CardNotification(
-                isLoading: false,
-                title: notificationList[index].title,
-                date: '10-july-2021 | 10:00 am',
-                textBody: notificationList[index].desc,
-              ),
+            if (snapshot.hasData) {
+              var notificationList = snapshot.data!.payload;
+              //  print(notificationList);
+              return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: notificationList?.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        var day =
+                            notificationList?[index].newsId!.createdAt!.day;
+                        var month =
+                            notificationList?[index].newsId!.createdAt!.month;
+                        var year =
+                            notificationList?[index].newsId!.createdAt!.year;
+
+                        Get.to(() => DetailNotificationScreen(
+                              title: notificationList?[index].newsId!.title,
+                              image: notificationList?[index].newsId!.img,
+                              desc: notificationList?[index].newsId!.message,
+                              datetime: "$day - $month - $year",
+                            ));
+                      },
+                      child: CardNotification(
+                        isLoading: false,
+                        image: Image.network(
+                            notificationList![index].newsId!.img.toString()),
+                        title: notificationList[index].newsId!.title.toString(),
+                        date: '10-july-2021 | 10:00 am',
+                        textBody:
+                            notificationList[index].newsId!.message.toString(),
+                      ),
+                    );
+                  });
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           }),
     );

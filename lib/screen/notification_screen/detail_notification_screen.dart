@@ -50,21 +50,23 @@ class DetailNotificationScreen extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 18.0),
         child: ListView(
+          scrollDirection: Axis.vertical,
+          physics: BouncingScrollPhysics(),
           children: [
             const SizedBox(height: 12.0),
-            // Hero(
-            //   tag: "sdf",
-            //   child: Container(
-            //     height: 220.0,
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(15.0),
-            //       image: DecorationImage(
-            //         image: NetworkImage(image.toString()),
-            //         fit: BoxFit.fill,
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            Hero(
+              tag: "sdf",
+              child: Container(
+                height: 220.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  image: DecorationImage(
+                    image: NetworkImage(image.toString()),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(height: 15.0),
             Row(
               children: [
@@ -104,11 +106,11 @@ class DetailNotificationScreen extends StatelessWidget {
                   icon: Icons.remove_red_eye,
                   total: "1view",
                 ),
-                const SizedBox(width: 15.0),
-                Status(
-                  icon: Icons.favorite_border,
-                  total: "Like",
-                ),
+                // const SizedBox(width: 15.0),
+                // Status(
+                //   icon: Icons.favorite_border,
+                //   total: "Like",
+                // ),
               ],
             ),
             SizedBox(height: 12.0),
@@ -121,34 +123,34 @@ class DetailNotificationScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 15.0),
-            // Row(
-            //   // ignore: prefer_const_literals_to_create_immutables
-            //   children: [
-            //     Text(
-            //       "Date:",
-            //       style: TextStyle(
-            //         fontSize: 14.0,
-            //         color: Color(0xFF6D6D6D),
-            //       ),
-            //     ),
-            //     SizedBox(width: 5.0),
-            //     SizedBox(
-            //       width: 10.0,
-            //       child: const Divider(
-            //         //    color: kBlack,
-            //         height: 1.0,
-            //       ),
-            //     ),
-            //     SizedBox(width: 5.0),
-            //     Text(
-            //       "$datetime",
-            //       style: TextStyle(
-            //         fontSize: 14.0,
-            //         //color: Color(0xFF6D6D6D),
-            //       ).copyWith(color: Colors.black),
-            //     ),
-            //   ],
-            // ),
+            Row(
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                Text(
+                  "Date:",
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Color(0xFF6D6D6D),
+                  ),
+                ),
+                SizedBox(width: 5.0),
+                SizedBox(
+                  width: 10.0,
+                  child: const Divider(
+                    //    color: kBlack,
+                    height: 1.0,
+                  ),
+                ),
+                SizedBox(width: 5.0),
+                Text(
+                  "$datetime",
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    //color: Color(0xFF6D6D6D),
+                  ).copyWith(color: Colors.black),
+                ),
+              ],
+            ),
             SizedBox(height: 15.0),
             Text(
               "Article: ",
@@ -156,6 +158,15 @@ class DetailNotificationScreen extends StatelessWidget {
                 fontSize: 18.0,
                 height: 2.0,
                 fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: 5.0),
+            Text(
+              desc.toString(),
+              style: TextStyle(
+                fontSize: 18.0,
+                height: 2.0,
+                fontWeight: FontWeight.w400,
               ),
             ),
             SizedBox(height: 25.0)

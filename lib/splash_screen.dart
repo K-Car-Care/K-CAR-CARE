@@ -28,7 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
       var token = _pref.getString('token') ?? "";
       if (token != "") {
         Get.to(() => MyHomeScreen());
-        _pref.remove("token");
       } else {
         Get.to(RegistrationScreen());
       }
