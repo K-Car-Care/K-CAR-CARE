@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
       OnsignalNotificationService();
   @override
   initState() {
-    _notificationService.initPlatformState();
+  //  _notificationService.initPlatformState();
 
     super.initState();
   }

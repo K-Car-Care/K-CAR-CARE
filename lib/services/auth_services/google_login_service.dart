@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:k_car_care_project/data/login_api/login_token_api.dart';
 import 'package:k_car_care_project/storage_data/user_profile_storage/save_user_data.dart';
 
 import '../../screen/home_screen/1_home_screen.dart';
@@ -17,6 +18,9 @@ class LoginController extends GetxController {
   late Rx<User?> firebaseUser;
   late Rx<GoogleSignInAccount?> googleSignInAccount;
   final SaveUserData _saveUserData = SaveUserData();
+    // }
+  final AccessToken _accessToken = AccessToken();
+
 
   @override
   void onReady() {
@@ -46,7 +50,6 @@ class LoginController extends GetxController {
   //   } else {
   //     Get.offAll(() => const MyHomeScreen());
   //   }
-  // }
 
   Future<void> signInWithGoogle() async {
     try {
@@ -55,18 +58,17 @@ class LoginController extends GetxController {
       if (googleSignInAccount != null) {
         GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
-
         AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
+        await _accessToken.accessToken("google");
         await auth.signInWithCredential(credential).then((value) async {
           //Add data to Firestore in Firebase
           addUserToFireStore(
             googleSignInAccount.email,
             googleSignInAccount.photoUrl.toString(),
           );
-          
           print("Gmail User: ${googleSignInAccount.email}");
           print("Profile User: ${googleSignInAccount.photoUrl}");
           print("Profile User: ${googleSignInAccount.id}");
@@ -78,6 +80,8 @@ class LoginController extends GetxController {
             username: googleSignInAccount.displayName.toString(),
             phone: "",
           );
+         await _accessToken.accessToken("google");
+          Get.off(() => const MyHomeScreen());
         }).catchError((onErr) {
           print(onErr);
         });
@@ -145,11 +149,11 @@ class LoginController extends GetxController {
 
       // Getting users credential
       UserCredential result = await auth.signInWithCredential(authCredential);
-    User? user = result.user;
+      User? user = result.user;
 
       if (result != null) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const MyHomeScreen()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const MyHomeScreen()));
       } // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }

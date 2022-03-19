@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/profile_screen/components/textfield_item.dart';
+import 'package:k_car_care_project/storage_data/user_profile_storage/user_phone_number_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditUserProfileScreen extends StatefulWidget {
   const EditUserProfileScreen({Key? key}) : super(key: key);
@@ -13,7 +15,7 @@ class EditUserProfileScreen extends StatefulWidget {
 }
 
 class _EditUserProfileScreenState extends State<EditUserProfileScreen> {
-  TextEditingController? yearcontroller;
+  TextEditingController? phoneController;
   TextEditingController? makeController;
   TextEditingController? modelController;
   TextEditingController? colorController;
@@ -21,15 +23,25 @@ class _EditUserProfileScreenState extends State<EditUserProfileScreen> {
 
   XFile? imageFile;
   final ImagePicker _imagePicker = ImagePicker();
+  late String phoneNumber;
+  final PhonenumberStorage _storage = PhonenumberStorage();
 
   @override
   void initState() {
+    phoneNumber = '';
     super.initState();
-    yearcontroller = TextEditingController();
+    phoneController = TextEditingController();
     makeController = TextEditingController();
     carTypeController = TextEditingController();
     modelController = TextEditingController();
     colorController = TextEditingController();
+  }
+
+  void getPhoneNumber() async {
+    try {
+      SharedPreferences _pref = await SharedPreferences.getInstance();
+      phoneNumber = _pref.getString('phoneNum') ?? "";
+    } catch (e) {}
   }
 
   @override
@@ -83,15 +95,31 @@ class _EditUserProfileScreenState extends State<EditUserProfileScreen> {
                   height: 20,
                 ),
                 TextFieldItem(
-                  textEditingController: yearcontroller,
+                  textEditingController: phoneController,
                   title: "Phone Number",
                   hint: "+855-0000",
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      return "Please enter your phone number";
+                    } else if (value.length <= 7 && value.length >= 9) {
+                      return "Phone number have only 8-digit";
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(phoneController!.text.toString());
+                    var phoneNumber = phoneController!.text.trim().toString();
+                    if (phoneNumber.isEmpty) {
+                    } else if (phoneNumber.length <= 7 &&
+                        phoneNumber.length >= 9) {
+                    } else {
+                      _storage.phoneStorage(phoneNumber);
+                    }
+                  },
                   child: Container(
                     alignment: Alignment.center,
                     width: 140,

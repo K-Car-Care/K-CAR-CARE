@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors, empty_catches
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/constant/theme_constant.dart';
@@ -19,6 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   initState() {
     token = '';
     checkToken();
+
     super.initState();
   }
 
@@ -27,9 +30,13 @@ class _SplashScreenState extends State<SplashScreen> {
       final SharedPreferences _pref = await SharedPreferences.getInstance();
       var token = _pref.getString('token') ?? "";
       if (token != "") {
-        Get.to(() => MyHomeScreen());
+        Future.delayed(Duration(seconds: 4), () {
+          Get.to(() => MyHomeScreen());
+        });
       } else {
-        Get.to(RegistrationScreen());
+        Future.delayed(Duration(seconds: 4), () {
+          Get.to(RegistrationScreen());
+        });
       }
     } catch (e) {}
   }

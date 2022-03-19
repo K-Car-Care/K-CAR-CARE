@@ -8,11 +8,13 @@ class TextFieldItem extends StatelessWidget {
   final String? hint;
   final String? title;
   final TextEditingController? textEditingController;
+  final FormFieldValidator<String>? validate;
   const TextFieldItem({
     Key? key,
     this.hint,
     this.title,
     this.textEditingController,
+    this.validate,
   }) : super(key: key);
 
   @override
@@ -30,16 +32,16 @@ class TextFieldItem extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        TextField(
-          controller: textEditingController,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            isDense: true,
-            contentPadding: EdgeInsets.all(18.0),
-            // labelText: hint,
-            hintText: hint,
-          ),
-        ),
+        TextFormField(
+            controller: textEditingController,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              isDense: true,
+              contentPadding: EdgeInsets.all(18.0),
+              // labelText: hint,
+              hintText: hint,
+            ),
+            validator: validate),
         SizedBox(
           height: 8,
         ),

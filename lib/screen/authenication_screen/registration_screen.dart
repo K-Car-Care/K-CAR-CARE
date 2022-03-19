@@ -302,7 +302,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       children: [
                         InkWell(
                           onTap: () async {
-                            // await _loginController.signInWithGoogle();
+                            await _loginController.signInWithGoogle();
                             //  await _loginController.signup(context);
                             //  _loginController1.login();
                             print("Google");
