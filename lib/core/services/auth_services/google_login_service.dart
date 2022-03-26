@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
-import 'package:k_car_care_project/screen/home_screen/1_home_screen.dart';
+import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 // import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/core/storage_data/user_profile_storage/save_user_data.dart';
 
@@ -153,7 +153,7 @@ class LoginController extends GetxController {
       // ignore: unnecessary_null_comparison
       if (result != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => MyHomeScreen()));
+            context, MaterialPageRoute(builder: (context) => const MyHomeScreen()));
       } // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }

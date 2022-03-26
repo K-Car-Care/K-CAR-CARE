@@ -8,11 +8,13 @@ class CardNotification extends StatelessWidget {
   final String date;
   final String textBody;
   final bool isLoading;
+  final Image image;
   const CardNotification(
       {Key? key,
       required this.title,
       required this.date,
       required this.textBody,
+      required this.image,
       required this.isLoading})
       : super(key: key);
 
@@ -34,11 +36,7 @@ class CardNotification extends StatelessWidget {
                   width: 40,
                   height: 40,
                   child: Center(
-                    child: Image.network(
-                      'https://image.flaticon.com/icons/png/512/3602/3602700.png',
-                      width: 40,
-                      height: 40,
-                    ),
+                    child:image,
                   ),
                 ),
                 title: Text(title,

@@ -16,12 +16,10 @@ class CarReleventNewsModel {
 
     String? message;
     List<Payload>? payload;
-
     factory CarReleventNewsModel.fromJson(Map<String, dynamic> json) => CarReleventNewsModel(
         message: json["message"],
         payload: List<Payload>.from(json["payload"].map((x) => Payload.fromJson(x))),
     );
-
     Map<String, dynamic> toJson() => {
         "message": message,
         "payload": List<dynamic>.from(payload!.map((x) => x.toJson())),
@@ -30,15 +28,14 @@ class CarReleventNewsModel {
 
 class Payload {
     Payload({
-        this.id,
-        this.newsId,
-        this.userIds,
-        this.createdAt,
-        this.updatedAt,
-        this.v,
-        this.isOpen,
+      this.id,
+      this.newsId,
+      this.userIds,
+      this.createdAt,
+      this.updatedAt,
+      this.v,
+      this.isOpen,
     });
-
     String? id;
     NewsId? newsId;
     List<dynamic>? userIds;
@@ -46,25 +43,25 @@ class Payload {
     DateTime? updatedAt;
     int? v;
     bool? isOpen;
-
+    
     factory Payload.fromJson(Map<String, dynamic> json) => Payload(
-        id: json["_id"],
-        newsId: NewsId.fromJson(json["news_id"]),
-        userIds: List<dynamic>.from(json["user_ids"].map((x) => x)),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-        isOpen: json["isOpen"],
+      id: json["_id"],
+      newsId: NewsId.fromJson(json["news_id"]),
+      userIds: List<dynamic>.from(json["user_ids"].map((x) => x)),
+      createdAt: DateTime.parse(json["createdAt"]),
+      updatedAt: DateTime.parse(json["updatedAt"]),
+      v: json["__v"],
+      isOpen: json["isOpen"],
     );
 
     Map<String, dynamic> toJson() => {
-        "_id": id,
-        "news_id": newsId?.toJson(),
-        "user_ids": List<dynamic>.from(userIds!.map((x) => x)),
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "__v": v,
-        "isOpen": isOpen,
+      "_id": id,
+      "news_id": newsId?.toJson(),
+      "user_ids": List<dynamic>.from(userIds!.map((x) => x)),
+      "createdAt": createdAt?.toIso8601String(),
+      "updatedAt": updatedAt?.toIso8601String(),
+      "__v": v,
+      "isOpen": isOpen,
     };
 }
 

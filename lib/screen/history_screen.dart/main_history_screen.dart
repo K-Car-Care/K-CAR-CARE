@@ -1,6 +1,7 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
+import 'package:k_car_care_project/core/constant/app_images.dart';
 // import 'package:get/get.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 // import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
@@ -16,6 +17,7 @@ class HisstoryScreen extends StatefulWidget {
 }
 
 class _HisstoryScreenState extends State<HisstoryScreen> {
+  
   @override
   void initState() {
     CheckInternet().checkConnection(context);
@@ -27,6 +29,8 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
     CheckInternet().listener?.cancel();
     super.dispose();
   }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,38 +56,71 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
               onPressed: () {},
             ),
           ]),
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: GestureDetector(
-          onVerticalDragStart: (details) => {
-            // ignore: avoid_print
-            print(details),
-          },
-          onVerticalDragEnd: (velocity) {
-            var sinat = velocity;
-            // ignore: avoid_print
-            print(sinat);
-          },
-          child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.black,
-          ),
-        ),
-        // child: ListView.builder(
-        //     physics: const BouncingScrollPhysics(),
-        //     itemCount: 10,
-        //     itemBuilder: (BuildContext context, int index) {
-        //       return CardService(
-        //         color: ColorRandom.getRandomColor(),
-        //         icon: 'assets/service_images/service_icon.png',
-        //         desc:
-        //             'Find history icon stock images in HD and millions of other royalty-free stock photos',
-        //         title: 'TELA  POWER',
-        //         phoneNumber: 'May 03, 2021',
-        //       );
-        //     }),
+        child: ListView.builder(
+            padding: const EdgeInsets.all(5),
+            physics: const BouncingScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (BuildContext context, int index) {
+              // return CardService(
+              //   color: ColorRandom.getRandomColor(),
+              //   icon: 'assets/service_images/service_icon.png',
+              //   desc:'Find history icon stock images in HD and millions of other royalty-free stock photos',
+              //   title: 'TELA  POWER',
+              //   phoneNumber: 'May 03, 2021',
+              // );
+              return Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(5),
+                    leading: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color:  ColorRandom.getRandomColor(),
+                        shape:BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        AppImages.historyIcon,
+                        fit: BoxFit.fill,
+                        color: Colors.white,
+                      ),
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: Column(
+                        children: [
+                          Text(
+                            // desc,
+                            '#248, Preah Monivong Blvd. (Street 93), Sangkat Boeung Raing, Khan Daun.',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: ThemeConstant.textTheme.bodyText2!.copyWith(color: Colors.grey)
+                          ),
+                          const SizedBox(height: 10),    
+                        ],
+                      ),
+                    ),
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          // title,
+                          'TOP AUTO Repair',
+                          style: ThemeConstant.textTheme.bodyText1!.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ); 
+            }),
       ),
     );
   }

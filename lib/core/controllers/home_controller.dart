@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
-import 'package:k_car_care_project/screen/home_screen/1_home_screen.dart';
+import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 
 class HomeController extends GetxController {
   late GoogleSignIn googleSignIn;

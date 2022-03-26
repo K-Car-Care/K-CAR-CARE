@@ -78,6 +78,23 @@ dependencies:
   syncfusion_flutter_charts: ^19.3.48
   carousel_slider: ^4.0.0
   dots_indicator: ^2.1.0
+  #flutter cach network image
+  cached_network_image: ^3.2.0
+  #dotted_border
+  dotted_border: ^2.0.0+2
+  #launch_review: 
+  launch_review: ^3.0.1
+  #percent_indicator:
+  percent_indicator: ^4.0.0
+  #flutter_share: 
+  flutter_share: ^2.0.0
+  #spring_button: 
+  spring_button: ^2.0.0
+  #_share: 
+  share: ^2.0.4
+  #pushable_button: 
+  pushable_button: ^0.0.3
+  flutter_rating_bar: ^4.0.0
   
 
 dev_dependencies:

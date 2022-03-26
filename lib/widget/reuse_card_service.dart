@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:k_car_care_project/core/constant/app_images.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/shared/typography.dart';
@@ -62,52 +63,60 @@ class CardService extends StatelessWidget {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    Container(
-                      height: 30,
-                      width:100,
-                      decoration: const BoxDecoration(
-                        // shape: BoxShape.circle,
-                        color: defaultColor,
-                      ),
-                      child:FittedBox(
-                        child: Row(
-                          children: [
-                            IconButton(
-                              padding: const EdgeInsets.all(5.0),
-                              icon: const Icon(Icons.assistant_direction_rounded,color:Colors.white, size: 30,),
-                              onPressed: ()async{
-                                final url = 'tel:$phoneNumber';
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                }
-                              },
-                            ),
-                            Text('ទៅកាន់ទីតាំង',style: subTitleTextStyleWhite,)
-                          ],
-                        ),
-                      ),
-                    ),
+                    Text('20\$',style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600,color:const Color(0xFFff0066))),
                     const Spacer(),
-                    Container(
-                      height: 30,
-                      width:30,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: defaultColor,
-                      ),
-                      child:FittedBox(
-                        child: IconButton(
-                          padding: const EdgeInsets.all(5.0),
-                          icon: const Icon(Icons.call_rounded,color:Colors.white, size: 30,),
-                          onPressed: ()async{
-                            final url = 'tel:$phoneNumber';
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            }
-                          },
+                    GestureDetector(
+                      onTap: () async{
+                        final url = 'tel:$phoneNumber';
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        }
+                      },
+                      child: Container(
+                        height: 30,
+                        width:100,
+                        decoration: BoxDecoration(
+                          // shape: BoxShape.circle,
+                          color: defaultColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child:FittedBox(
+                          child: Row(
+                            children: [
+                              IconButton(
+                                padding: const EdgeInsets.all(5.0),
+                                icon: const Icon(Icons.assistant_direction_rounded,color:Colors.white, size: 30,),
+                                onPressed: ()async{
+      
+                                },
+                              ),
+                              Text('ជ្រើសរើស',style: titleTextStyleWhite.copyWith(fontSize: 20,fontWeight: FontWeight.w600))
+                            ],
+                          ),
                         ),
                       ),
                     ),
+                    
+                    // Container(
+                    //   height: 30,
+                    //   width:30,
+                    //   decoration: const BoxDecoration(
+                    //     shape: BoxShape.circle,
+                    //     color: defaultColor,
+                    //   ),
+                    //   child:FittedBox(
+                    //     child: IconButton(
+                    //       padding: const EdgeInsets.all(5.0),
+                    //       icon: const Icon(Icons.call_rounded,color:Colors.white, size: 30,),
+                    //       onPressed: ()async{
+                    //         final url = 'tel:$phoneNumber';
+                    //         if (await canLaunch(url)) {
+                    //           await launch(url);
+                    //         }
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),    
               ],
