@@ -34,12 +34,12 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   // ignore: prefer_final_fields
   List<MainModel> _mainBox = [
+    MainModel( name: 'VIEW HISTORY', image: AppImages.historyImg,color:const Color(0xFFff0066)),
+    MainModel(name: 'REPAIR COST', image: AppImages.repairCostImg,color:const Color(0xFFfea832)),
+    MainModel(name: 'CAR RELVENT NEW',image: AppImages.carReleventNews,color:const  Color(0xFFB00020)),
+    MainModel(name: 'ACCOUNT', image:AppImages.profileImg,color:const Color(0xFF0F3EB6)),
     MainModel(name: 'CAR SERVICE', image: AppImages.carServiceImg, color:const  Color(0xFF1976D2)),
     MainModel( name: 'REPAIR SERVICE', image: AppImages.repairService,color:Colors.green),
-    MainModel(name: 'REPAIR COST', image: AppImages.repairCostImg,color:const Color(0xFFfea832) ),
-    MainModel(name: 'CAR RELVENT NEW',image: AppImages.carReleventNews,color:const  Color(0xFFB00020)),
-    MainModel( name: 'VIEW HISTORY', image: AppImages.historyImg,color:const Color(0xFFff0066)),
-    MainModel(name: 'ACCOUNT', image:AppImages.profileImg,color:const Color(0xFF0F3EB6)),
   ];
   
   navigate(int index) {
@@ -102,7 +102,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
               TextSpan(
                 text: "Care",
                 style: TextStyle(
-                  color: Colors.red,
+                  color: Color(0xfffaca0b),
                   fontSize: 18,
                 ),
               ),

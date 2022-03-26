@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/app_images.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
@@ -12,26 +10,27 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:  AppBar(
-          elevation: 0,
-          backgroundColor: defaultColor,
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
+        elevation: 0,
+        backgroundColor: defaultColor,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
-          centerTitle: true,
-          title: Text('អំពីយើង',style: subTitleTextStyleWhite),
-          actions: [
-            IconButton(
-              icon: (const Icon(Icons.notifications, color: Colors.white)),
-              onPressed: () {},
-            ),
-          ]),
+        ),
+        centerTitle: true,
+        title: Text('About Us',style: subTitleTextStyleWhite),
+        actions: [
+          IconButton(
+            icon: (const Icon(Icons.notifications, color: Colors.white)),
+            onPressed: () {},
+          ),
+        ]
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

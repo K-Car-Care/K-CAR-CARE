@@ -46,7 +46,7 @@ class Contact extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
-                        'ធ្វើការទំនាក់ទំនងមកយើងគ្រប់ពេលប្រសិនបើអ្នកជូបប្រទះនូវបញ្ហារឺត្រូវការជំនួយបន្ថែម។',
+                        'Contact us anytime if you need further assistance',
                         textAlign: TextAlign.center,
                         style: subTitleTextStyleBlack,
                       ),
@@ -59,7 +59,7 @@ class Contact extends StatelessWidget {
                 child: Column(
                 children: [
                   Text(
-                    "ទំនាក់ទំនងតាមរយ:",
+                    "Contact Via",
                     style: subTitleTextStyleBlack,
                   ),
                   const SizedBox(height: 8),
@@ -78,7 +78,7 @@ class Contact extends StatelessWidget {
                 child: Column(
                 children: [
                   Text(
-                    "ទំនាក់ទំនងតាមប្រព័ន្ធ",
+                    "Contact Via",
                     style: subTitleTextStyleBlack,
                   ),
                   const SizedBox(height: 8),
@@ -105,7 +105,7 @@ class Contact extends StatelessWidget {
                 child: Column(
                 children: [
                   Text(
-                    "ចូលទៅកាន់វេបសាយ",
+                    "Our Website",
                     style: subTitleTextStyleBlack,
                   ),
                   const SizedBox(height: 8),
@@ -189,8 +189,10 @@ class ReuseCardWithBorder extends StatelessWidget {
       padding: const EdgeInsets.only(top: 5, bottom: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: defaultColor,width: 1),
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white,
+        border: Border.all(
+          width: 0.5,
+          color:Colors.grey.withOpacity(0.3)),
       ),
       child: Align(
         alignment: Alignment.center,

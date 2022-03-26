@@ -143,7 +143,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
       width:MediaQuery.of(context).size.width / 1.4,
       child: Drawer(
           child: Container(
-            color: defaultColor,
+            color: Colors.white,
             child: CustomScrollView(
               controller: _scrollController,
               slivers: <Widget>[
@@ -170,8 +170,8 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         Column(
                           crossAxisAlignment:CrossAxisAlignment.start,
                           children: [
-                            Text(fullname.isEmpty ? 'Full Name':fullname, style:subTitleTextStyleWhite ),
-                            Text(email.isEmpty ? 'Student Email':email, style:subTitleTextStyleWhite.copyWith(color:  Colors.white.withOpacity(0.5),)),
+                            Text(fullname.isEmpty ? 'Full Name':fullname, style:subTitleTextStyleBlack ),
+                            Text(email.isEmpty ? 'Student Email':email, style:subTitleTextStyleBlack.copyWith(color:  Colors.white.withOpacity(0.5),)),
                           ],
                         ),
                         ]
@@ -227,12 +227,12 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       const SizedBox(height: 10),
                       Text(
                         fullname.isEmpty ? "Full Name":fullname,
-                          style: bodyTextStyleWhite.copyWith(fontWeight: FontWeight.w600,fontSize:10,color:  Colors.white),
+                          style: bodyTextStyleWhite.copyWith(fontWeight: FontWeight.w600,fontSize:10,color:  Colors.black),
                         ),
                       const SizedBox(height: 5),
                       Text(
                         email.isEmpty ? "Student Email":email,
-                        style:bodyTextStyleWhite.copyWith(color:  Colors.white.withOpacity(0.5),fontSize:10),
+                        style:bodyTextStyleWhite.copyWith(color:  Colors.black.withOpacity(0.5),fontSize:10),
                       ),
                     ],
                   ),
@@ -246,9 +246,9 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
             SliverList(
               delegate: SliverChildListDelegate([
                 BuildMenuItem(
-                  text:
+                  text:'Setting',
                       // _lang.translate('contact'),
-                      'ការកំណត់',
+                      //'ការកំណត់',
                   icon: Icons.contacts_outlined,
                   onClicked: () {
                     // Navigator.push(context, MaterialPageRoute(builder: (_) => const Contact()));
@@ -257,7 +257,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                     text:
                         // _lang.translate('help'),
-                        'ជំនួយ',
+                        'Help and Support',
                     icon: Icons.help_center_outlined,
                     onClicked: () {
                       // Navigator.push(
@@ -268,7 +268,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                     text:
                         // _lang.translate('feedback'),
-                        'បញ្ចេញមតិយោបល់',
+                        'Feeback',
                     icon: Icons.message_outlined,
                     onClicked: () {
                        showModalBottomSheet(
@@ -294,10 +294,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                         // SizedBox(height: 5),
                                         BuildLineTop(context: context),
                                         const SizedBox(height: 10),
-                                        Text("តើអ្នកយល់យ៉ាងណាក្រោយពីបានធ្វើការប្រើប្រាស់ K-CAR-CARE APP?",style: subTitleTextStyleBlack.copyWith(fontWeight:FontWeight.w600)),
+                                        Text("What do you think after using K-CAR-CARE APP?",style: subTitleTextStyleBlack.copyWith(fontWeight:FontWeight.w600)),
                                         const SizedBox(height: 10),
                                         BuildForm(
-                                          hideText: 'ខ្ញុំយល់ថា...',
+                                          hideText: 'Feedback here.....',
                                             context: context,
                                             disscuson: controller,
                                             maxLines: 3,
@@ -371,7 +371,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                                   mainAxisSize:MainAxisSize.min,
                                                   children: [
                                                     const Icon(Icons.add_outlined,color:Colors.grey),
-                                                    Text('បញ្ជូលរូបភាព',style:subTitleTextStyleBlack.copyWith(color:Colors.grey,fontWeight:FontWeight.w600 )),
+                                                    Text('Select Image',style:subTitleTextStyleBlack.copyWith(color:Colors.grey,fontWeight:FontWeight.w600 )),
                                                   ],
                                                 ),
                                               ),
@@ -397,7 +397,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                   text:
                       // _lang.translate('contact'),
-                      'ទំនាក់ទំនង',
+                      'Contact',
                   icon: Icons.contacts_outlined,
                   onClicked: () {
                     Navigator.push(context, MaterialPageRoute(builder: (_) => const Contact()));
@@ -406,7 +406,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                   text:
                       // _lang.translate('share'),
-                      'ចែករំលែក',
+                      'Share',
                   icon: Icons.share_outlined,
                   onClicked: () {
                     final renderbox = context.findRenderObject() as RenderBox;
@@ -416,7 +416,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
                 BuildMenuItem(
                 text:// _lang.translate('contact'),
-                    'វាយតម្លៃ',
+                    'Rate App',
                 icon: Icons.star_rounded,
                 onClicked: () {
                   LaunchReview.launch(
@@ -427,7 +427,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                   text:
                       // _lang.translate('share'),
-                      'កម្មវិធីផ្សេងទៀត',
+                      'Other App',
                   icon: Icons.mobile_friendly_outlined,
                   onClicked: () {
                     return launchURL();
@@ -435,7 +435,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                     text:
                         // _lang.translate('aboutus'),
-                        'អំពីយើង',
+                        'About us',
                     icon: Icons.workspaces_outline,
                     onClicked: () {
                       // MyNavigator.goToAboutUs(context);
@@ -445,7 +445,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                     text:
                         // _lang.translate('chang_lang'),
-                        'ផ្លាស់ប្ដូរភាសា',
+                        'Language',
                     icon: Icons.language_outlined,
                     onClicked: () {
                        showModalBottomSheet(
@@ -477,7 +477,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 BuildMenuItem(
                     text:
                         // _lang.translate('logout'),
-                        'ចាកចេញ',
+                        'Logout',
                     icon: Icons.login_outlined,
                     onClicked: () {
                        showModalBottomSheet(
@@ -524,8 +524,8 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   Widget buildEnrollButton({required Function onTap}) {
     return PushableButton(
-        child: Text('រួចរាល់',
-            style: titleTextStyleWhite.copyWith(color: Colors.white, fontWeight: FontWeight.w600)),
+        child: Text('Send',
+            style: titleTextStyleWhite.copyWith(color: Colors.black.withOpacity(0.7), fontWeight: FontWeight.w600)),
         height: 50,
         elevation: 5,
         hslColor: HSLColor.fromColor(defaultColor),
@@ -558,17 +558,15 @@ class BuildMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const color = Colors.white;
     const hoverColor = Colors.white70;
     return ListTile(
       leading: Container(
-          height: 35,
-          width: 35,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle, color: Colors.white.withOpacity(0.1)),
-          child: Icon(icon, color: color, size: 20)),
-      title: Text(text,
-          style: bodyTextStyleBlack.copyWith(color: color)),
+        height: 35,
+        width: 35,
+        decoration: BoxDecoration( shape: BoxShape.circle, color: Colors.grey.withOpacity(0.1)),
+        child: Icon(icon, color: Colors.grey, size: 20)
+      ),
+      title: Text(text,style: bodyTextStyleBlack.copyWith(color: Colors.black,fontWeight: FontWeight.w600,)),
       hoverColor: hoverColor,
       onTap: onClicked
     );
@@ -956,7 +954,7 @@ class AlertChangeLanguage extends StatelessWidget {
             onTap: onTapEH,
             child: ListTile(
               leading: const ResueLeadingLogo(imgUrl: 'https://vectorflags.s3.amazonaws.com/flags/uk-circle-01.png'),
-              title:  Text('ភាសាអង់គ្លេស',style: bodyTextStyleBlack),
+              title:  Text('English',style: bodyTextStyleBlack),
               // trailing:  const Container()
               //Icon(Icons.check_circle,  color: defaultColor),
             ),
@@ -964,9 +962,9 @@ class AlertChangeLanguage extends StatelessWidget {
           const Divider(),
           GestureDetector(
             onTap: onTapKH,
-            child: ListTile(
+            child: ListTile( 
               leading: const ResueLeadingLogo(imgUrl: 'https://cdn.countryflags.com/thumbs/cambodia/flag-round-250.png'),
-              title: Text('ភាសាខ្មែរ', style: bodyTextStyleBlack),
+              title: Text('Khmer', style: bodyTextStyleBlack),
               trailing: const Icon(Icons.check_circle,  color: defaultColor),
             ),
           )

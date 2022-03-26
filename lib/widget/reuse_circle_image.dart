@@ -15,12 +15,12 @@ class ContainerRaduis extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: defaultColor.withOpacity(0.1),
+        color: Colors.grey.withOpacity(0.1),
       ),
       child: Center(
         child: Image.asset(
           assetPath,
-          color: defaultColor,
+          color: Colors.grey,
           width: 40,
           height: 40,
         ),

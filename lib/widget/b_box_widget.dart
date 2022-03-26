@@ -22,19 +22,12 @@ class BBoxWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
-          color: const Color(0xffECECEC),
-        ),
-        borderRadius:BorderRadius.circular(5),
-        boxShadow: [
-          BoxShadow(
-            offset: const Offset(1, 2),
-            blurRadius: 2,
-            color: const Color(0xff000000).withOpacity(.1),
-          )
-        ],
+          width: 0.5,
+          color:Colors.grey.withOpacity(0.3)),
+        borderRadius:BorderRadius.circular(8),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             width: 80,
@@ -46,7 +39,7 @@ class BBoxWidget extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            child: Image.asset("$image",color:color),
+            child: Image.asset("$image",width: 20, height: 30,),
           ),
           Hero(
             tag: tag.toString(),
@@ -57,8 +50,8 @@ class BBoxWidget extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 16,
-                fontFamily: 'Vollkorn',
-                fontWeight: FontWeight.w500,
+                // fontFamily: 'Vollkorn',
+                fontWeight: FontWeight.w600,
                 color:Colors.black,
               ),
             ),

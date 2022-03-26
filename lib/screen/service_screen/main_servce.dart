@@ -116,13 +116,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
             ListTile(
               leading: ContainerRaduis(assetPath: AppImages.carServiceImg),
               title: Text(
-                'ជ្រើសរើសសេវាកម្មដែលអ្នកត្រូវការ',
-                style: subTitleTextStyleBlack.copyWith(color:defaultColor,fontWeight:FontWeight.w600)
+                'Choose the service you need',
+                style: subTitleTextStyleBlack.copyWith(fontWeight:FontWeight.w600)
               ),
             ),
-            const SizedBox(
-              height: 5,
-            ),
+            // const SizedBox(
+            //   height: 5,
+            // ),
             FutureBuilder<MainServiceModel>(
               future: _mainServiceModel,
               builder: (context, snapshot) {
@@ -133,14 +133,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 }
                 if (snapshot.hasData) {
                   var result = snapshot.data!.payload;
-                  return Container(
+                  return SizedBox(
                     height: MediaQuery.of(context).size.height / 1.5,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    // padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: GridView.builder(
                       physics: const BouncingScrollPhysics(),
                       itemCount: result?.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         // crossAxisSpacing: 10
                       ),
