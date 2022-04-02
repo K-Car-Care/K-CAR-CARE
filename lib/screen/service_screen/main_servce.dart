@@ -102,7 +102,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
             ),
           ),
           centerTitle: true,
-          title: Text('Service', style: ThemeConstant.textTheme.bodyText1),
+          title: Text('Service', style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
           actions: [
             IconButton(
               // ignore: prefer_const_constructors

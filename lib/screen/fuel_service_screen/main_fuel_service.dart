@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/model/main_services_models/fuel_model.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
 import '../../core/data/check_connectivity/check_connectivity.dart';
@@ -46,7 +47,7 @@ class _FuelServiceScreenState extends State<FuelServiceScreen> {
           ),
         ),
         centerTitle: true,
-        title: Text('Fuel Service', style: ThemeConstant.textTheme.bodyText1),
+        title: Text('Fuel Service', style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
         actions: [
           IconButton(
             // ignore: prefer_const_constructors

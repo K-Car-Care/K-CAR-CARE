@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/app_images.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
@@ -35,6 +36,7 @@ class AboutUs extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 5),
@@ -42,19 +44,45 @@ class AboutUs extends StatelessWidget {
               ),
               const SizedBox(height: 7),
               Text(
-                "សាលា គម្ពីរជាវេទិកានិម្មិត សម្រាប់សិស្សានុសិស្ស គ្រូបង្រៀន និងអ្នកជំនាញធ្វើការចែករំលែកចំនេះដឹងទៅកាន់អ្នកសិក្សាដទៃទៀត។ អ្នកអាចបើកមើលឬបង្កើតមេរៀននៅលើវេទិកាដោយឥតគិតថ្លៃព្រមទាំងបង្កើតសាលារៀនមួយផងដែរ។សាលារៀននិមួយៗមានបង្រៀនមុខជំនាញខុសៗគ្នាជាច្រើនដែលក្នុងនោះមានវិទ្យាសាស្រ្ត បច្ចេកវិទ្យា វិស្វកម្ម សិល្បៈ និងគណិតវិទ្យា។ សាលារៀនមួយចំនួនក៏មានវត្តមានពិតនៅក្នុងប្រទេសកម្ពុជាផងដែរ។ ពួកយើងពិតជាចង់ឃើញសាលារៀននិងអ្នកបង្កើតមាតិកាបន្ថែមទៀតនៅលើវេទិកានេះ ដើម្បីឲ្យសិស្សានុសិស្សទទួលបានចំនេះដឹងកាន់តែច្រើន។ ការចូលរួមរបស់អ្នកនឹងធ្វើឲ្យមានការផ្លាស់ប្តូរនិងរីកចម្រើនក្នុងវិស័យអប់រំឌីជីថលរបស់ប្រទេសកម្ពុជា ដោយស្របទៅតាមទស្សនវិស័យ និងបេសកម្មរបស់សាលាគម្ពីរ យើងចង់ផ្ដល់ភាពងាយស្រួលដល់ការសិក្សា ហើយធ្វើការប្រែក្លាយវាទៅជាឧបករណ៍មួយដែលមានសារប្រយោជន៍និង ជួយជម្រុញដល់អ្នកសិក្សាជំនាន់ក្រោយរបស់ពួកយើងដើម្បីឲ្យមានការប្រកួតប្រជែងឈានទៅរកការរីកចម្រើន។​ ហើយវាជាផ្នែកមួយដែលយើងអាចធ្វើការលើកស្ទួយដល់សង្គមជាតិរបស់យើង ដោយចាប់ផ្ដើមធ្វើការចែករំលែកនូវចំនេះដឹងរបស់ពួកយើង។ ",
+                "SAVE MONEY ON YOUR CAR",
                 textAlign: TextAlign.justify,
-                style: bodyTextStyleBlack,
+                style: bodyTextStyleBlack.copyWith(fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "We help you control FUEL, refuelling, MAINTENANCE and expenses (registration, fines and financing) and revenues. Drivvo is a finance manager for your CAR, MOTORCYCLE, BUS or TRUCK, for personal use or for professional drivers (Taxi, Uber, Cabify, 99, motorcycle couriers and truck drivers).Managing MULTIPLE VEHICLES and getting the gas consumption calculation just got a lot easier; get fuel efficiency reports sorted by fuel and gas stations, showing which one is best for your car.",
+                textAlign: TextAlign.justify,
+                style: bodyTextStyleBlack.copyWith(color:Colors.grey),
+              ),
+              Text(
+                "You can also restore data from other apps.",
+                textAlign: TextAlign.justify,
+                style: bodyTextStyleBlack.copyWith(fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "(Fuelio, aCar, Carango, Carrorama, Fuel Log, My Cars, Car Expenses, Fuel Manager)",
+                textAlign: TextAlign.justify,
+                style: bodyTextStyleBlack.copyWith(color:Colors.grey),
+              ),
+              Text(
+                "SAVE MONEY",
+                textAlign: TextAlign.justify,
+                style: bodyTextStyleBlack.copyWith(fontWeight: FontWeight.w600),
+              ),
+              Text(
+                "Find out how much you spend on gasoline or ethanol, registration, fines and save much more. By registering refuelling, expenses and services with this app for your car, you will have access to its monthly costs, average consumption, cost per km, average km/liter, oil change and even instalments of its financing.With Drivvo, you will have a CAR APP at hand, helping with fuel calculation and management of preventive maintenance, therefore saving money. No more forgetting a maintenance, fine, taxes or financing instalments; leave aside the monthly expenses spreadsheet.)",
+                textAlign: TextAlign.justify,
+                style: bodyTextStyleBlack.copyWith(color:Colors.grey),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('គាំទ្រ និងរក្សាសិទ្ធដោយ',
-                    style: subTitleTextStyleBlack
+                child: Text(
+                  'Supported and copyrighted by',
+                style: subTitleTextStyleBlack.copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Image.asset(AppImages.logoImg, height: 70),

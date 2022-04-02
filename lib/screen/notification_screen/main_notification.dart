@@ -1,14 +1,13 @@
 // ignore_for_file: unrelated_type_equality_checks
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/core/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';  
 import 'package:k_car_care_project/core/data/notification_api/notification_api.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 import 'package:k_car_care_project/screen/notification_screen/detail_notification_screen.dart';
 import '../../core/data/check_connectivity/check_connectivity.dart';
 import '../../core/model/notification_models/notification_model.dart';
 import 'components/card_notification.dart';
-
 class Notifications extends StatefulWidget {
   const Notifications({Key? key}) : super(key: key);
 
@@ -38,7 +37,7 @@ class _NotificationsState extends State<Notifications> with SingleTickerProvider
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xff0185BE),
+        backgroundColor: defaultColor,
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -51,7 +50,7 @@ class _NotificationsState extends State<Notifications> with SingleTickerProvider
           ),
         ),
         centerTitle: true,
-        title: Text('Notifications', style: ThemeConstant.textTheme.bodyText1),
+        title: Text('Notifications', style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
       ),
       body: FutureBuilder<NotificationModel>(
           future: _notiModel,
@@ -70,26 +69,23 @@ class _NotificationsState extends State<Notifications> with SingleTickerProvider
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onTap: () {
-                        var day =
-                            notificationList?[index].newsId!.createdAt!.day;
-                        var month =
-                            notificationList?[index].newsId!.createdAt!.month;
+                        var day = notificationList?[index].newsId!.createdAt!.day;
+                        var month = notificationList?[index].newsId!.createdAt!.month;
                         var year = notificationList?[index].newsId!.createdAt!.year;
                         Get.to(() => DetailNotificationScreen(
-                              title: notificationList?[index].newsId!.title,
-                              image: notificationList?[index].newsId!.img,
-                              desc: notificationList?[index].newsId!.message,
-                              datetime: "$day - $month - $year",
-                            ));
+                            title: notificationList?[index].newsId!.title,
+                            image: notificationList?[index].newsId!.img,
+                            desc: notificationList?[index].newsId!.message,
+                            datetime: "$day - $month - $year",
+                          )
+                        );
                       },
                       child: CardNotification(
                         isLoading: false,
-                        image: Image.network(
-                            notificationList![index].newsId!.img.toString()),
+                        image: Image.network(notificationList![index].newsId!.img.toString()),
                         title: notificationList[index].newsId!.title.toString(),
                         date: '10-july-2021 | 10:00 am',
-                        textBody:
-                            notificationList[index].newsId!.message.toString(),
+                        textBody: notificationList[index].newsId!.message.toString(),
                       ),
                     );
                   });

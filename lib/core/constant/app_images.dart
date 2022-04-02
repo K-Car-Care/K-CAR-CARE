@@ -26,4 +26,6 @@ class AppImages {
   static final String assetTelegramLogo = imgPath + 'telegram.png';
   static final String assetGmailLogo = imgPath + 'gmail.png';
   static final String assetWebsiteLogo = imgPath + 'web.png';
+  static final String assetAutoCar = imgPath + 'auto.png';
+  static final String assetAnnountcement = imgPath + 'announcement.jpg';
 }

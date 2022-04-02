@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:k_car_care_project/core/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 import 'package:k_car_care_project/screen/car_relevent_new_screen/car_relevent_news_screen.dart';
 import 'package:k_car_care_project/screen/google_map_screen/find_garage_map_screen.dart';
 import 'package:k_car_care_project/screen/drawer_screen/main_drawer.dart';
@@ -55,7 +55,7 @@ class _MyHomeScreenProdState extends State<MyHomeScreenProd> {
             ),
           ),
           centerTitle: true,
-          title: Text('Overview', style: ThemeConstant.textTheme.bodyText1),
+          title: Text('Overview', style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
           actions: [
             IconButton(
               icon: const Icon(Icons.notifications, color: Colors.white),

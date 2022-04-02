@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/data/car_relevent_news_api.dart';
 // import 'package:k_car_care_project/data/car_relevent_news_api.dart';
 import 'package:k_car_care_project/core/model/car_relevent_news_models/car_relevent_news_model.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 import '../../core/constant/theme_constant.dart';
 import '../test.dart';
 
@@ -45,7 +46,8 @@ class _CarReleventNewsScreenState extends State<CarReleventNewsScreen> {
           ),
           centerTitle: true,
           title: Text('Car Relevent News',
-              style: ThemeConstant.textTheme.bodyText1),
+              style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)
+          ),
           actions: [
             IconButton(
               icon: (Icon(Icons.notifications, color: Colors.white)),

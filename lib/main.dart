@@ -2,16 +2,29 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/core/services/notification_service/notification_service.dart';
 import 'package:k_car_care_project/translation_screen/messages.dart';
+import 'package:provider/provider.dart';
+
+import 'core/provider/state_change_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<StateChangeNotifier>(
+          create: (context) => StateChangeNotifier(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -37,6 +50,11 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Color(0xFFf5f5f5),
         appBarTheme: AppBarTheme(
           color: ThemeConstant.lightScheme.background,
+          elevation: 0.0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness:  Brightness.dark ,
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,

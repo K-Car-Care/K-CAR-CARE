@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/model/map_model/map_model.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 
 import '../../core/data/map_apis/map_api.dart';
 class GoogleMapScreen extends StatefulWidget {
@@ -61,9 +62,9 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: defaultColor,
-        title: const Text(
+        title: Text(
           "Find Place",
-          style: TextStyle(fontSize: 20),
+          style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600),
         ),
         actions: [
           Padding(

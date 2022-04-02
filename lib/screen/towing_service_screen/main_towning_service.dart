@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/model/main_services_models/towing_model.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
@@ -49,7 +50,7 @@ class _TowingServiceScreenState extends State<TowingServiceScreen> {
           ),
         ),
         centerTitle: true,
-        title: Text('Towing Service', style: ThemeConstant.textTheme.bodyText1),
+        title: Text('Towing Service', style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
         actions: [
           IconButton(
             icon: (Icon(Icons.notifications, color: Colors.white)),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/model/main_services_models/flate_model.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
 import '../../core/data/check_connectivity/check_connectivity.dart';
@@ -48,7 +49,8 @@ class _FlatFireServiceScreenState extends State<FlatFireServiceScreen> {
           ),
           centerTitle: true,
           title: Text('Flat Tire Service',
-              style: ThemeConstant.textTheme.bodyText1),
+              style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)
+          ),
           actions: [
             IconButton(
               // ignore: prefer_const_constructors

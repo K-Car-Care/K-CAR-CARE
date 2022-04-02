@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/app_images.dart';
 // import 'package:get/get.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
 // import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 // import 'package:k_car_care_project/widget/reuse_card_service.dart';
 
@@ -48,7 +49,7 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
             ),
           ),
           centerTitle: true,
-          title: Text('History', style: ThemeConstant.textTheme.bodyText1),
+          title: Text('History', style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
           actions: [
             IconButton(
               // ignore: prefer_const_constructors

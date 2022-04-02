@@ -1,17 +1,22 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
 import 'dart:ui';
 import 'package:flutter/material.dart';
+
 class BBoxWidget extends StatelessWidget {
   const BBoxWidget({
     Key? key,
     this.name,
-    this.image, this.tag,
+    this.image, 
+    this.tag,
     this.color,
+    this.index,
   }) : super(key: key);
+  
   final String? name;
   final String? image;
   final String? tag;
   final Color? color;
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,9 @@ class BBoxWidget extends StatelessWidget {
         color: Colors.white,
         border: Border.all(
           width: 0.5,
-          color:Colors.grey.withOpacity(0.3)),
+          color: Colors.grey.withOpacity(0.3),
+          //index == 0 || index == 1 || index == 3 ? defaultColor : Colors.grey.withOpacity(0.3)
+        ),
         borderRadius:BorderRadius.circular(8),
       ),
       child: Column(

@@ -95,6 +95,12 @@ dependencies:
   #pushable_button: 
   pushable_button: ^0.0.3
   flutter_rating_bar: ^4.0.0
+  #Chart 
+  charts_flutter: ^0.12.0
+  #font_awesome_flutter
+  font_awesome_flutter:
+  #fl_chart
+  fl_chart:
   
 
 dev_dependencies:

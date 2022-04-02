@@ -1,3 +1,3 @@
 abstract class ApiRepository {
-  String url = 'https://k-car-care.herokuapp.com/api/v1';
+  String url = 'http://192.168.1.12:3000/api/v1';
 }
