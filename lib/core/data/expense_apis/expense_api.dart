@@ -14,8 +14,7 @@ class ExpenseApi extends ApiRepository {
         "http://k-car-care.herokuapp.com/api/v1/usedServices/",
       ),
       headers: {
-        "token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWUyNDRiMGZlYTYzMjRlZWRkNDgyNjMiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjQyOTAzMTcyLCJleHAiOjE2NDMxNjIzNzJ9.ROz-jsfxtdC7DdHYRrSXgbrpvdQtFGS0aFCbEHDHODA",
+        "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWUyNDRiMGZlYTYzMjRlZWRkNDgyNjMiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjQyOTAzMTcyLCJleHAiOjE2NDMxNjIzNzJ9.ROz-jsfxtdC7DdHYRrSXgbrpvdQtFGS0aFCbEHDHODA",
       },
     );
     var responseJson = jsonDecode(response.body);

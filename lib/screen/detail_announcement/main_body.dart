@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:k_car_care_project/core/constant/app_images.dart';
 import 'package:k_car_care_project/core/shared/typography.dart';
-import 'package:k_car_care_project/widget/carousel_widget.dart';
 
 class DetailAnnocement extends StatefulWidget {
   final String assetImage;
@@ -76,39 +75,39 @@ class _DetailAnnocementState extends State<DetailAnnocement> {
           ),
         ),
       ),
-      bottomSheet: SizedBox(
-        height:70,
-        width:double.maxFinite,
-        child: CarouselWidget(
-              onPageChanged: (val, carouselPageChangedReason) {
-                // setState(() {
-                //   dotPosition = val;
-                // });
-              },
-              items: carouselImage.map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return GestureDetector(
-                      onTap:(){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  DetailAnnocement(assetImage:i)));
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(i),
-                          ),
-                          color: Colors.blue,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-      ),
+      // bottomSheet: SizedBox(
+      //   height:70,
+      //   width:double.maxFinite,
+      //   child: CarouselWidget(
+      //         onPageChanged: (val, carouselPageChangedReason) {
+      //           // setState(() {
+      //           //   dotPosition = val;
+      //           // });
+      //         },
+      //         items: carouselImage.map((i) {
+      //           return Builder(
+      //             builder: (BuildContext context) {
+      //               return GestureDetector(
+      //                 onTap:(){
+      //                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  DetailAnnocement(assetImage:i)));
+      //                 },
+      //                 child: Container(
+      //                   width: MediaQuery.of(context).size.width,
+      //                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
+      //                   decoration: BoxDecoration(
+      //                     image: DecorationImage(
+      //                       fit: BoxFit.fill,
+      //                       image: AssetImage(i),
+      //                     ),
+      //                     color: Colors.blue,
+      //                   ),
+      //                 ),
+      //               );
+      //             },
+      //           );
+      //         }).toList(),
+      //       ),
+      // ),
     );
   }
 }

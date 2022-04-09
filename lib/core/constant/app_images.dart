@@ -28,4 +28,6 @@ class AppImages {
   static final String assetWebsiteLogo = imgPath + 'web.png';
   static final String assetAutoCar = imgPath + 'auto.png';
   static final String assetAnnountcement = imgPath + 'announcement.jpg';
+  static final String assetCarExpense = imgPath + 'repair_cost_exspense.png';
+  static final String assetListExpense = imgPath + 'img_list_expense.png';
 }

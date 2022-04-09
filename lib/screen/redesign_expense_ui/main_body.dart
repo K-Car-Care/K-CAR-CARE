@@ -3,10 +3,14 @@ import 'package:k_car_care_project/core/constant/app_images.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/provider/state_change_notifier.dart';
 import 'package:provider/provider.dart';
+import 'components/add_expense_data_screen.dart';
 import 'json/budget_json.dart';
 import 'json/daily_json.dart';
 import 'json/day_month.dart';
 import 'package:fl_chart/fl_chart.dart';
+
+import 'list_expense/main_body.dart';
+import 'list_expense_category/main_body.dart';
 
 class NewUIDesign extends StatefulWidget {
   const NewUIDesign({Key? key}) : super(key: key);
@@ -18,6 +22,27 @@ class NewUIDesign extends StatefulWidget {
 class _NewUIDesignState extends State<NewUIDesign> {
   int activeDay = 3;
   int? touchedIndex;
+
+  final Color color1 = const Color(0xffFFC145);
+  final Color color2 = const Color(0xffFFE538);
+
+  double height = .55;
+  double opacity = .9;
+
+  void addTransaction() {
+    setState(() {
+      height = .08;
+      opacity = 1;
+    });
+  }
+
+  void done() {
+    setState(() {
+      height = .55;
+      opacity = 9;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +69,8 @@ class _NewUIDesignState extends State<NewUIDesign> {
       //   ],
       // ),
       body: SingleChildScrollView(
-          child: Column(children: [
+        child: Column(
+          children: [
         Container(
           decoration: BoxDecoration(color: white, boxShadow: [
             BoxShadow(
@@ -55,26 +81,32 @@ class _NewUIDesignState extends State<NewUIDesign> {
             ),
           ]),
           child: Padding(
-            padding:
-                const EdgeInsets.only(top: 60, right: 20, left: 20, bottom: 25),
+            padding: const EdgeInsets.only(top: 40, right: 10, left: 10, bottom: 25),
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () {
+                    IconButton(
+                    icon: const Icon(Icons.arrow_back,color:black),
+                    onPressed:(){
                         Navigator.pop(context);
-                      },
-                      child: const Text(
-                        "Stats",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: black),
-                      ),
+                      }
                     ),
-                    const Icon(Icons.search)
+                    const Text(
+                      "Car Expense",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: black),
+                    ),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> const ListAllExpense()));
+                      },
+                      child: Image.asset(AppImages.assetListExpense,width: 30,height: 30,)
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -142,98 +174,103 @@ class _NewUIDesignState extends State<NewUIDesign> {
                 scrollDirection: Axis.horizontal,
                 itemCount: budget_json.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                            width: 0.5, color: Colors.grey.withOpacity(0.2)),
-                        color: white,
-                      ),
-                      width: MediaQuery.of(context).size.width -
-                          (MediaQuery.of(context).size.width / 4),
-                      height: 130,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              budget_json[index]['name'].toUpperCase(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
-                                  color:
-                                      const Color(0xff67727d).withOpacity(0.6)),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      budget_json[index]['price'],
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=> const ListExpenseCategory()));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                              width: 0.5, color: Colors.grey.withOpacity(0.2)),
+                          color: white,
+                        ),
+                        width: MediaQuery.of(context).size.width -
+                            (MediaQuery.of(context).size.width / 4),
+                        height: 130,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                budget_json[index]['name'].toUpperCase(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color:
+                                        const Color(0xff67727d).withOpacity(0.6)),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        budget_json[index]['price'],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 3),
-                                      child: Text(
-                                        budget_json[index]['label_percentage'],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 13,
-                                            color: const Color(0xff67727d)
-                                                .withOpacity(0.6)),
+                                      const SizedBox(
+                                        width: 8,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "\$5000.00",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13,
-                                        color: const Color(0xff67727d)
-                                            .withOpacity(0.6)),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 3),
+                                        child: Text(
+                                          budget_json[index]['label_percentage'],
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 13,
+                                              color: const Color(0xff67727d)
+                                                  .withOpacity(0.6)),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Stack(
-                              children: [
-                                Container(
-                                  width: (size.width - 40),
-                                  height: 4,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.grey.withOpacity(0.1)),
-                                ),
-                                Container(
-                                  width: (size.width - 40) *
-                                      budget_json[index]['percentage'],
-                                  height: 4,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: budget_json[index]['color']),
-                                ),
-                              ],
-                            )
-                          ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 3),
+                                    child: Text(
+                                      "\$5000.00",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                          color: const Color(0xff67727d)
+                                              .withOpacity(0.6)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Stack(
+                                children: [
+                                  Container(
+                                    width: (size.width - 40),
+                                    height: 4,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.grey.withOpacity(0.1)),
+                                  ),
+                                  Container(
+                                    width: (size.width - 40) *
+                                        budget_json[index]['percentage'],
+                                    height: 4,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: budget_json[index]['color']),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -243,9 +280,11 @@ class _NewUIDesignState extends State<NewUIDesign> {
         Container(
           height: 250.0,
           padding:const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 8.0),
           decoration: BoxDecoration(
+              border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.2)),
               color: white,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(5.0),
               boxShadow: [
                 BoxShadow(
                   color: grey.withOpacity(0.01),
@@ -271,14 +310,13 @@ class _NewUIDesignState extends State<NewUIDesign> {
                       // });
                       // }),
                       centerSpaceRadius: 50.0,
-                      sections: showCategories(touchedIndex),
+                      sections: showCategories(touchedIndex,context),
                       sectionsSpace: 0.0,
                       centerSpaceColor: Colors.white,
                       borderData: FlBorderData(
                         show: false,
                       ),
-                      pieTouchData: PieTouchData(
-                          touchCallback: (fBorderData, pieTouchResponse) {
+                      pieTouchData: PieTouchData(touchCallback: (fBorderData, pieTouchResponse) {
                         setState(() {
                           // if (pieTouchResponse.touchedSection is FlLongPressEnd || pieTouchResponse.touchInput is FlPanEnd) {
                           //   touchedIndex = -1;
@@ -304,16 +342,18 @@ class _NewUIDesignState extends State<NewUIDesign> {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 20.0),
+        const SizedBox(height: 5.0),
         Container(
+          margin:const EdgeInsets.symmetric(horizontal: 8.0),
           decoration: BoxDecoration(
               color: white,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.2)),
               boxShadow: [
                 BoxShadow(
                   color: grey.withOpacity(0.01),
@@ -326,12 +366,13 @@ class _NewUIDesignState extends State<NewUIDesign> {
               children: List.generate(daily.length, (index) {
             return GestureDetector(
               onTap: () {
-                stateNotifier.setLegendIndex(index);
+                Navigator.push(context, MaterialPageRoute(builder: (_)=> const ListExpenseCategory()));
               },
               child: Container(
                 // margin: const EdgeInsets.only(left: 8, right: 8,top:8),
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
                   color: stateNotifier.legendIndex == index
                     ? const Color(0xFFFFF8E5).withOpacity(0.5)
                     : white,
@@ -354,7 +395,7 @@ class _NewUIDesignState extends State<NewUIDesign> {
                                 ),
                                 child: Center(
                                   child: Image.asset(
-                                    AppImages.repairCostImg,
+                                    AppImages.assetCarExpense,
                                     width: 35,
                                     height: 35,
                                     //  color:,
@@ -395,10 +436,10 @@ class _NewUIDesignState extends State<NewUIDesign> {
                           //  width: (size.width - 40) * 0.1,
                           child: Text(
                             "${daily[index]['price']}",
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 15,
-                                color: defaultColor),
+                                color: const Color(0xffFF5771).withOpacity(0.7)),
                           ),
                         )
                       ],
@@ -410,58 +451,90 @@ class _NewUIDesignState extends State<NewUIDesign> {
                 ),
               ),
             );
-          })),
+          }
+          )
+        ),
         ),
         const SizedBox(
-          height: 15,
+          height: 5,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Row(
-            children: [
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 80),
-                child: Text(
-                  "Total",
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: black.withOpacity(0.4),
-                      fontWeight: FontWeight.w600),
-                  overflow: TextOverflow.ellipsis,
+        Container(
+          height:70,
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 80),
+                  child: Text(
+                    "Total".toUpperCase(),
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: grey.withOpacity(0.8),
+                        fontWeight: FontWeight.w600),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              const Padding(
-                padding: EdgeInsets.only(top: 5),
-                child: Text(
-                  "\$1780.00",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
+                const Spacer(),
+                const Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Text(
+                    "\$1780.00",
+                    style: TextStyle(fontSize: 20,color: Color(0xffFF5771), fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 20)
-      ])),
-    );
-  }
-
-  Widget buidCardPieChart({BuildContext? context, required Widget child}) {
-    return Container(
-      height: 320,
-      margin: const EdgeInsets.all(8),
-      alignment: Alignment.topLeft,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.2)),
-        color: Colors.white,
+        // const SizedBox(height: 20)
+      ]
+      )
       ),
-      child: child,
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+              useRootNavigator: true,
+              isScrollControlled: true,
+              context: context,
+              clipBehavior: Clip.antiAlias,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(24),
+                  ),
+                ),
+                builder:(context) => SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: NewTransaction(
+                        opacity: opacity,
+                        done: done,
+                      ),
+                  ),
+                ),
+              );
+          },
+          child:  Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [color1, color2],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            ),
+          backgroundColor: color1,
+        ),
     );
   }
 }
@@ -482,52 +555,74 @@ class CostsData {
   const CostsData(this.category, this.cost, this.color);
 }
 
-List<PieChartSectionData> showCategories(touchedIndex) {
+List<PieChartSectionData> showCategories(touchedIndex,context) {
   return List.generate(4, (index) {
     final isTouched = index == touchedIndex;
     final double fontSize = isTouched ? 18 : 16;
     final double radius = isTouched ? 70 : 60;
+    final stateNotifier = Provider.of<StateChangeNotifier>(context);
     switch (index) {
       case 0:
         return PieChartSectionData(
-            color: const Color(0xff2211ff),
+            color: const Color(0xffFFC145),
             value: 53,
             title: "53%",
             radius: radius,
-            titleStyle:
-                TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold));
+            badgeWidget: GestureDetector(
+              onTap:(){
+                stateNotifier.setLegendIndex(index);
+              }
+            ),
+            titleStyle: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold,color:white));
 
       case 1:
         return PieChartSectionData(
-            color: const Color(0xff00aaaa),
+            color: const Color(0xff1C85FF),
             value: 18,
             title: "18%",
+            badgeWidget: GestureDetector(
+              onTap:(){
+                // ignore: avoid_print
+                print("index$index");
+                stateNotifier.setLegendIndex(index);
+              }
+            ),
             radius: radius,
-            titleStyle:
-                TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold));
+            titleStyle: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold,color:white));
 
       case 2:
         return PieChartSectionData(
-            color: const Color(0xffff11aa),
+            color: const Color(0xffFF5771),
             value: 17,
             title: "17%",
             radius: radius,
-            titleStyle:
-                TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold));
+            badgeWidget: GestureDetector(
+              onTap:(){
+                // ignore: avoid_print
+                print("index$index");
+                stateNotifier.setLegendIndex(index);
+              }
+            ),
+            titleStyle:TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold,color:white));
 
       case 3:
         return PieChartSectionData(
-            color: const Color(0xff525252),
+            color: const Color(0xff3CD1A2),
             value: 12,
             title: "12%",
+            badgeWidget: GestureDetector(
+              onTap:(){
+                // ignore: avoid_print
+                print("index$index");
+                stateNotifier.setLegendIndex(index);
+              }
+            ),
             radius: radius,
-            titleStyle:
-                TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold));
+            titleStyle:TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold,color:white));
       default:
         return PieChartSectionData();
     }
   });
 }
 
-TextStyle smallTitleStyle =
-    const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0);
+TextStyle smallTitleStyle = const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0);

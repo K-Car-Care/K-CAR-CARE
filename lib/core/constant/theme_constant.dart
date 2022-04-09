@@ -193,7 +193,6 @@ const Color green = Color(0xFF43aa8b);
 const Color blue = Color(0xFF28c2ff);
 
 class ColorRandom {
-  static Color getRandomColor() =>
-      Colors.primaries[Random().nextInt(Colors.primaries.length)];
+  static Color getRandomColor() => Colors.primaries[Random().nextInt(Colors.primaries.length)];
 
 }

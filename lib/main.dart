@@ -1,16 +1,16 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
-import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/core/services/notification_service/notification_service.dart';
 import 'package:k_car_care_project/translation_screen/messages.dart';
 import 'package:provider/provider.dart';
-
 import 'core/provider/state_change_notifier.dart';
+import 'screen/main_home/main_body.dart';
+import 'screen/promotion/components/list_category.dart';
+import 'screen/promotion/components/main_promotion.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,8 +35,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final OnsignalNotificationService _notificationService =
-      OnsignalNotificationService();
+
+  final OnsignalNotificationService _notificationService = OnsignalNotificationService();
+
   @override
   initState() {
     _notificationService.initPlatformState();
@@ -62,10 +63,7 @@ class _MyAppState extends State<MyApp> {
       // translations will be displayed in that locale
       locale: const Locale('en','US'),
       fallbackLocale: const Locale('en','US'),
-      home: MyHomeScreen(),
+      home:  MyHomePage(),
     );
   }
 }
-
-
-

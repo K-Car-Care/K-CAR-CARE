@@ -82,7 +82,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   @override
   void initState() {
     // Use either of them.
-    Future(_showDialog);
+    // Future(_showDialog);
     super.initState();
   }
 

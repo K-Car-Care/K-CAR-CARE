@@ -1,0 +1,566 @@
+
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
+import 'package:k_car_care_project/core/shared/typography.dart';
+import 'package:k_car_care_project/screen/promotion/main_body.dart';
+import 'package:coupon_uikit/coupon_uikit.dart';
+
+import 'list_category.dart';
+
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
+
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+
+  @override
+  Widget build(BuildContext context) {
+    final height  = MediaQuery.of(context).size.height * 1 ;
+    final width  = MediaQuery.of(context).size.width * 1 ;
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+          ),
+        title: const  Text('Promotions',style:TextStyle(color:black)),
+        centerTitle:false,
+        actions: const[
+          Icon(Icons.shopping_bag_outlined,color:black),
+          SizedBox(width: 10,)
+        ],
+        bottom: PreferredSize(
+          preferredSize:const Size.fromHeight(40),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
+            child: Row(
+              children:  [
+                Expanded(
+                  child: CupertinoTextField(
+                  padding: EdgeInsets.symmetric(vertical: 12 , horizontal: 10),
+                  placeholder: "Seach for shop & restaurants",
+                  prefix: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Icon(Icons.search , color: Color(0xff7b7b7b) ,),
+                  ),
+                  decoration: BoxDecoration(
+                      color: Color(0xfff7f7f7),
+                      borderRadius : BorderRadius.circular(50)
+                  ),
+                  style: TextStyle(color: Color(0xff707070) ,
+                      fontSize: 12) ,
+                )),
+              ],
+            ),
+          ),
+        ),
+      ),
+      body:  SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15 ,vertical: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+           children: [
+             ClipRRect(
+               borderRadius: BorderRadius.circular(10),
+               child: InkWell(
+                 onTap: (){
+                   //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                 },
+                 child: Container(
+                   height: MediaQuery.of(context).size.height * .18,
+                   width: double.infinity,
+                   decoration: BoxDecoration(
+                     color: defaultColor,
+                     borderRadius: BorderRadius.circular(10)
+                   ),
+                   child: CustomSliderWidget(
+                      items: [
+                        "https://lyhourleasing.com/wp-content/uploads/2021/08/New-Promotion-webside-03.png",
+                        "https://lyhourleasing.com/wp-content/uploads/2021/08/New-Promotion-webside-01.png",
+                        "http://www.mybestcardealer.com/wp-content/uploads/2016/11/Toyota-Discount-November-Promotion-2016.jpg"
+                      ],
+                    ),
+                 ),
+               ),
+             ),
+             Padding(
+               padding: const EdgeInsets.symmetric(vertical: 10),
+               child: Row(
+                 children: [
+                   Expanded(
+                     flex: 1,
+                     child: Container(
+                       height: MediaQuery.of(context).size.height * .25,
+                       decoration: BoxDecoration(
+                           color: white,
+                           borderRadius: BorderRadius.circular(10),
+                           image: const DecorationImage(
+                               fit: BoxFit.cover,
+                                 image: NetworkImage('https://img.freepik.com/free-vector/car-promotion-social-media-post-banner-template-vector_434448-179.jpg')
+
+                             )
+                       ),
+                       child: Padding(
+                         padding: const EdgeInsets.all(10.0),
+                         child: Stack(
+                           alignment: Alignment.center,
+                           children: const [
+                            //  Positioned(
+                            //      bottom: 0,
+                            //      left: 0,
+                            //      child: Text('pandamart' , style: TextStyle(color: black , fontSize: 18 ),)),
+                            //  Positioned(
+                            //      bottom: 0,
+                            //      left: 0,
+                            //      child: Text('panda20 for 20% off' , style: TextStyle(color: black , fontWeight: FontWeight.w500 ,height:1 , fontSize: 14  ))),
+
+                           ],
+                         ),
+                       ),
+                     ),
+                   ),
+                   SizedBox(width: 8,),
+                   Expanded(
+                     flex: 1,
+                     child: Column(
+                       children: [
+                         Container(
+                           height: MediaQuery.of(context).size.height * .15,
+                           width: double.infinity,
+                           decoration: BoxDecoration(
+                               color: Color(0xffef9fc4),
+                               borderRadius: BorderRadius.circular(10),
+                             image: DecorationImage(
+                               fit: BoxFit.cover,
+                                 image: NetworkImage('https://kh.totalenergies.com/km/system/files/atoms/image/car-care-promotion-edito.jpg')
+
+                             )
+                           ),
+                           child: Padding(
+                             padding: const EdgeInsets.all(10.0),
+                             child: Column(
+                               mainAxisAlignment: MainAxisAlignment.end,
+                               crossAxisAlignment: CrossAxisAlignment.start,
+                               children: [
+                                //Text('Pick-Uo' , style: TextStyle(color: black , fontSize: 18 ),),
+                                 //ext('Upto 50% off' , style: TextStyle(color: black , fontWeight: FontWeight.w500 ,height:1 , fontSize: 14  )),
+                               ],
+                             ),
+                           ),
+                         ),
+                         const SizedBox(height: 14),
+                         Container(
+                           height: MediaQuery.of(context).size.height * .1,
+                           width: double.infinity,
+                           decoration: BoxDecoration(
+                               color: const Color(0xff85bfff),
+                               borderRadius: BorderRadius.circular(10),
+                               image: const DecorationImage(
+                               fit: BoxFit.cover,
+                                 image: NetworkImage('https://www.mistercarz.com.my/images/headers/facebook/honda-city.jpg')
+                                )
+                           ),
+                           child: Padding(
+                             padding: const EdgeInsets.all(10.0),
+                             child: Column(
+                               mainAxisAlignment: MainAxisAlignment.end,
+                               crossAxisAlignment: CrossAxisAlignment.start,
+                               children: [
+                                 //Text('Shops' , style: TextStyle(color: black , fontSize: 18 ),),
+                                 //Text('Everyday assentials' , style: TextStyle(color: black , fontWeight: FontWeight.w500 ,height:1 , fontSize: 14  )),
+
+                               ],
+                             ),
+                           ),
+
+                         )
+                       ],
+                     ),
+                   ),
+
+                 ],
+               ),
+             ),
+             const SizedBox(height:14),
+             Row(
+               children: [
+                 Image.network('https://cdn-icons-png.flaticon.com/512/6782/6782256.png',width: 20,height:20),
+                 const SizedBox(width: 7),
+                 const Text('Category' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
+                 const Spacer(),
+                 GestureDetector(
+                   onTap:(){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoryDetail()));
+                   },
+                   child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                  )
+               ],
+             ),
+             const SizedBox(height:14),
+             Container(
+          width:MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            color: white,
+            borderRadius: BorderRadius.circular(5)
+            ),
+          child: Padding(
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            child: Container(
+              decoration: BoxDecoration(color: white),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 15,
+                  bottom: 15,
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 15),
+                    child: Row( children: List.generate(categories.length, (index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 40),
+                        child: Column(
+                          children: [
+                            Image.network(
+                              categories[index]['img'],
+                              width: 40,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              categories[index]['name'],
+                              
+                            )
+                          ],
+                        ),
+                      );
+                    })),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+             const SizedBox(height:14),
+             Row(
+               children: [
+                 Image.network('https://cdn-icons-png.flaticon.com/512/3199/3199306.png',width: 20,height:20),
+                 const SizedBox(width: 7),
+                 const Text('Hot Productions' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
+                 const Spacer(),
+                 GestureDetector(
+                   onTap:(){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion(title:'Hot Productions')));
+                   },
+                   child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                  )
+               ],
+             ),
+             const SizedBox(height:14),
+             Padding(
+               padding: const EdgeInsets.symmetric(vertical: 10),
+               child: Container(
+                 height: MediaQuery.of(context).size.height * .278,
+                 child: ListView.builder(
+                     itemCount: PandaPickHelper.itemCount,
+                     scrollDirection: Axis.horizontal,
+                     itemBuilder: (context, index){
+                       PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                       return RestuarentScreen(
+                         name: model.name,
+                         image:model.image ,
+                         remainingTime: model.remaingTime,
+                         totalRating: model.totalRating,
+                         subTitle: model.subTitle,
+                         rating: model.ratting,
+                         deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
+                       );
+                     }),
+               ),
+             ),
+             const SizedBox(height:14),
+             Row(
+                     children: [
+                       Image.network('https://cdn-icons-png.flaticon.com/512/3728/3728890.png',width: 20,height:20),
+                       const SizedBox(width: 7),
+                       const Text('Free Coupons' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
+                       const Spacer(),
+                       GestureDetector(
+                         onTap:(){
+                          //Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion()));
+                         },
+                         child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                        )
+                     ],
+                   ),
+             const SizedBox(height:12),
+             Container(
+                      height: 120,
+                      child: ListView.builder(
+                          itemCount: PandaPickHelper.itemCount,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index){
+                            PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Container(
+                                decoration:BoxDecoration(
+                                  borderRadius:BorderRadius.circular(8),
+                                  color:defaultColor,
+                                   image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                      image: NetworkImage('https://www.wpbeginner.com/wp-content/uploads/2020/01/create-coupon-popup-wordpress-550x340-featured.png')
+                                  )
+                                ),
+                                width: 220,
+                              ),
+                            );
+                          }),
+                    ),
+           
+             const SizedBox(height:14),
+             Row(
+               children: [
+                 Image.network('https://cdn-icons-png.flaticon.com/512/3500/3500954.png',width: 20,height:20),
+                 const SizedBox(width: 7),
+                 const Text('Recommended Promotion' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
+                 const Spacer(),
+                 GestureDetector(
+                   onTap:(){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion(title:'Recommended Promotion')));
+                   },
+                   child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                  )
+               ],
+             ),
+             const SizedBox(height:8),
+             Padding(
+               padding: const EdgeInsets.symmetric(vertical: 10),
+               child: Container(
+                 height: MediaQuery.of(context).size.height * .278,
+                 child: ListView.builder(
+                     itemCount: PandaPickHelper.itemCount,
+                     scrollDirection: Axis.horizontal,
+                     itemBuilder: (context, index){
+                       PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                       return RestuarentScreen(
+                         name: model.name,
+                         image:model.image ,
+                         remainingTime: model.remaingTime,
+                         totalRating: model.totalRating,
+                         subTitle: model.subTitle,
+                         rating: model.ratting,
+                         deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
+                       );
+                     }),
+               ),
+             ),
+           ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class ReuseListCardCategory extends StatelessWidget {
+  final Color getRandomColor;
+  final VoidCallback onTap;
+  final String image;
+  final String title;
+
+  const ReuseListCardCategory({
+    Key? key,
+    required this.getRandomColor,
+    required this.onTap,
+    required this.title,
+    required this.image,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return  GestureDetector(
+            onTap: onTap,
+            child: Container(
+              margin:const EdgeInsets.all(2),
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(
+                    width: 0.5,
+                    color: grey.withOpacity(0.2)),
+                borderRadius: BorderRadius.circular(5),
+                color: white
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorRandom.getRandomColor().withOpacity(0.1),
+                    ),
+                    child: Center(
+                      child:  Image.network(
+                          image,
+                          width: 30,
+                          height: 30,
+                        )
+                      ),
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(title,
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.fade,
+                      style: bodyTextStyleBlack
+                  )
+                ],
+              ),
+            ),
+          );
+  }
+}
+
+
+
+
+
+class ActiveDot extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Container(
+        width: 8,
+        height: 8,
+        decoration: BoxDecoration(
+          color: defaultColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+    );
+  }
+}
+
+class InactiveDot extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Container(
+        width: 8,
+        height: 8,
+        decoration: BoxDecoration(
+          color: white,
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+    );
+  }
+}
+
+/*
+ * for slider home page
+ */
+class CustomSliderWidget extends StatefulWidget {
+  // final List<String> items;
+  final List? items;
+
+  CustomSliderWidget({this.items});
+
+  @override
+  _CustomSliderWidgetState createState() => _CustomSliderWidgetState();
+}
+
+class _CustomSliderWidgetState extends State<CustomSliderWidget> {
+  int activeIndex = 0;
+  setActiveDot(index) {
+    setState(() {
+      activeIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      overflow: Overflow.visible,
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width,
+          child: CarouselSlider(
+            options: CarouselOptions(
+              onPageChanged: (index, reason) {
+                setActiveDot(index);
+              },
+              enableInfiniteScroll: false,
+              autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+              autoPlayAnimationDuration: Duration(seconds: 2),
+              // autoPlay: true,
+              viewportFraction: 1.0,
+            ),
+            items: widget.items!.map((item) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Stack(
+                    children: <Widget>[
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Image(
+                            image: NetworkImage(item),
+                            fit: BoxFit.cover,
+                          )),
+                    ],
+                  );
+                },
+              );
+            }).toList(),
+          ),
+        ),
+        Positioned(
+          left: 20,
+          right: 0,
+          bottom: 15,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(widget.items!.length, (idx) {
+                return activeIndex == idx ? ActiveDot() : InactiveDot();
+              })),
+        )
+      ],
+    );
+  }
+}
+
+
+const List categories = [
+  {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178787.png", "name": "Pickup"},
+  {"img": "https://cdn-icons-png.flaticon.com/128/7178/7178738.png", "name": "Grocery"},
+  {"img": "https://cdn-icons-png.flaticon.com/128/7178/7178747.png", "name": "Essentials"},
+  {"img": "https://cdn-icons-png.flaticon.com/128/7178/7178719.png", "name": "Fruit"},
+  {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178674.png", "name": "Alcohol"},
+  {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178729.png", "name": "Deals"},
+  {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178653.png", "name": "Discount"},
+];
