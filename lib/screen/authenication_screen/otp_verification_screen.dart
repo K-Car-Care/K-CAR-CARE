@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
-
 import '../../core/data/check_connectivity/check_connectivity.dart';
 import '../../core/services/auth_services/auth_services.dart';
 

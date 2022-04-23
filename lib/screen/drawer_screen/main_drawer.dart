@@ -15,6 +15,7 @@ import 'package:launch_review/launch_review.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pushable_button/pushable_button.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spring_button/spring_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -134,6 +135,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final Authentication _auth = Get.put(Authentication());
     if(Platform.isAndroid) {
       url = 'https://play.google.com/store/apps/details?id=com.koompi.sala';
     } else {
@@ -480,6 +482,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         'Logout',
                     icon: Icons.login_outlined,
                     onClicked: () {
+                      print('click');
                        showModalBottomSheet(
                           shape: BottomSheetShape(),
                           backgroundColor: Colors.black54,
@@ -488,9 +491,14 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             return BottomLogoutStyle(
                               question:'តើអ្នកពិតជាចង់ចាកចេញមែនទេ?',
                               logout: () async {
-                                // await signOut();
-                                // Navigator.pushReplacement(
-                                //     context, RouteAnimation(enterPage: Signin()));
+                                print('Hello world');
+                                _auth.signOut().then(
+                                  (value) async {
+                                    SharedPreferences preferences =
+                                        await SharedPreferences.getInstance();
+                                    await preferences.remove('recents');
+                                  },
+                                );
                               },
                             );
                           });
@@ -538,7 +546,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
         onPressed:() => onTap
       );
   }
-
   void launchURL() async => await canLaunch(urlPlaystore) ? await launch(urlPlaystore) : throw 'Could not launch $urlPlaystore';
 }
 
@@ -642,7 +649,7 @@ class BuildForm extends StatelessWidget {
 
 
 class BottomLogoutStyle extends StatelessWidget {
-  final Function logout;
+  final VoidCallback logout;
   final String question;
   const BottomLogoutStyle({
     Key? key, 
@@ -694,7 +701,7 @@ class BottomLogoutStyle extends StatelessWidget {
               ),
               Expanded(
                 child: MaterialButton(
-                  onPressed:() => logout,
+                  onPressed: logout,
                   color: Colors.white,
                   child: Text(
                       // _lang.translate('yes'),

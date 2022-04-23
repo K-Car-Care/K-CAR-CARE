@@ -9,8 +9,7 @@ import 'package:k_car_care_project/translation_screen/messages.dart';
 import 'package:provider/provider.dart';
 import 'core/provider/state_change_notifier.dart';
 import 'screen/main_home/main_body.dart';
-import 'screen/promotion/components/list_category.dart';
-import 'screen/promotion/components/main_promotion.dart';
+import 'screen/splash_screen/main_body.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +62,7 @@ class _MyAppState extends State<MyApp> {
       // translations will be displayed in that locale
       locale: const Locale('en','US'),
       fallbackLocale: const Locale('en','US'),
-      home:  MyHomePage(),
+      home:  SplashScreen(),
     );
   }
 }
