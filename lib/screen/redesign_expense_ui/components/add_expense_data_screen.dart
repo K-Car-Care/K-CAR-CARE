@@ -55,7 +55,7 @@ class NewTransaction extends StatelessWidget {
               Expanded(
                 child: TextFormField(
                   keyboardType: TextInputType.number,
-                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly,],
+                  // inputFormatters: [WhiteI .digitsOnly,],
                   decoration: InputDecoration(
                     hintText: 'Amount',
                     hintStyle: bodyTextStyleBlack.copyWith(fontWeight:FontWeight.w400,color:grey),

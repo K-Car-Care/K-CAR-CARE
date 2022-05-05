@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:k_car_care_project/core/constant/theme_constant.dart';
 
 class BBoxWidget extends StatelessWidget {
   const BBoxWidget({
@@ -21,9 +21,9 @@ class BBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width / 2 - 12,
-      height: MediaQuery.of(context).size.height / 3.5,
-      margin: EdgeInsets.all(5),
+      width: MediaQuery.of(context).size.width / 2.15,
+      height: 150,
+      margin: EdgeInsets.all(0),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
@@ -36,18 +36,24 @@ class BBoxWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 80,
-            height: 80,
-            // decoration: BoxDecoration(
-            //   image: DecorationImage(
-            //     image: AssetImage(
-            //       "$image",
-            //     ),
-            //   ),
-            // ),
-            child: Image.asset("$image",width: 20, height: 30,),
+          Container(
+            width: 60,
+            height: 60,
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: defaultColor.withOpacity(0.1),
+              shape: BoxShape.circle,
+              // image: DecorationImage(
+              //   image: AssetImage(
+              //     "$image",
+              //   ),
+              // ),
+            ),
+            child: FittedBox(
+              child: Image.asset("$image",width: 20, height: 20,color:defaultColor)
+            ),
           ),
+          SizedBox(height: 10),
           Hero(
             tag: tag.toString(),
             child: Text(
@@ -58,8 +64,8 @@ class BBoxWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 // fontFamily: 'Vollkorn',
-                fontWeight: FontWeight.w600,
-                color:Colors.black,
+                fontWeight: FontWeight.w500,
+                color:Colors.black87.withOpacity(0.8),
               ),
             ),
           ),

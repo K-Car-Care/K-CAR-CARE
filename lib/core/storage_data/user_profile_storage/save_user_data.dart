@@ -30,6 +30,7 @@ class SaveUserData {
   saveUserLocation({String? location}) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     String? currentLocation = preferences.getString('userlocation');
+    print(location);
     preferences
         .setString(
           'userlocation',

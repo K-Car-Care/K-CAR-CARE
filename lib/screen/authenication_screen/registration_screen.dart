@@ -185,11 +185,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             color: Colors.black,
                             shape: CircleBorder(),
                             onPressed: () async {
-                              print('Hello world');
-                              _authentication.signInwithPhoneNumber(
-                                  my_phone_num: "$dialCode${controller.text.trim()}");
-                              _accessToken.accessToken("phoneNumber");
-                              print("$dialCode${controller.text}");
+                              //print('Hello world');
+                              // _authentication.signInwithPhoneNumber(
+                              // my_phone_num: "$dialCode${controller.text.trim()}");
+                              _accessToken.login(
+                                phoneNumber:"$dialCode${controller.text}",
+                                googleId:'',
+                                displayName:'',
+                                firstName:'',
+                                lastName:'',
+                                email:'',
+                                profile:'', 
+                                cloudinary_id:'',
+                                context:context,
+                                status:'phone'
+                              );
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(14.0),
@@ -228,9 +238,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       children: [
                         InkWell(
                           onTap: () async {
-                            await _loginController.signInWithGoogle();
-                            //  await _loginController.signup(context);
-                            //  _loginController1.login();
+                            await _loginController.signInWithGoogle(context: context);
+                            //wait _loginController.signup(context);
+                            // _loginController1.login();
                             print("Google");
                           },
                           child: Column(

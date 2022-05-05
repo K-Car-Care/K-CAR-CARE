@@ -482,6 +482,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         'Logout',
                     icon: Icons.login_outlined,
                     onClicked: () {
+                      // ignore: avoid_print
                       print('click');
                        showModalBottomSheet(
                           shape: BottomSheetShape(),
@@ -491,6 +492,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             return BottomLogoutStyle(
                               question:'តើអ្នកពិតជាចង់ចាកចេញមែនទេ?',
                               logout: () async {
+                                // ignore: avoid_print
                                 print('Hello world');
                                 _auth.signOut().then(
                                   (value) async {

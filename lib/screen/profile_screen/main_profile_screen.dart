@@ -26,6 +26,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   List<String> _recentProfile = [];
+  // ignore: unused_field
   List<String> _carStoreInfo = [];
   String? userLocation = 'Get Your Current Lcoation';
   Position? position;
@@ -40,7 +41,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _carStoreInfo = _carList;
       userLocation = currentLocation;
       _recentProfile = _prevList;
-      print(_recentProfile);
     });
   }
 
@@ -68,20 +68,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
         scrollDirection: Axis.vertical,
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: ListView.builder(
+          child: 
+          // Container(
+          //           height:MediaQuery.of(context).size.height,
+          //           child: ListView.builder(
+          //               physics: NeverScrollableScrollPhysics(),
+          //               shrinkWrap: true,
+          //               itemCount: _carStoreInfo.length,
+          //               itemBuilder: (context, index) {
+          //                 var _itemList = json.decode(_carStoreInfo[index]);
+          //                 print(_itemList.toString());
+          //                 return CardItem(
+          //                   subtitle: _itemList['make'],
+          //                   icon: Icon(
+          //                     Icons.car_rental,
+          //                   ),
+          //                   title: _itemList['year'],
+          //                 );
+          //               }),
+          //         ),
+          
+          ListView.builder(
             shrinkWrap: true,
             itemCount: _recentProfile.length,
             itemBuilder: (context, index) {
               final itemProfile = json.decode(_recentProfile[index]);
-
+              print(_recentProfile[index]);
               return Column(
                 children: [
                   StackContainer(
-                    fullName: itemProfile['userName'] != "User Guest"
-                        ? '${itemProfile['userName']}'
+                    fullName: itemProfile['username'] != "User Guest"
+                        ? '${itemProfile['username']}'
                         : "User Guest",
-                    profileImage: itemProfile['profile'] != ""
-                        ? itemProfile['profile'].toString()
+                    profileImage: itemProfile['profileUrl'] != ""
+                        ? itemProfile['profileUrl'].toString()
                         : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
                     cover:
                         "https://images.perthnow.com.au/publication/C-861981/e4fe792eca190bb10a6456b13046ade92f3764f7-4x3-x0y0w664h500.jpg",
@@ -89,7 +109,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-                      print("Edit");
                       Get.to(() => EditUserProfileScreen());
                     },
                     icon: Icon(Icons.edit),
@@ -111,8 +130,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Get.to(() => EditUserProfileScreen());
                           },
                           child: CardItem(
-                            subtitle: itemProfile['phoneNumber'] != ""
-                                ? '${itemProfile['phoneNumber']}'
+                            subtitle: itemProfile['phone'] != ""
+                                ? '${itemProfile['phone']}'
                                 : "សូមបញ្ជូលលេខទូរស័ព្ទរបស់លោកអ្នក",
                             icon: Icon(
                               Icons.phone,
@@ -182,21 +201,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: _carStoreInfo.length,
-                      itemBuilder: (context, index) {
-                        var _itemList = json.decode(_carStoreInfo[index]);
-                        print(_itemList.toString());
-                        return CardItem(
-                          subtitle: _itemList['make'],
-                          icon: Icon(
-                            Icons.car_rental,
-                          ),
-                          title: _itemList['year'],
-                        );
-                      })
+                  // Container(
+                  //   height:MediaQuery.of(context).size.height,
+                  //   child: ListView.builder(
+                  //       physics: NeverScrollableScrollPhysics(),
+                  //       shrinkWrap: true,
+                  //       itemCount: _carStoreInfo.length,
+                  //       itemBuilder: (context, index) {
+                  //         var _itemList = json.decode(_carStoreInfo[index]);
+                  //         print(_itemList.toString());
+                  //         return CardItem(
+                  //           subtitle: _itemList['make'],
+                  //           icon: Icon(
+                  //             Icons.car_rental,
+                  //           ),
+                  //           title: _itemList['year'],
+                  //         );
+                  //       }),
+                  // )
                 ],
               );
             },
@@ -217,8 +239,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
     Placemark pMark = placeMarks![0];
 
-    String completeAddress =
-        '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality},${pMark.subAdministrativeArea},${pMark.administrativeArea}, ${pMark.postalCode} ${pMark.country}';
+    String completeAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality},${pMark.subAdministrativeArea},${pMark.administrativeArea}, ${pMark.postalCode} ${pMark.country}';
 
     setState(() {
       userLocation = completeAddress;

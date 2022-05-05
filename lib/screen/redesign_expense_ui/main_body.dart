@@ -8,7 +8,6 @@ import 'json/budget_json.dart';
 import 'json/daily_json.dart';
 import 'json/day_month.dart';
 import 'package:fl_chart/fl_chart.dart';
-
 import 'list_expense/main_body.dart';
 import 'list_expense_category/main_body.dart';
 
@@ -135,13 +134,13 @@ class _NewUIDesignState extends State<NewUIDesign> {
                               Container(
                                 decoration: BoxDecoration(
                                     color: activeDay == index
-                                        ? defaultColor
-                                        : black.withOpacity(0.02),
+                                      ? const Color.fromARGB(255, 252, 208, 121)
+                                      : black.withOpacity(0.02),
                                     borderRadius: BorderRadius.circular(5),
                                     border: Border.all(
-                                        color: activeDay == index
-                                            ? defaultColor
-                                            : black.withOpacity(0.1))),
+                                      color: activeDay == index
+                                        ? const Color.fromARGB(255, 252, 208, 121)
+                                        : black.withOpacity(0.1))),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 12, right: 12, top: 7, bottom: 7),
@@ -159,7 +158,9 @@ class _NewUIDesignState extends State<NewUIDesign> {
                           ),
                         ),
                       );
-                    }))
+                    }
+                  )
+                )
               ],
             ),
           ),
@@ -564,7 +565,7 @@ List<PieChartSectionData> showCategories(touchedIndex,context) {
     switch (index) {
       case 0:
         return PieChartSectionData(
-            color: const Color(0xffFFC145),
+            color: Color.fromARGB(255, 252, 208, 121),
             value: 53,
             title: "53%",
             radius: radius,

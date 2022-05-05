@@ -4,7 +4,6 @@ import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/screen/promotion/components/main_promotion.dart';
-import 'package:k_car_care_project/screen/promotion/main_body.dart';
 import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
 
 class MyHomePage extends StatefulWidget {

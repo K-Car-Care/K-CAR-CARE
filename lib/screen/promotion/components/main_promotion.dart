@@ -3,11 +3,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/shared/typography.dart';
 import 'package:k_car_care_project/screen/promotion/main_body.dart';
-import 'package:coupon_uikit/coupon_uikit.dart';
 
 import 'list_category.dart';
 
@@ -22,7 +20,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final height  = MediaQuery.of(context).size.height * 1 ;
+    // ignore: unused_local_variable
     final width  = MediaQuery.of(context).size.width * 1 ;
     return Scaffold(
       appBar: AppBar(
@@ -50,18 +50,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               children:  [
                 Expanded(
                   child: CupertinoTextField(
-                  padding: EdgeInsets.symmetric(vertical: 12 , horizontal: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 12 , horizontal: 10),
                   placeholder: "Seach for shop & restaurants",
-                  prefix: Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                  prefix: const Padding(
+                    padding: EdgeInsets.only(left: 10),
                     child: Icon(Icons.search , color: Color(0xff7b7b7b) ,),
                   ),
                   decoration: BoxDecoration(
-                      color: Color(0xfff7f7f7),
+                      color: const Color(0xfff7f7f7),
                       borderRadius : BorderRadius.circular(50)
                   ),
-                  style: TextStyle(color: Color(0xff707070) ,
-                      fontSize: 12) ,
+                  style: const TextStyle(color: Color(0xff707070) , fontSize: 12) ,
                 )),
               ],
             ),
@@ -87,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                      color: defaultColor,
                      borderRadius: BorderRadius.circular(10)
                    ),
-                   child: CustomSliderWidget(
+                   child: const CustomSliderWidget(
                       items: [
                         "https://lyhourleasing.com/wp-content/uploads/2021/08/New-Promotion-webside-03.png",
                         "https://lyhourleasing.com/wp-content/uploads/2021/08/New-Promotion-webside-01.png",
@@ -133,7 +132,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                        ),
                      ),
                    ),
-                   SizedBox(width: 8,),
+                   const SizedBox(width: 8,),
                    Expanded(
                      flex: 1,
                      child: Column(
@@ -142,9 +141,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                            height: MediaQuery.of(context).size.height * .15,
                            width: double.infinity,
                            decoration: BoxDecoration(
-                               color: Color(0xffef9fc4),
+                               color: const Color(0xffef9fc4),
                                borderRadius: BorderRadius.circular(10),
-                             image: DecorationImage(
+                             image: const DecorationImage(
                                fit: BoxFit.cover,
                                  image: NetworkImage('https://kh.totalenergies.com/km/system/files/atoms/image/car-care-promotion-edito.jpg')
 
@@ -155,7 +154,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                              child: Column(
                                mainAxisAlignment: MainAxisAlignment.end,
                                crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
+                               children: const [
                                 //Text('Pick-Uo' , style: TextStyle(color: black , fontSize: 18 ),),
                                  //ext('Upto 50% off' , style: TextStyle(color: black , fontWeight: FontWeight.w500 ,height:1 , fontSize: 14  )),
                                ],
@@ -179,7 +178,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                              child: Column(
                                mainAxisAlignment: MainAxisAlignment.end,
                                crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
+                               children: const  [
                                  //Text('Shops' , style: TextStyle(color: black , fontSize: 18 ),),
                                  //Text('Everyday assentials' , style: TextStyle(color: black , fontWeight: FontWeight.w500 ,height:1 , fontSize: 14  )),
 
@@ -212,50 +211,50 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
              ),
              const SizedBox(height:14),
              Container(
-          width:MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: white,
-            borderRadius: BorderRadius.circular(5)
-            ),
-          child: Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 10),
-            child: Container(
-              decoration: BoxDecoration(color: white),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 15,
-                  bottom: 15,
-                ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
+                width:MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: white,
+                  borderRadius: BorderRadius.circular(5)
+                  ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Container(
-                    margin: const EdgeInsets.only(left: 15),
-                    child: Row( children: List.generate(categories.length, (index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 40),
-                        child: Column(
-                          children: [
-                            Image.network(
-                              categories[index]['img'],
-                              width: 40,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              categories[index]['name'],
-                              
-                            )
-                          ],
+                    decoration: const BoxDecoration(color: white),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 15,
+                        bottom: 15,
+                      ),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 15),
+                          child: Row( children: List.generate(categories.length, (index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 40),
+                              child: Column(
+                                children: [
+                                  Image.network(
+                                    categories[index]['img'],
+                                    width: 40,
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    categories[index]['name'],
+
+                                  )
+                                ],
+                              ),
+                            );
+                          })),
                         ),
-                      );
-                    })),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-        ),
              const SizedBox(height:14),
              Row(
                children: [
@@ -273,65 +272,66 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
              ),
              const SizedBox(height:14),
              Padding(
-               padding: const EdgeInsets.symmetric(vertical: 10),
-               child: Container(
-                 height: MediaQuery.of(context).size.height * .278,
-                 child: ListView.builder(
-                     itemCount: PandaPickHelper.itemCount,
-                     scrollDirection: Axis.horizontal,
-                     itemBuilder: (context, index){
-                       PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
-                       return RestuarentScreen(
-                         name: model.name,
-                         image:model.image ,
-                         remainingTime: model.remaingTime,
-                         totalRating: model.totalRating,
-                         subTitle: model.subTitle,
-                         rating: model.ratting,
-                         deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
-                       );
-                     }),
-               ),
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: SizedBox(
+               height: MediaQuery.of(context).size.height * .278,
+               child: ListView.builder(
+                   itemCount: PandaPickHelper.itemCount,
+                   scrollDirection: Axis.horizontal,
+                   itemBuilder: (context, index){
+                     PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                     return RestuarentScreen(
+                       name: model.name,
+                       image:model.image ,
+                       remainingTime: model.remaingTime,
+                       totalRating: model.totalRating,
+                       subTitle: model.subTitle,
+                       rating: model.ratting,
+                       deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
+                     );
+                   }),
              ),
-             const SizedBox(height:14),
-             Row(
-                     children: [
-                       Image.network('https://cdn-icons-png.flaticon.com/512/3728/3728890.png',width: 20,height:20),
-                       const SizedBox(width: 7),
-                       const Text('Free Coupons' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
-                       const Spacer(),
-                       GestureDetector(
-                         onTap:(){
-                          //Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion()));
-                         },
-                         child: const Icon(Icons.arrow_forward_rounded,color: grey)
-                        )
-                     ],
-                   ),
+            ),
+            const SizedBox(height:14),
+            Row(
+              children: [
+               Image.network('https://cdn-icons-png.flaticon.com/512/3728/3728890.png',width: 20,height:20),
+               const SizedBox(width: 7),
+               const Text('Free Coupons' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
+               const Spacer(),
+               GestureDetector(
+                 onTap:(){
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion()));
+                 },
+                 child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                )
+             ],
+            ),
              const SizedBox(height:12),
-             Container(
-                      height: 120,
-                      child: ListView.builder(
-                          itemCount: PandaPickHelper.itemCount,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index){
-                            PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: Container(
-                                decoration:BoxDecoration(
-                                  borderRadius:BorderRadius.circular(8),
-                                  color:defaultColor,
-                                   image: const DecorationImage(
-                                    fit: BoxFit.cover,
-                                      image: NetworkImage('https://www.wpbeginner.com/wp-content/uploads/2020/01/create-coupon-popup-wordpress-550x340-featured.png')
-                                  )
-                                ),
-                                width: 220,
-                              ),
-                            );
-                          }),
-                    ),
+             SizedBox(
+              height: 120,
+              child: ListView.builder(
+                  itemCount: PandaPickHelper.itemCount,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index){
+                    // ignore: unused_local_variable
+                    PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                        decoration:BoxDecoration(
+                          borderRadius:BorderRadius.circular(8),
+                          color:defaultColor,
+                           image: const DecorationImage(
+                            fit: BoxFit.cover,
+                              image: NetworkImage('https://www.wpbeginner.com/wp-content/uploads/2020/01/create-coupon-popup-wordpress-550x340-featured.png')
+                          )
+                        ),
+                        width: 220,
+                      ),
+                    );
+                  }),
+            ),
            
              const SizedBox(height:14),
              Row(
@@ -351,7 +351,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
              const SizedBox(height:8),
              Padding(
                padding: const EdgeInsets.symmetric(vertical: 10),
-               child: Container(
+               child: SizedBox(
                  height: MediaQuery.of(context).size.height * .278,
                  child: ListView.builder(
                      itemCount: PandaPickHelper.itemCount,
@@ -445,10 +445,9 @@ class ReuseListCardCategory extends StatelessWidget {
 }
 
 
-
-
-
 class ActiveDot extends StatelessWidget {
+  const ActiveDot({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -466,6 +465,8 @@ class ActiveDot extends StatelessWidget {
 }
 
 class InactiveDot extends StatelessWidget {
+  const InactiveDot({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -489,7 +490,7 @@ class CustomSliderWidget extends StatefulWidget {
   // final List<String> items;
   final List? items;
 
-  CustomSliderWidget({this.items});
+  const CustomSliderWidget({Key? key, this.items}) : super(key: key);
 
   @override
   _CustomSliderWidgetState createState() => _CustomSliderWidgetState();
@@ -506,9 +507,8 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      overflow: Overflow.visible,
-      children: <Widget>[
-        Container(
+      clipBehavior: Clip.none, children: <Widget>[
+        SizedBox(
           width: MediaQuery.of(context).size.width,
           child: CarouselSlider(
             options: CarouselOptions(
@@ -517,7 +517,7 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
               },
               enableInfiniteScroll: false,
               autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-              autoPlayAnimationDuration: Duration(seconds: 2),
+              autoPlayAnimationDuration: const Duration(seconds: 2),
               // autoPlay: true,
               viewportFraction: 1.0,
             ),
@@ -526,7 +526,7 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
                 builder: (BuildContext context) {
                   return Stack(
                     children: <Widget>[
-                      Container(
+                      SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: Image(
                             image: NetworkImage(item),
@@ -546,7 +546,7 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
           child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(widget.items!.length, (idx) {
-                return activeIndex == idx ? ActiveDot() : InactiveDot();
+                return activeIndex == idx ? const ActiveDot() : const InactiveDot();
               })),
         )
       ],

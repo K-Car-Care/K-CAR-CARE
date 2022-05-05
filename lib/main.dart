@@ -5,11 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/services/notification_service/notification_service.dart';
+import 'package:k_car_care_project/screen/splash_screen/main_body.dart';
 import 'package:k_car_care_project/translation_screen/messages.dart';
 import 'package:provider/provider.dart';
 import 'core/provider/state_change_notifier.dart';
 import 'screen/main_home/main_body.dart';
-import 'screen/splash_screen/main_body.dart';
+import 'screen/test_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

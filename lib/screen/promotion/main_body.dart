@@ -25,6 +25,7 @@ class _PromotionState extends State<Promotion> {
   @override
   Widget build(BuildContext context) {
     final height  = MediaQuery.of(context).size.height * 1 ;
+    // ignore: unused_local_variable
     final width  = MediaQuery.of(context).size.width * 1 ;
 
     return Scaffold(
@@ -38,7 +39,7 @@ class _PromotionState extends State<Promotion> {
               color: Colors.black,
             ),
           ),
-        title:  Text(widget.title,style:TextStyle(color:black)),
+        title:  Text(widget.title,style:const TextStyle(color:black)),
         // actions: const[
         //   Icon(Icons.shopping_bag_outlined,color:black),
         //   SizedBox(width: 10,)
@@ -74,16 +75,16 @@ class _PromotionState extends State<Promotion> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             height: height,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Panda Pick' , style: const TextStyle(color: Color(0xff323232) , fontSize: 15),),
+                const Text('Panda Pick' , style: TextStyle(color: Color(0xff323232) , fontSize: 15),),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height * .278,
                     child: ListView.builder(
                         itemCount: PandaPickHelper.itemCount,
@@ -105,7 +106,7 @@ class _PromotionState extends State<Promotion> {
                const  Text('Panda exclusives' , style: TextStyle(color: Color(0xff323232) , fontSize: 15),),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height * .278,
                     child: ListView.builder(
                         itemCount: ExclusiveHelper.itemCount,
@@ -251,7 +252,7 @@ class _RestuarentScreenState extends State<RestuarentScreen> {
       },
       child: Padding(
         padding: const EdgeInsets.only(right: 10),
-        child: Container(
+        child: SizedBox(
           height: height * .3,
           width: width * .6,
           child: Column(
@@ -290,12 +291,12 @@ class _RestuarentScreenState extends State<RestuarentScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Color(0xfffffcff),
+                            color: const Color(0xfffffcff),
                             borderRadius: BorderRadius.circular(20.0)
                         ),
                         child:  Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          child: Text(widget.remainingTime , style: TextStyle(color: black , fontSize: 12, ),),
+                          child: Text(widget.remainingTime , style: const TextStyle(color: black , fontSize: 12, ),),
                         ),
 
                       ),
@@ -303,16 +304,16 @@ class _RestuarentScreenState extends State<RestuarentScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 5  ,),
+              const SizedBox(height: 5  ,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(widget.name , style: TextStyle(color: Color(0xff323232) , fontSize: 14),),
+                  Text(widget.name , style: const TextStyle(color: Color(0xff323232) , fontSize: 14),),
                   Row(
                     children: [
                       RatingBarIndicator(
                         rating: 2.75,
-                        itemBuilder: (context, index) => Icon(
+                        itemBuilder: (context, index) => const Icon(
                           Icons.star,
                           color: Colors.amber,
                         ),

@@ -23,8 +23,6 @@ class StoreCarInformation {
         'carType': cartype ?? "empty",
       }),
     );
-
     _carPref.setStringList('carStore', _carList);
-    print("done Saving to Pref");
   }
 }

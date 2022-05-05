@@ -18,7 +18,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
   final _key = GlobalKey<ScaffoldState>();
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
   }
 
@@ -104,13 +104,13 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 ),
                 Positioned(
                     bottom: 0,
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>  [
+                        children: const  [
                           Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(10.0),
                             child:  Text(
                               'ALL PROMOTION CATEGPRIES',
                               style:  TextStyle(
@@ -158,8 +158,8 @@ class _CategoryDetailState extends State<CategoryDetail> {
                             elevation: 10,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Icon(Icons.arrow_back,color:black)
                             ),
                           ))
@@ -183,7 +183,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
                           offset: Offset(2, 5),
                           blurRadius: 10)
                     ]),
-                child: Container(
+                child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child:GridView.count(
                         physics: const BouncingScrollPhysics(),
@@ -231,7 +231,7 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         color: white,
-        child: SpinKitFadingCircle(
+        child: const SpinKitFadingCircle(
           color: black,
           size: 30,
         )

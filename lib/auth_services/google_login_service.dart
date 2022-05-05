@@ -1,16 +1,12 @@
 // ignore_for_file: avoid_print
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:k_car_care_project/core/data/login_api/login_token_api.dart';
+import 'package:k_car_care_project/core/services/auth_services/auth_services.dart';
+import 'package:k_car_care_project/core/utils/save_user_data.dart';
 import 'package:k_car_care_project/screen/authenication_screen/registration_screen.dart';
-import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
-// import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
-import 'package:k_car_care_project/core/storage_data/user_profile_storage/save_user_data.dart';
-
-import 'auth_services.dart';
+import 'package:k_car_care_project/screen/main_home/main_body.dart';
 
 class LoginController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -21,7 +17,6 @@ class LoginController extends GetxController {
   late Rx<GoogleSignInAccount?> googleSignInAccount;
   // ignore: unused_field
   final SaveUserData _saveUserData = SaveUserData();
-  final AccessToken _accessToken = AccessToken();
 
   @override
   void onReady() {
@@ -40,7 +35,7 @@ class LoginController extends GetxController {
     if (user == null) {
       Get.offAll(() => const RegistrationScreen());
     } else {
-      Get.offAll(() => const MyHomeScreen());
+      Get.offAll(() => const MyHomePage());
     }
   }
 
@@ -49,11 +44,11 @@ class LoginController extends GetxController {
     if (googleSignInAccount == null) {
       Get.offAll(() => const RegistrationScreen());
     } else {
-      Get.offAll(() => const MyHomeScreen());
+      Get.offAll(() => const MyHomePage());
     }
   }
 
-  Future<void> signInWithGoogle({required BuildContext context}) async {
+  Future<void> signInWithGoogle() async {
     try {
       GoogleSignInAccount? googleSignInAccount = await googleSign.signIn();
 
@@ -64,19 +59,20 @@ class LoginController extends GetxController {
         AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
+          
         );
-        await auth.signInWithCredential(credential).then((value) async {
-          //Add data to Firestore in Firebase
+        await auth.signInWithCredential(credential).then((value) async{   
+          //Add data to Firestore in Firebase 
           addUserToFireStore(
             googleSignInAccount.email,
             googleSignInAccount.photoUrl.toString(),
           );
-          
+
           print("Gmail User: ${googleSignInAccount.email}");
           print("Profile User: ${googleSignInAccount.photoUrl}");
           print("Profile User: ${googleSignInAccount.id}");
 
-          // Save Data into Share Preference
+          // Save Data into Share Preference 
           // _saveUserData.saveUserData(
           //   gmail: googleSignInAccount.email,
           //   profileUrl: googleSignInAccount.photoUrl.toString(),
@@ -84,18 +80,6 @@ class LoginController extends GetxController {
           //   phone: "",
           // );
 
-          _accessToken.login(
-            phoneNumber:"",
-            googleId:googleSignInAccount.id ,
-            displayName: googleSignInAccount.displayName ?? '' ,
-            firstName:'',
-            lastName:'',
-            email:googleSignInAccount.email,
-            profile: googleSignInAccount.photoUrl ?? '' , 
-            cloudinary_id:'',
-            context:context,
-            status:'google',
-          );
         }).catchError((onErr) {
           print(onErr);
         });
@@ -109,6 +93,7 @@ class LoginController extends GetxController {
       print(e.toString());
     }
   }
+
 
   // Function To Store data into FirebaseFirestore
   Future<void> addUserToFireStore(String gmail, String profileUrl) async {
@@ -149,30 +134,7 @@ class LoginController extends GetxController {
   //       .setStringList("recents", _prevList)
   //       .then((value) => print("done Saving to Prefs"));
   // }
-
-  Future<void> signup(BuildContext context) async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
-    if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
-      final AuthCredential authCredential = GoogleAuthProvider.credential(
-          idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken);
-
-      // Getting users credential
-      UserCredential result = await auth.signInWithCredential(authCredential);
-      // ignore: unused_local_variable
-      User? user = result.user;
-      print("user$user");
-       //ignore: unnecessary_null_comparison
-      if (result != null) {
-        
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const MyHomeScreen()));
-      } // if result not null we simply call the MaterialpageRoute,
-      // for go to the HomePage screen
-    }
-  }
 }
+
+
+

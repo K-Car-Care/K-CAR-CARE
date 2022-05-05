@@ -2,10 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class CarouselWidget extends StatelessWidget {
+  final double? height;
   const CarouselWidget({
     Key? key,
     this.onPageChanged,
     this.items,
+    required this.height
   }) : super(key: key);
   final Function(int index, CarouselPageChangedReason reason)? onPageChanged;
   final List<Widget>? items;
@@ -13,7 +15,7 @@ class CarouselWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200.0,
+        height: height,
         aspectRatio: 16/9,
         viewportFraction: 0.9,
         initialPage: 0,
