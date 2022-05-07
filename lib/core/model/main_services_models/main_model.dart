@@ -34,8 +34,6 @@ class Payload {
         this.name,
         this.img,
         this.cloudinaryId,
-        this.updatedAt,
-        this.createdAt,
         this.v,
     });
 
@@ -52,8 +50,6 @@ class Payload {
         name: json["name"],
         img: json["img"],
         cloudinaryId: json["cloudinary_id"],
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        createdAt: DateTime.parse(json["createdAt"]),
         v: json["__v"],
     );
 
@@ -62,8 +58,6 @@ class Payload {
         "name": name,
         "img": img,
         "cloudinary_id": cloudinaryId,
-        "updatedAt": updatedAt!.toIso8601String(),
-        "createdAt": createdAt!.toIso8601String(),
         "__v": v,
     };
 }

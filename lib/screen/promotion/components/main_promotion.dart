@@ -397,50 +397,55 @@ class ReuseListCardCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
-            onTap: onTap,
-            child: Container(
-              margin:const EdgeInsets.all(2),
-              padding: const EdgeInsets.all(5),
+      onTap: onTap,
+      child: Container(
+        margin:const EdgeInsets.all(2),
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          border: Border.all(
+              width: 0.5,
+              color: grey.withOpacity(0.3)),
+          borderRadius: BorderRadius.circular(5),
+          color: white
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 50,
+              height: 50,
               decoration: BoxDecoration(
-                border: Border.all(
-                    width: 0.5,
-                    color: grey.withOpacity(0.2)),
-                borderRadius: BorderRadius.circular(5),
-                color: white
+                shape: BoxShape.circle,
+                color: Colors.grey.withOpacity(0.2),
+                image: DecorationImage(
+                  image: NetworkImage(image),
+                  fit: BoxFit.fill,
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorRandom.getRandomColor().withOpacity(0.1),
-                    ),
-                    child: Center(
-                      child:  Image.network(
-                          image,
-                          width: 30,
-                          height: 30,
-                        )
-                      ),
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  Text(title,
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      softWrap: true,
-                      overflow: TextOverflow.fade,
-                      style: bodyTextStyleBlack
-                  )
-                ],
-              ),
+              // child: Center(
+              //   child:  Image.network(
+              //       image,
+              //       width: 50,
+              //       height: 50,
+              //       color:Colors.white,
+              //     )
+              //   ),
             ),
-          );
+            const SizedBox(
+              height: 6,
+            ),
+            Text(title,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                softWrap: true,
+                overflow: TextOverflow.fade,
+                style: bodyTextStyleBlack
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 

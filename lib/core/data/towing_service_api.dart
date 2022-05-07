@@ -9,10 +9,14 @@ import 'base_repository_api.dart';
 class TowingServiceApi extends ApiRepository {
   Future<TowingServiceModel> readTowingService() async {
     http.Response response = await http.get(
-      Uri.parse('$url/services?type=towing'),
-      headers: <String,String>{
-        'Content-type':'maltipart/form-data'
-      }
+      Uri.parse('$url/services'),
+      // headers: <String,String>{
+      //   'Content-type':'maltipart/form-data'
+      // }
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY0ZWI1NDdlMTA1NzEwZmExOWM0MzciLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjUxODg4NDU2fQ.z4jHuybIngIWrT9vdVfy-V7eADRUl0nTjST0em_QJrE',
+      },
     );
     if (response.statusCode == 200) {
       return TowingServiceModel.fromJson(jsonDecode(response.body));

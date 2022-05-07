@@ -35,9 +35,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   final OnsignalNotificationService _notificationService = OnsignalNotificationService();
-
   @override
   initState() {
     _notificationService.initPlatformState();
@@ -63,7 +61,7 @@ class _MyAppState extends State<MyApp> {
       // translations will be displayed in that locale
       locale: const Locale('en','US'),
       fallbackLocale: const Locale('en','US'),
-      home:  SplashScreen(),
+      home:  MyHomePage(),
     );
   }
 }

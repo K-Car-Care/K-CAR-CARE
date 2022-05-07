@@ -51,8 +51,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
   void initState() {
     super.initState();
     // _getRecentsFromSharedPrefsFolder();
-    _mainServiceModel = _serviceApi.readMainServiceApi();
+    fetchData();
     CheckInternet().checkConnection(context);
+  }
+
+  void fetchData() async{
+    _mainServiceModel = _serviceApi.readMainServiceApi();
   }
 
   List data = [
@@ -102,7 +106,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
             ),
           ),
           centerTitle: true,
-          title: Text('Service', style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
+          title: Text('Services', style: titleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
           actions: [
             IconButton(
               // ignore: prefer_const_constructors
@@ -110,85 +114,63 @@ class _ServiceScreenState extends State<ServiceScreen> {
               onPressed: () async {},
             ),
           ]),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListTile(
-              leading: ContainerRaduis(assetPath: AppImages.carServiceImg),
-              title: Text(
-                'Choose the service you need',
-                style: subTitleTextStyleBlack.copyWith(fontWeight:FontWeight.w600)
-              ),
-            ),
-            // const SizedBox(
-            //   height: 5,
-            // ),
-            FutureBuilder<MainServiceModel>(
-              future: _mainServiceModel,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return const Center(
-                    child: Text("Error read data from api"),
-                  );
-                }
-                if (snapshot.hasData) {
-                  var result = snapshot.data!.payload;
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.5,
-                    // padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: GridView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: result?.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        // crossAxisSpacing: 10
-                      ),
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            if (result![index].name?.toUpperCase() ==
-                                "TOWING") {
-                              Get.to(() => const TowingServiceScreen());
-                            } else if (result[index].name?.toUpperCase() ==
-                                "FUEL") {
-                              Get.to(() => const FuelServiceScreen());
-                            } else if (result[index].name?.toUpperCase() ==
-                                "KEY SERVICE") {
-                              Get.to(() => const KeyServiceScreen());
-                            } else if (result[index].name?.toUpperCase() ==
-                                "FLATE TIRE") {
-                              Get.to(() => const FlatFireServiceScreen());
-                            }
-                          },
-                          child: MainCardService(
-                            title: "${result?[index].name}",
-                            image: "${result?[index].img.toString()}",
-                            color: data[index]['color'],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                }
-                return SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 180,
-                  child: const Center(
-                    child: CircularProgressIndicator(),
+      body: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: FutureBuilder<MainServiceModel>(
+          future: _mainServiceModel,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.toString()),
+              );
+            }
+            if (snapshot.hasData) {
+              var result = snapshot.data!.payload;
+              return SizedBox(
+                // height: MediaQuery.of(context).size.height - 30,
+                // padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: snapshot.data!.payload!.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    // crossAxisSpacing: 10
                   ),
-                );
-              },
-            ),
-            // Container(
-            //   height: 180,
-            //   margin: const EdgeInsets.only(top: 50),
-            //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            //   decoration: const BoxDecoration(
-            //     color: Color(0xffff6968),
-            //   ),
-            //   child: const ContactSection(),
-            // ),
-          ],
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (result![index].name?.toUpperCase() ==
+                            "TOWING") {
+                          Get.to(() => const TowingServiceScreen());
+                        } else if (result[index].name?.toUpperCase() ==
+                            "FUEL") {
+                          Get.to(() => const FuelServiceScreen());
+                        } else if (result[index].name?.toUpperCase() ==
+                            "KEY SERVICE") {
+                          Get.to(() => const KeyServiceScreen());
+                        } else if (result[index].name?.toUpperCase() ==
+                            "FLATE TIRE") {
+                          Get.to(() => const FlatFireServiceScreen());
+                        }
+                      },
+                      child: MainCardService(
+                        title: "${result?[index].name}",
+                        image: "${result?[index].img.toString()}",
+                        // color: data[index]['color'],
+                      ),
+                    );
+                  },
+                ),
+              );
+            }
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 180,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
         ),
       ),
     );

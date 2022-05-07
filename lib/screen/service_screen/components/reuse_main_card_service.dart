@@ -5,11 +5,9 @@ import 'package:k_car_care_project/core/constant/app_images.dart';
 class MainCardService extends StatelessWidget {
   final String image;
   final String title;
-  final Color color;
   const MainCardService({
     Key? key,
     required this.image,
-    required this.color,
     required this.title,
   }) : super(key: key);
 
@@ -30,18 +28,38 @@ class MainCardService extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Container(
+          //   alignment: Alignment.center,
+          //   // padding: const EdgeInsets.only(right: 10, top: 15),
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(0.0),
+          //     child: Image.network(
+          //       image, //color: color,
+          //       width: 80,
+          //       height: 80,
+          //     ),
+          //   )
+          // ),
           Container(
-            alignment: Alignment.center,
-            // padding: const EdgeInsets.only(right: 10, top: 15),
-            child: Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: Image.asset(
-                AppImages.historyImg, //color: color,
-                width: 80,
-                height: 80,
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey.withOpacity(0.2),
+                image: DecorationImage(
+                  image: NetworkImage(image),
+                  fit: BoxFit.fill,
+                ),
               ),
-            )
-          ),
+              // child: Center(
+              //   child:  Image.network(
+              //       image,
+              //       width: 50,
+              //       height: 50,
+              //       color:Colors.white,
+              //     )
+              //   ),
+            ),
           ListTile(
             title: Text(
               title.toUpperCase(),

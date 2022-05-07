@@ -7,13 +7,16 @@ import 'package:k_car_care_project/screen/notification_screen/main_notification.
 import 'package:k_car_care_project/screen/promotion/main_body.dart';
 import 'package:k_car_care_project/screen/redesign_expense_ui/main_body.dart';
 import '../../core/constant/theme_constant.dart';
+import '../../core/data/main_service_api.dart';
 import '../../core/model/home_screen_model/home_screen_model.dart';
+import '../../core/model/main_services_models/main_model.dart';
 import '../../widget/b_box_widget.dart';
 import '../../widget/carousel_widget.dart';
 import '../../widget/dot_indicator_widget.dart';
 import '../car_relevent_new_screen/car_relevent_news_screen.dart';
 import '../history_screen.dart/main_history_screen.dart';
 import '../profile_screen/main_profile_screen.dart';
+import '../promotion/components/main_promotion.dart';
 import '../service_screen/main_servce.dart';
 import '../test_profile.dart';
 
@@ -89,8 +92,15 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   void initState() {
     // Use either of them.
     // Future(_showDialog);
+    fetchData();
     super.initState();
   }
+  final MainServiceApi _serviceApi = MainServiceApi();
+  Future<MainServiceModel>? _mainServiceModel;
+  void fetchData() async{
+    _mainServiceModel = _serviceApi.readMainServiceApi();
+  }
+
 
   // ignore: unused_element
   void _showDialog() {
@@ -236,16 +246,21 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
               dotPosition: dotPosition.toDouble(),
             ),
             Row(
-               children:const [
+               children: [
                 //  Image.network('https://cdn-icons-png.flaticon.com/512/3199/3199306.png',width: 20,height:20),
                   // SizedBox(width: 7),
-                  Text('General' , style: TextStyle( fontSize: 17,fontWeight:FontWeight.w400,color:Colors.grey )),
-                //  const Spacer(),
-                //  GestureDetector(
-                //    onTap:(){
-                //     // Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion(title:'Hot Productions')));
-                //    },
-                //    child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                const Text('General' , style: TextStyle( fontSize: 17,fontWeight:FontWeight.w400,color:Colors.grey )),
+                const Spacer(),
+                // GestureDetector(
+                //   onTap:(){
+                //     //Navigator.push(context, MaterialPageRoute(builder: (context) => const ServiceScreen()));
+                //   },
+                //   child: Row(
+                //      children: const [
+                //         Text('View all',style: TextStyle(color: Colors.grey)),
+                //         Icon(Icons.arrow_forward_ios_rounded,color: grey,size: 15),
+                //      ],
+                //     ),
                 //   )
                ],
              ),
@@ -303,64 +318,134 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             ),
             const SizedBox(height: 16,),
             Row(
-               children: const [
+               children: [
                 //  Image.network('https://cdn-icons-png.flaticon.com/512/3199/3199306.png',width: 20,height:20),
                 // SizedBox(width: 7),
-                Text('Main Service' , style: TextStyle( fontSize: 17,fontWeight:FontWeight.w400,color:Colors.grey )),
-                //  const Spacer(),
-                //  GestureDetector(
-                //    onTap:(){
-                //     // Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion(title:'Hot Productions')));
-                //    },
-                //    child: const Icon(Icons.arrow_forward_rounded,color: grey)
-                //   )
+                const Text('Main Service' , style: TextStyle( fontSize: 17,fontWeight:FontWeight.w400,color:Colors.grey )),
+                const Spacer(),
+                GestureDetector(
+                   onTap:(){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ServiceScreen()));
+                   },
+                   child: Row(
+                     children: const [
+                        Text('View all',style: TextStyle(color: Colors.grey)),
+                        Icon(Icons.arrow_forward_ios_rounded,color: grey,size: 15),
+                     ],
+                    ),
+                  ),
                ],
              ),
              const SizedBox(height: 16,),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: [
-                 GestureDetector(
-                   onTap:(){
-                     Navigator.push( context, MaterialPageRoute(builder: (_) => const ServiceScreen()));
-                   },
-                   child: BBoxWidget(
-                      index: 0,
-                      color: const Color.fromARGB(255, 54, 135, 216),
-                      tag: 'Car Assistant \nService',
-                      name:'Car Assistant \nService',
-                      image:   AppImages.carServiceImg,
-                   ),
-                 ),
-                //  const SizedBox(width: 5),
-                 GestureDetector(
-                   onTap:(){
-                     Navigator.push(context, MaterialPageRoute(builder: (_) => const GoogleMapScreen()));
-                   },
-                   child: BBoxWidget(
-                      index: 0,
-                      color: const Color.fromARGB(235, 5, 201, 152),
-                      tag: 'Find Repair \nGarage',
-                      name:'Find Repair \nGarage',
-                      image:   AppImages.repairService,
-                   ),
-                 ),
-               ],
-             ),
+             FutureBuilder<MainServiceModel>(
+              future: _mainServiceModel,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text("Error read data from api"),
+                  );
+                }
+                if (snapshot.hasData) {
+              var result = snapshot.data!.payload;
+              return Container(
+                decoration:const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                ),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child:GridView.count(
+                      physics: const BouncingScrollPhysics(),
+                      crossAxisCount:  3,
+                      shrinkWrap: true,
+                      childAspectRatio: 1.1,
+                      children: List.generate(
+                        6,
+                        (index) {
+                          // Category category = listCategorie[index];
+                          return ReuseListCardCategory(
+                            getRandomColor:defaultColor,
+                            title: "${result?[index].name}",
+                            image: "${result?[index].img.toString()}",
+                            onTap: () {
+                              // Navigator.push(
+                              //     context,
+                              //     RouteAnimation(
+                              //         enterPage: ListSubcategory(
+                              //             categoryId: category.id,
+                              //             urlImg: category.avatar,
+                              //             categoryTitle:category.title,
+                              //             )
+                              // )
+                              //);
+                            },
+                          );
+                        },
+                      ),
+                    )
+                  )
+                );
+                }
+                return SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - 180,
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              },
+            ),
+            //  Row(
+            //    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //    children: [
+            //      GestureDetector(
+            //        onTap:(){
+            //          Navigator.push( context, MaterialPageRoute(builder: (_) => const ServiceScreen()));
+            //        },
+            //        child: BBoxWidget(
+            //           index: 0,
+            //           color: const Color.fromARGB(255, 54, 135, 216),
+            //           tag: 'Car Assistant \nService',
+            //           name:'Car Assistant \nService',
+            //           image:   AppImages.carServiceImg,
+            //        ),
+            //      ),
+            //     //  const SizedBox(width: 5),
+            //      GestureDetector(
+            //        onTap:(){
+            //          Navigator.push(context, MaterialPageRoute(builder: (_) => const GoogleMapScreen()));
+            //        },
+            //        child: BBoxWidget(
+            //           index: 0,
+            //           color: const Color.fromARGB(235, 5, 201, 152),
+            //           tag: 'Find Repair \nGarage',
+            //           name:'Find Repair \nGarage',
+            //           image:   AppImages.repairService,
+            //        ),
+            //      ),
+            //    ],
+            //  ),
             const SizedBox(height: 16),
             Row(
-               children: [
+              children: [
                 //  Image.network('https://cdn-icons-png.flaticon.com/512/3199/3199306.png',width: 20,height:20),
                 // const SizedBox(width: 7),
                 const Text('Hot Activities' , style:  TextStyle( fontSize: 17,fontWeight:FontWeight.w400,color:Colors.grey )),
                 const Spacer(),
                 GestureDetector(
-                    onTap:(){
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion()));
-                    },
-                    child: const Icon(Icons.arrow_forward_rounded,color: grey)
-                    )
-               ],
+                  onTap:(){
+                    //Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion()));
+                  },
+                  child: Row(
+                   children: const [
+                      Text('View all',style: TextStyle(color: Colors.grey)),
+                      Icon(Icons.arrow_forward_ios_rounded,color: grey,size: 15),
+                   ],
+                  ),
+                )
+              ],
             ),
             const SizedBox(height: 16),
             Padding(
@@ -381,8 +466,9 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                        rating: model.ratting,
                        deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
                      );
-                   }),
-             ),
+                  }
+                ),
+              ),
             ),
             // const SizedBox(height:16),
             Row(
@@ -395,7 +481,12 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                  onTap:(){
                   //Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion()));
                  },
-                 child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                 child: Row(
+                     children: const [
+                        Text('View all',style: TextStyle(color: Colors.grey)),
+                        Icon(Icons.arrow_forward_ios_rounded,color: grey,size: 15),
+                     ],
+                  ),
                 )
              ],
             ),
@@ -489,7 +580,7 @@ class HomeMenu extends StatelessWidget {
             height: 40,
             padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
-              color: defaultColor.withOpacity(0.1),
+              color: defaultColor,
               shape: BoxShape.circle,
               // image: DecorationImage(
               //   image: AssetImage(
@@ -498,7 +589,7 @@ class HomeMenu extends StatelessWidget {
               // ),
             ),
             child: FittedBox(
-              child: Image.asset(image!,width: 20, height: 20,color:defaultColor)
+              child: Image.asset(image!,width: 20, height: 20,color:Colors.white)
             ),
           ),
           const SizedBox(width: 5),
