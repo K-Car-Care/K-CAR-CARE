@@ -8,7 +8,6 @@ import 'package:k_car_care_project/screen/profile_screen/add_more_info_screen.da
 
 import '../widget/carousel_widget.dart';
 import '../widget/dot_indicator_widget.dart';
-import 'detail_announcement/main_body.dart';
 
 class Episode1 extends StatefulWidget {
   const Episode1({Key? key}) : super(key: key);
@@ -34,6 +33,7 @@ class _Episode1State extends State<Episode1> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     // Lets add some image urls in a list from internet
+    // ignore: unused_local_variable
     final List<String> imageUrls = [
       "https://images.unsplash.com/photo-1589802829985-817e51171b92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80",
       "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW5zfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -95,15 +95,15 @@ class _Episode1State extends State<Episode1> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
+                    children: const[
+                      Text(
                         "seyhavon22@gmail.com",
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 17,
                         ),
                       ),
-                      const VerticalDivider(
+                      VerticalDivider(
                         thickness: 1,
                         color: Colors.grey,
                         width: 10,
@@ -115,7 +115,7 @@ class _Episode1State extends State<Episode1> {
                       //     fontSize: 17,
                       //   ),
                       // ),
-                      const SizedBox(
+                      SizedBox(
                         width: 3,
                       ),
                       // GestureDetector(
@@ -214,11 +214,11 @@ class _Episode1State extends State<Episode1> {
                   Container(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Your Cars',textAlign: TextAlign.start),
+                          const Text('Your Cars',textAlign: TextAlign.start),
                           GestureDetector(
                         onTap: (){
                           // Episode1
@@ -238,7 +238,7 @@ class _Episode1State extends State<Episode1> {
                                   (context, setModalState) {
                                 return  SizedBox(
                                   height: MediaQuery.of(context).size.height -200,
-                                  child: AddMoreInfoScreen()
+                                  child: const AddMoreInfoScreen()
                                 );
                               });
                             }
@@ -333,7 +333,7 @@ class _Episode1State extends State<Episode1> {
                                                       (context, setModalState) {
                                                     return  SizedBox(
                                                       height: MediaQuery.of(context).size.height -200,
-                                                      child: AddMoreInfoScreen()
+                                                      child: const AddMoreInfoScreen()
                                                     );
                                                   });
                                                 }
@@ -633,7 +633,8 @@ class CarCard extends StatelessWidget {
   final String background;
   final bool isOdd;
 
-  CarCard(
+  // ignore: use_key_in_widget_constructors
+  const CarCard(
       this.title,
       this.subtitle,
       this.image,
@@ -643,7 +644,7 @@ class CarCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 130,
       width: 351,
       child: Stack(
@@ -652,23 +653,22 @@ class CarCard extends StatelessWidget {
             bottom: 5,
             right: !isOdd ? 20 : 0,
             left: !isOdd ? 0 : 20,
-            child: new Container(
+            child:  Container(
                 width: 351,
                 height: 62,
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    gradient: LinearGradient(colors: [
-                      Color(0xff3c80f7),
-                      Color(0xff1058d1) ],
-                        stops: [
-                          0,
-                          1
-                        ]
+                    gradient:const LinearGradient(colors: [
+                    Color(0xff3c80f7),
+                    Color(0xff1058d1) ],
+                      stops: [
+                        0,
+                        1,
+                      ]
                     )
                 )
             ),
           ),
-
           isOdd ?
               Positioned(
                 left: 60,
@@ -676,8 +676,9 @@ class CarCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new Text(title,
-                        style: TextStyle(
+                    Text(
+                      title,
+                        style:const TextStyle(
                           fontFamily: 'Roboto',
                           color: Color(0xffffffff),
                           fontSize: 16,
@@ -687,8 +688,8 @@ class CarCard extends StatelessWidget {
 
                         )
                     ),
-                    new Text(subtitle,
-                        style: TextStyle(
+                    Text(subtitle,
+                        style: const TextStyle(
                           fontFamily: 'AlegreyaSansSC',
                           color: Color(0xffffffff),
                           fontSize: 14,
@@ -709,8 +710,8 @@ class CarCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Text(title,
-                      style: TextStyle(
+                  Text(title,
+                      style: const TextStyle(
                         fontFamily: 'Roboto',
                         color: Color(0xffffffff),
                         fontSize: 16,
@@ -720,8 +721,8 @@ class CarCard extends StatelessWidget {
 
                       )
                   ),
-                  new Text(subtitle,
-                      style: TextStyle(
+                  Text(subtitle,
+                      style: const TextStyle(
                         fontFamily: 'AlegreyaSansSC',
                         color: Color(0xffffffff),
                         fontSize: 14,

@@ -2,12 +2,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/shared/typography.dart';
 import 'package:k_car_care_project/screen/promotion/main_body.dart';
 
+import '../../../core/constant/app_images.dart';
+import '../../../core/data/promotion_api.dart';
+import '../../../core/model/coupon_model.dart';
+import '../../../core/model/promotion.dart';
+import '../../../core/model/promotion_category_model.dart';
+import '../../../core/model/user_coupon.dart';
+import '../../detail_announcement/main_body.dart';
 import 'list_category.dart';
+import 'list_coupon.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -18,24 +25,71 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
 
+  PromotionServiceApi promotionServiceApi = PromotionServiceApi();
+  PromotionCategoryModel? readPromotionsCategory;
+  List<DataPromotionCategory>? listPromotionCategory;
+
+  PromotionModel? readPromotions;
+  List<DataPromotion>? listPromotion;
+
+  CouponModel? readCoupon;
+  List<DataCoupon>? listCoupons;
+
+  UserCouponModel? readUserCoupon;
+  List<DataUserCoupon>? listUserCoupons;
+
+  @override
+  void initState() {
+    super.initState();
+    initList();
+  }
+
+  void initList() async{
+    //garageByService  = (await _serviceApi.readGarageBYServiceApi()) as List<GarageByService>?;
+    readPromotionsCategory = await promotionServiceApi.readPromotionsCategory();
+    listPromotionCategory = readPromotionsCategory?.payload;
+
+    readPromotions = await promotionServiceApi.readPromotions();
+    listPromotion = readPromotions?.payload;
+
+    readCoupon = await promotionServiceApi.readPromotionCoupon();
+    listCoupons = readCoupon?.payload;
+
+    readUserCoupon = await promotionServiceApi.readUserCoupons();
+    listUserCoupons = readUserCoupon?.payload;
+    setState(() {
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final height  = MediaQuery.of(context).size.height * 1 ;
     // ignore: unused_local_variable
     final width  = MediaQuery.of(context).size.width * 1 ;
+
+    if(listPromotionCategory == null || listPromotion == null){
+      return Container(
+        color: Colors.white,
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-          ),
+          // leading: IconButton(
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //   },
+          //   icon: const Icon(
+          //     Icons.arrow_back,
+          //     color: Colors.black,
+          //   ),
+          // ),
         title: const  Text('Promotions',style:TextStyle(color:black)),
         centerTitle:false,
         actions: const[
@@ -110,7 +164,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                            image: const DecorationImage(
                                fit: BoxFit.cover,
                                  image: NetworkImage('https://img.freepik.com/free-vector/car-promotion-social-media-post-banner-template-vector_434448-179.jpg')
-
                              )
                        ),
                        child: Padding(
@@ -190,7 +243,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                        ],
                      ),
                    ),
-
                  ],
                ),
              ),
@@ -205,7 +257,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                    onTap:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoryDetail()));
                    },
-                   child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                   child: Row(
+                     children: const [
+                        Text('View all',style: TextStyle(color: Colors.grey)),
+                        Icon(Icons.arrow_forward_ios_rounded,color: grey,size: 15),
+                     ],
+                    ),
                   )
                ],
              ),
@@ -229,7 +286,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         scrollDirection: Axis.horizontal,
                         child: Container(
                           margin: const EdgeInsets.only(left: 15),
-                          child: Row( children: List.generate(categories.length, (index) {
+                          child: Row( children: List.generate(listPromotionCategory!.length, (index) {
                             return Padding(
                               padding: const EdgeInsets.only(right: 40),
                               child: Column(
@@ -242,8 +299,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     height: 15,
                                   ),
                                   Text(
-                                    categories[index]['name'],
-
+                                    listPromotionCategory![index].name ?? '',
+                                    style:  subTitleTextStyleBlack.copyWith(fontWeight: FontWeight.w600),
                                   )
                                 ],
                               ),
@@ -260,37 +317,46 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                children: [
                  Image.network('https://cdn-icons-png.flaticon.com/512/3199/3199306.png',width: 20,height:20),
                  const SizedBox(width: 7),
-                 const Text('Hot Productions' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
+                 const Text('Hot promotions' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
                  const Spacer(),
                  GestureDetector(
                    onTap:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion(title:'Hot Productions')));
                    },
-                   child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                   child: Row(
+                     children: const [
+                        Text('View all',style: TextStyle(color: Colors.grey)),
+                        Icon(Icons.arrow_forward_ios_rounded,color: grey,size: 15),
+                     ],
+                    ),
                   )
                ],
              ),
              const SizedBox(height:14),
-             Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: SizedBox(
-               height: MediaQuery.of(context).size.height * .278,
-               child: ListView.builder(
-                   itemCount: PandaPickHelper.itemCount,
-                   scrollDirection: Axis.horizontal,
-                   itemBuilder: (context, index){
-                     PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
-                     return RestuarentScreen(
-                       name: model.name,
-                       image:model.image ,
-                       remainingTime: model.remaingTime,
-                       totalRating: model.totalRating,
-                       subTitle: model.subTitle,
-                       rating: model.ratting,
-                       deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
-                     );
-                   }),
-             ),
+                height: MediaQuery.of(context).size.height * .278,
+                child: ListView.builder(
+                    itemCount: listPromotion!.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index){
+                      // PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                      return RestuarentScreen(
+                        name: listPromotion![index].title ?? '',
+                        image: listPromotion![index].img ?? '' ,
+                        remainingTime:listPromotion![index].nameOwner ?? '' ,
+                        totalRating: '5.0',
+                        subTitle: 'subtitle',
+                        rating: '',
+                        deliveryTime:'deliverytime', 
+                        deliveryPrice: 'deliveryPrice',
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) =>  DetailAnnocement(assetImage:  AppImages.sliderImg1)));
+                        },
+                      );
+                    }),
+              ),
             ),
             const SizedBox(height:14),
             Row(
@@ -301,9 +367,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                const Spacer(),
                GestureDetector(
                  onTap:(){
-                  //Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ListCoupons()));
                  },
-                 child: const Icon(Icons.arrow_forward_rounded,color: grey)
+                 child: Row(
+                     children: const [
+                        Text('View all',style: TextStyle(color: Colors.grey)),
+                        Icon(Icons.arrow_forward_ios_rounded,color: grey,size: 15),
+                     ],
+                    ),
                 )
              ],
             ),
@@ -311,7 +382,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
              SizedBox(
               height: 120,
               child: ListView.builder(
-                  itemCount: PandaPickHelper.itemCount,
+                  itemCount: listCoupons!.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index){
                     // ignore: unused_local_variable
@@ -322,9 +393,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         decoration:BoxDecoration(
                           borderRadius:BorderRadius.circular(8),
                           color:defaultColor,
-                           image: const DecorationImage(
+                           image: DecorationImage(
                             fit: BoxFit.cover,
-                              image: NetworkImage('https://www.wpbeginner.com/wp-content/uploads/2020/01/create-coupon-popup-wordpress-550x340-featured.png')
+                              image: NetworkImage(listCoupons![index].img ?? ''),
                           )
                         ),
                         width: 220,
@@ -332,44 +403,53 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     );
                   }),
             ),
-           
-             const SizedBox(height:14),
-             Row(
-               children: [
-                 Image.network('https://cdn-icons-png.flaticon.com/512/3500/3500954.png',width: 20,height:20),
-                 const SizedBox(width: 7),
-                 const Text('Recommended Promotion' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
-                 const Spacer(),
-                 GestureDetector(
-                   onTap:(){
+            const SizedBox(height:14),
+            Row(
+              children: [
+                Image.network('https://cdn-icons-png.flaticon.com/512/3500/3500954.png',width: 20,height:20),
+                const SizedBox(width: 7),
+                const Text('Recommended Promotion' , style: TextStyle(color: Color(0xff323232) , fontSize: 17,fontWeight:FontWeight.w600 )),
+                const Spacer(),
+                GestureDetector(
+                  onTap:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const Promotion(title:'Recommended Promotion')));
-                   },
-                   child: const Icon(Icons.arrow_forward_rounded,color: grey)
-                  )
-               ],
-             ),
-             const SizedBox(height:8),
-             Padding(
-               padding: const EdgeInsets.symmetric(vertical: 10),
-               child: SizedBox(
-                 height: MediaQuery.of(context).size.height * .278,
-                 child: ListView.builder(
-                     itemCount: PandaPickHelper.itemCount,
-                     scrollDirection: Axis.horizontal,
-                     itemBuilder: (context, index){
-                       PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
-                       return RestuarentScreen(
-                         name: model.name,
-                         image:model.image ,
-                         remainingTime: model.remaingTime,
-                         totalRating: model.totalRating,
-                         subTitle: model.subTitle,
-                         rating: model.ratting,
-                         deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
-                       );
-                     }),
-               ),
-             ),
+                  },
+                  child: Row(
+                     children: const [
+                        Text('View all',style: TextStyle(color: Colors.grey)),
+                        Icon(Icons.arrow_forward_ios_rounded,color: grey,size: 15),
+                     ],
+                    ),
+                )
+              ],
+            ),
+            const SizedBox(height:8),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * .278,
+                child: ListView.builder(
+                    itemCount: listPromotion!.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index){
+                      // PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                      return RestuarentScreen(
+                        name: listPromotion![index].title ?? '',
+                        image: listPromotion![index].img ?? '' ,
+                        remainingTime:listPromotion![index].nameOwner ?? '' ,
+                        totalRating: '5.0',
+                        subTitle: 'subtitle',
+                        rating: '',
+                        deliveryTime:'deliverytime', 
+                        deliveryPrice: 'deliveryPrice',
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => DetailAnnocement(assetImage:AppImages.sliderImg1)));
+                        },
+                      );
+                    }
+                  ),
+              ),
+            ),
            ],
           ),
         ),
@@ -418,29 +498,29 @@ class ReuseListCardCategory extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey.withOpacity(0.2),
-                image: DecorationImage(
-                  image: NetworkImage(image),
-                  fit: BoxFit.fill,
-                ),
+                // image: DecorationImage(
+                //   image: NetworkImage(image),
+                //   fit: BoxFit.contain,
+                // ),
               ),
-              // child: Center(
-              //   child:  Image.network(
-              //       image,
-              //       width: 50,
-              //       height: 50,
-              //       color:Colors.white,
-              //     )
-              //   ),
+              child: Center(
+                child:  Image.network(
+                    image,
+                    width: 30,
+                    height: 30,
+                    // color:Colors.white,
+                  )
+                ),
             ),
             const SizedBox(
               height: 6,
             ),
             Text(title,
-                maxLines: 1,
+                maxLines: 2,
                 textAlign: TextAlign.center,
                 softWrap: true,
                 overflow: TextOverflow.fade,
-                style: bodyTextStyleBlack
+                style: subTitleTextStyleBlack.copyWith(fontWeight: FontWeight.w600),
             )
           ],
         ),
@@ -561,6 +641,13 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
 
 
 const List categories = [
+  {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178787.png", "name": "Pickup"},
+  {"img": "https://cdn-icons-png.flaticon.com/128/7178/7178738.png", "name": "Grocery"},
+  {"img": "https://cdn-icons-png.flaticon.com/128/7178/7178747.png", "name": "Essentials"},
+  {"img": "https://cdn-icons-png.flaticon.com/128/7178/7178719.png", "name": "Fruit"},
+  {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178674.png", "name": "Alcohol"},
+  {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178729.png", "name": "Deals"},
+  {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178653.png", "name": "Discount"},
   {"img": "https://cdn-icons-png.flaticon.com/512/7178/7178787.png", "name": "Pickup"},
   {"img": "https://cdn-icons-png.flaticon.com/128/7178/7178738.png", "name": "Grocery"},
   {"img": "https://cdn-icons-png.flaticon.com/128/7178/7178747.png", "name": "Essentials"},

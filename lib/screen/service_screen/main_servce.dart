@@ -2,17 +2,13 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:k_car_care_project/core/constant/app_images.dart';
-import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/model/main_services_models/main_model.dart';
 import 'package:k_car_care_project/screen/flat_fire_service_screen/main_flat_fire.dart';
 import 'package:k_car_care_project/screen/fuel_service_screen/main_fuel_service.dart';
 import 'package:k_car_care_project/screen/key_service_screen/main_key_service.dart';
 import 'package:k_car_care_project/screen/towing_service_screen/main_towning_service.dart';
 import 'package:k_car_care_project/core/shared/typography.dart';
-import 'package:k_car_care_project/widget/reuse_circle_image.dart';
 import 'package:k_car_care_project/screen/service_screen/components/reuse_main_card_service.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
@@ -93,7 +89,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
-          backgroundColor: defaultColor,
+          backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           leading: IconButton(
             onPressed: () {
@@ -102,15 +98,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
             },
             icon: const Icon(
               Icons.arrow_back,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           centerTitle: true,
-          title: Text('Services', style: titleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
+          title: Text('Services', style: titleTextStyleBlack.copyWith(fontWeight: FontWeight.w600)),
           actions: [
             IconButton(
               // ignore: prefer_const_constructors
-              icon: (Icon(Icons.notifications, color: Colors.white)),
+              icon: (Icon(Icons.notifications, color: Colors.black)),
               onPressed: () async {},
             ),
           ]),
@@ -120,8 +116,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
           future: _mainServiceModel,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.toString()),
+              return const Center(
+                child: Text('Error'),
               );
             }
             if (snapshot.hasData) {
@@ -141,7 +137,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                       onTap: () {
                         if (result![index].name?.toUpperCase() ==
                             "TOWING") {
-                          Get.to(() => const TowingServiceScreen());
+                          Get.to(() =>  TowingServiceScreen(
+                            mainService: result[index].name,
+                          ));
                         } else if (result[index].name?.toUpperCase() ==
                             "FUEL") {
                           Get.to(() => const FuelServiceScreen());

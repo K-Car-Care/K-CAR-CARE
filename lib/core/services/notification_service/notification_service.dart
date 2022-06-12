@@ -14,9 +14,7 @@ class OnsignalNotificationService {
       // print("Accepted permission: $accepted");
     });
 
-    OneSignal.shared
-        .setNotificationOpenedHandler((OSNotificationOpenedResult result) {});
-
+    OneSignal.shared.setNotificationOpenedHandler((OSNotificationOpenedResult result) {});
     OneSignal.shared.setNotificationOpenedHandler(
       (openedResult) {
         var title = openedResult.notification.title;

@@ -1,16 +1,13 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, deprecated_member_use, unrelated_type_equality_checks, unused_field
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
-// import 'package:k_car_care_project/data/notification_api/notification_api.dart';
-
 import '../../core/data/check_connectivity/check_connectivity.dart';
 import '../../core/data/login_api/login_token_api.dart';
 import '../../core/services/auth_services/auth_services.dart';
 import '../../core/services/auth_services/google_login_service.dart';
+import '../../core/shared/typography.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -67,71 +64,52 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 key: formKey,
                 child: Column(
                   // ignore: prefer_const_literals_to_create_immutables
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .04,
-                    ),
-                    Text(
-                      "WELCOME_REGISTER".tr,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Poppins",
-                        color: Color(0xff979797),
+                    Center(
+                      child: SizedBox(
+                        child: Image.asset('assets/service_images/logo.png',height: 120,width: 120),
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "PLEASE_FILL".tr,
+                    const SizedBox(height: 15),
+                    const Text(
+                      'One account. One place to manage it all.\n Welcome to K-CAR-CARE.',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: "Poppins",
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.grey
+                      )
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .1,
+                    const SizedBox(height: 20),
+                    GoogleBtn(
+                      title: 'Login with Google',
+                      img: 'https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png',
+                      onPressed: () async {
+                        await _loginController.signInWithGoogle(context: context);
+                        //wait _loginController.signup(context);
+                        // _loginController1.login();
+                        print("Google");
+                      },
                     ),
-                    Text(
-                  //    "សម្រាប់ឧទាហរណ៍​: ជ្រើសរើស កូដប្រទេស​​ លេខទូរសព្ទ័",
-                  "EXAMPLE".tr,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: "Poppins",
-                        color: Colors.black,
-                      ),
+                    GoogleBtn(
+                      title: 'Login with Facebook',
+                      img: 'https://www.facebook.com/images/fb_icon_325x325.png',
+                      onPressed: (){}  
                     ),
+                    SizedBox(height: MediaQuery.of(context).size.height * .05),
+                    divider('or Login with Phone Number'),
                     SizedBox(height: MediaQuery.of(context).size.height * .05),
                     Container(
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.3)),
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(.25),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.25),
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 10.0,
-                            spreadRadius: 1.0,
-                          ),
-                          BoxShadow(
-                            color: Colors.black.withOpacity(.25),
-                            offset: Offset(-1.0, -1.0),
-                            blurRadius: 10.0,
-                            spreadRadius: 1.0,
-                          ),
-                        ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 4.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
                         child: InternationalPhoneNumberInput(
                           textFieldController: controller,
                           onInputChanged: (PhoneNumber number) {
@@ -149,24 +127,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           autoValidateMode: AutovalidateMode.disabled,
                           selectorTextStyle: TextStyle(
                             color: Colors.black,
-                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
                           ),
                           initialValue: number,
                           maxLength: 12,
-                          hintText: "ឧទាហរណ៍ 123 456 7",
+                          hintText: "Phone number",
                           keyboardType: TextInputType.numberWithOptions(
                             signed: true,
                             decimal: true,
                           ),
                           inputBorder: InputBorder.none,
                           textStyle: TextStyle(
-                            fontFamily: "Poppins",
                             fontSize: 16,
+                            color:Colors.black,
+                            fontWeight: FontWeight.bold,
                           ),
                           onSaved: (PhoneNumber number) {
                             print('On Saved: $number');
                             setState(
-                              () {
+                              (){
                                 dialCode == number;
                               },
                             );
@@ -177,127 +156,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .05,
                     ),
-                    Center(
-                      child: Column(
-                        children: [
-                          RaisedButton(
-                            splashColor: Colors.white.withOpacity(.25),
-                            color: Colors.black,
-                            shape: CircleBorder(),
-                            onPressed: () async {
-                              //print('Hello world');
-                              // _authentication.signInwithPhoneNumber(
-                              // my_phone_num: "$dialCode${controller.text.trim()}");
-                              _accessToken.login(
-                                phoneNumber:"$dialCode${controller.text}",
-                                googleId:'',
-                                displayName:'',
-                                firstName:'',
-                                lastName:'',
-                                email:'',
-                                profile:'', 
-                                cloudinary_id:'',
-                                context:context,
-                                status:'phone'
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: Icon(
-                                Icons.chevron_right,
-                                size: 30,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            "បន្ត",
-                            style: TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * .02,
-                          ),
-                          Text(
-                            "ឬ",
-                            style:
-                                TextStyle(fontFamily: "Poppins", fontSize: 14),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * .02,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            await _loginController.signInWithGoogle(context: context);
-                            //wait _loginController.signup(context);
-                            // _loginController1.login();
-                            print("Google");
-                          },
-                          child: Column(
-                            children: [
-                              SvgPicture.asset("assets/icons/google.svg"),
-                              Text(
-                                "Google",
-                                style: TextStyle(
-                                    fontFamily: "Poppins", fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            print("Facebook");
-                          },
-                          child: Column(
-                            children: [
-                              Image.asset("assets/icons/Facebook.png"),
-                              Text(
-                                "Facebook",
-                                style: TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "តើអ្នកមានគណនីហើយឬនៅ?",
-                            style:
-                                TextStyle(fontFamily: "Poppins", fontSize: 14),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              print("Login");
-                            },
-                            child: Text(
-                              "ចូលប្រើ នៅទីនេះ",
-                              style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontSize: 14,
-                                color: ThemeConstant.lightScheme.primary,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    SubmitButton(
+                      text: 'Submit',
+                      onPressed: () async {
+                        // _authentication.signInwithPhoneNumber(
+                        // my_phone_num: "$dialCode${controller.text.trim()}");
+                        _accessToken.login(
+                          phoneNumber:"$dialCode${controller.text}",
+                          googleId:'',
+                          displayName:'',
+                          firstName:'',
+                          lastName:'',
+                          email:'',
+                          profile:'', 
+                          cloudinary_id:'',
+                          context:context,
+                          status:'phone'
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -315,5 +191,131 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     setState(() {
       this.number = number;
     });
+  }
+
+Widget divider(String title) {
+  return Container(
+    color: Colors.white.withOpacity(0.5),
+    child: Row(children: <Widget>[
+      Expanded(
+        child: Container(
+            margin: const EdgeInsets.only(left: 10.0, right: 15.0),
+            child: const Divider(
+              color: Colors.black,
+              height: 50,
+            )),
+      ),
+      Text(title, style:subTitleTextStyleBlack.copyWith(fontWeight: FontWeight.w400,color: Colors.grey)),
+      Expanded(
+        child: Container(
+            margin: const EdgeInsets.only(left: 15.0, right: 10.0),
+            child: const Divider(
+              color: Colors.black,
+              height: 50,
+            )),
+      ),
+    ]),
+  );
+  }
+}
+
+
+class GoogleBtn extends StatelessWidget {
+  final Function()? onPressed;
+  final String? img;
+  final String? title;
+  const GoogleBtn({
+    this.onPressed,
+    this.title,
+    this.img,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 55,
+      margin: const EdgeInsets.symmetric(vertical: 8,),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.2)),
+        color: Colors.white,
+      ),
+      child: TextButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            side: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            borderRadius: BorderRadius.circular(8))
+          )
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Image.network(img!,height: 30, width: 30)),
+            // const SizedBox(
+            //   width: 10,
+            // ),
+            Expanded(
+              flex: 4,
+              child: Text(title!,textAlign: TextAlign.start, style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ))),
+          ],
+        ),
+        onPressed: onPressed,
+      )
+    );
+  }
+}
+
+
+
+class SubmitButton extends StatelessWidget {
+  final String? text;
+  final Function()? onPressed;
+  final EdgeInsetsGeometry? padding;
+  const SubmitButton({
+    this.text, 
+    this.onPressed, 
+    this.padding = const EdgeInsets.all(0), 
+    Key? key
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    const accentColor = Color(0xffffffff);
+    const double borderRadius = 8;
+
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: SizedBox(
+        height: 55,
+        width: MediaQuery.of(context).size.width,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+            color: defaultColor
+          ),
+          child: ElevatedButton(
+            style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0),
+                alignment: Alignment.center,
+                padding: MaterialStateProperty.all(
+                    const EdgeInsets.only(top: 15, bottom: 15)),
+                backgroundColor:
+                    MaterialStateProperty.all(Colors.transparent),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(borderRadius)),
+                )),
+            onPressed: onPressed,
+            child: Text(text!,style: titleTextStyleBlack.copyWith(fontWeight: FontWeight.bold)))
+        ),
+      ),
+    );
   }
 }

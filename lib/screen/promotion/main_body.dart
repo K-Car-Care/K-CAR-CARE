@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../core/constant/app_images.dart';
+import '../../core/data/promotion_api.dart';
+import '../../core/model/promotion.dart';
+import '../detail_announcement/main_body.dart';
+
 
 class Promotion extends StatefulWidget {
   final String title;
@@ -15,11 +20,23 @@ class Promotion extends StatefulWidget {
 class _PromotionState extends State<Promotion> {
 
   late TextEditingController _textController;
+  PromotionServiceApi promotionServiceApi = PromotionServiceApi();
+  PromotionModel? readPromotions;
+  List<DataPromotion>? listPromotion;
 
   @override
   void initState() {
     super.initState();
     _textController = TextEditingController(text: 'Search for restaurant,cuisones, and dishes');
+    initList();
+  }
+
+  void initList() async{
+    //garageByService  = (await _serviceApi.readGarageBYServiceApi()) as List<GarageByService>?;
+    readPromotions = await promotionServiceApi.readPromotions();
+    listPromotion = readPromotions?.payload;
+    setState(() {
+    });
   }
 
   @override
@@ -27,7 +44,14 @@ class _PromotionState extends State<Promotion> {
     final height  = MediaQuery.of(context).size.height * 1 ;
     // ignore: unused_local_variable
     final width  = MediaQuery.of(context).size.width * 1 ;
-
+    if(listPromotion == null){
+      return Container(
+        color: Colors.white,
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -51,9 +75,9 @@ class _PromotionState extends State<Promotion> {
             child: Row(
               children:  [
                 Expanded(child: CupertinoTextField(
-                    controller: _textController,
+                  controller: _textController,
                   padding: const  EdgeInsets.symmetric(vertical: 12 , horizontal: 10),
-                  placeholder: "asdf",
+                  placeholder: "search",
                   prefix: const Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Icon(Icons.search , color: Color(0xff7b7b7b) ,),
@@ -81,71 +105,83 @@ class _PromotionState extends State<Promotion> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Panda Pick' , style: TextStyle(color: Color(0xff323232) , fontSize: 15),),
+                const Text('Crash Repair' , style: TextStyle(color: Color(0xff323232) , fontSize: 15,fontWeight: FontWeight.bold),),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * .278,
                     child: ListView.builder(
-                        itemCount: PandaPickHelper.itemCount,
+                        itemCount: listPromotion!.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index){
-                          PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                          // PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
                           return RestuarentScreen(
-                            name: model.name,
-                            image:model.image ,
-                            remainingTime: model.remaingTime,
-                            totalRating: model.totalRating,
-                            subTitle: model.subTitle,
-                            rating: model.ratting,
-                            deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
+                            name: listPromotion![index].title ?? '',
+                            image: listPromotion![index].img ?? '' ,
+                            remainingTime:listPromotion![index].nameOwner ?? '' ,
+                            totalRating: '5.0',
+                            subTitle: 'subtitle',
+                            rating: '',
+                            deliveryTime:'deliverytime', 
+                            deliveryPrice: 'deliveryPrice',
+                            onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) =>  DetailAnnocement(assetImage:  AppImages.sliderImg1)));
+                        },
                           );
                         }),
                   ),
                 ),
-               const  Text('Panda exclusives' , style: TextStyle(color: Color(0xff323232) , fontSize: 15),),
+               const  Text('Oil Changes' , style: TextStyle(color: Color(0xff323232) , fontSize: 15,fontWeight: FontWeight.bold),),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * .278,
                     child: ListView.builder(
-                        itemCount: ExclusiveHelper.itemCount,
+                        itemCount: listPromotion!.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index){
-                          ExclusiveItemModel model = ExclusiveHelper.getStatusItem(index);
+                          // PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
                           return RestuarentScreen(
-                            name: model.name,
-                            image:model.image ,
-                            remainingTime: model.remaingTime,
-                            totalRating: model.totalRating,
-                            subTitle: model.subTitle,
-                            rating: model.rating,
-                            deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
+                            name: listPromotion![index].title ?? '',
+                            image: listPromotion![index].img ?? '' ,
+                            remainingTime:listPromotion![index].nameOwner ?? '' ,
+                            totalRating: '5.0',
+                            subTitle: 'subtitle',
+                            rating: '',
+                            deliveryTime:'deliverytime', 
+                            deliveryPrice: 'deliveryPrice',
+                            onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) =>  DetailAnnocement(assetImage:  AppImages.sliderImg1)));
+                        },
                           );
                         }),
                   ),
                 ),
-                const Text('All Restuarent' , style: TextStyle(color: Color(0xff323232) , fontSize: 15),),
-
-                Container(
-                  height: 250,
+                const Text('Car Wash' , style: TextStyle(color: Color(0xff323232) , fontSize: 15,fontWeight: FontWeight.bold),),
+                Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: ListView.builder(
-                      itemCount: ExclusiveHelper.itemCount,
-                      scrollDirection: Axis.horizontal,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index){
-                        ExclusiveItemModel model = ExclusiveHelper.getStatusItem(index);
-                        return RestuarentScreen(
-                          name: model.name,
-                          image:model.image ,
-                          remainingTime: model.remaingTime,
-                          totalRating: model.totalRating,
-                          subTitle: model.subTitle,
-                          rating: model.rating,
-                          deliveryTime: model.remaingTime, deliveryPrice: model.deliveryPrice,
-                        );
-                      }),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * .278,
+                    child: ListView.builder(
+                        itemCount: listPromotion!.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index){
+                          // PandaPickItemModel model = PandaPickHelper.getStatusItem(index);
+                          return RestuarentScreen(
+                            name: listPromotion![index].title ?? '',
+                            image: listPromotion![index].img ?? '' ,
+                            remainingTime:listPromotion![index].nameOwner ?? '' ,
+                            totalRating: '5.0',
+                            subTitle: 'subtitle',
+                            rating: '',
+                            deliveryTime:'deliverytime', 
+                            deliveryPrice: 'deliveryPrice',
+                            onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (_) =>  DetailAnnocement(assetImage:  AppImages.sliderImg1)));
+                        },
+                      );
+                    }),
+                  ),
                 ),
                 // SizedBox(height: 20,)
               ],
@@ -234,8 +270,9 @@ class PandaPickHelper {
 
 class RestuarentScreen extends StatefulWidget {
   final String name, image , remainingTime , subTitle, rating, deliveryTime , totalRating, deliveryPrice;
+  final VoidCallback? onTap;
   const RestuarentScreen({Key? key,required this.name ,required this.image,required this.remainingTime ,
-    required this.rating , required this.deliveryTime, required this.totalRating , required this.subTitle , required this.deliveryPrice  }) : super(key: key);
+    required this.rating , required this.deliveryTime, required this.totalRating , required this.subTitle , required this.deliveryPrice,required this.onTap }) : super(key: key);
 
   @override
   _RestuarentScreenState createState() => _RestuarentScreenState();
@@ -247,9 +284,7 @@ class _RestuarentScreenState extends State<RestuarentScreen> {
     final height  = MediaQuery.of(context).size.height * 1 ;
     final width  = MediaQuery.of(context).size.width * 1 ;
     return InkWell(
-      onTap: (){
-        //Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(name: widget.name, image: widget.image)));
-      },
+      onTap: widget.onTap,
       child: Padding(
         padding: const EdgeInsets.only(right: 10),
         child: SizedBox(
@@ -273,26 +308,25 @@ class _RestuarentScreenState extends State<RestuarentScreen> {
                       decoration: const BoxDecoration(
                           color: defaultColor,
                           borderRadius:  BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
+                            topRight: Radius.circular(8),
+                            bottomRight: Radius.circular(8),
                           )
                       ),
                       child:  const Padding(
                         padding: EdgeInsets.only(top: 7, left: 5 , right: 10, bottom: 7),
-                        child: Text("Flash 20% OFF" , style: TextStyle(color: Colors.white , fontSize: 10),),
+                        child: Text("Flash 20% OFF" , style: TextStyle(color: Colors.black , fontSize: 12,fontWeight: FontWeight.w600),),
                       ),
-
                     ),
                   ),
                   Positioned(
                     bottom: 0,
-                    left: 10 ,
+                    left: 5 ,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Container(
                         decoration: BoxDecoration(
-                            color: const Color(0xfffffcff),
-                            borderRadius: BorderRadius.circular(20.0)
+                            color: const Color(0xFFe0ebeb),
+                            borderRadius: BorderRadius.circular(8.0)
                         ),
                         child:  Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

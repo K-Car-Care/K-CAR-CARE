@@ -36,27 +36,28 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
-          backgroundColor: defaultColor,
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
           ),
-          centerTitle: true,
-          title: Text('History', style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
-          actions: [
-            IconButton(
-              // ignore: prefer_const_constructors
-              icon: (Icon(Icons.notifications, color: Colors.white)),
-              onPressed: () {},
-            ),
-          ]),
+        ),
+        centerTitle: true,
+        title: Text('History', style: titleTextStyleBlack.copyWith(fontWeight: FontWeight.bold)),
+        actions: [
+          IconButton(
+            // ignore: prefer_const_constructors
+            icon: (Icon(Icons.notifications, color: Colors.white)),
+            onPressed: () {},
+          ),
+        ]
+      ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: ListView.builder(
@@ -71,7 +72,15 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
               //   title: 'TELA  POWER',
               //   phoneNumber: 'May 03, 2021',
               // );
-              return Card(
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    width: 0.5,
+                    color:Colors.grey.withOpacity(0.3)),
+                  borderRadius:BorderRadius.circular(8),
+                ),
+                margin: const EdgeInsets.symmetric(vertical: 3,horizontal: 2),
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: ListTile(
@@ -99,7 +108,7 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
                             '#248, Preah Monivong Blvd. (Street 93), Sangkat Boeung Raing, Khan Daun.',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: ThemeConstant.textTheme.bodyText2!.copyWith(color: Colors.grey)
+                            style: bodyTextStyleBlack.copyWith(color:grey)
                           ),
                           const SizedBox(height: 10),    
                         ],
@@ -107,21 +116,19 @@ class _HisstoryScreenState extends State<HisstoryScreen> {
                     ),
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children:const[
                         Text(
                           // title,
                           'TOP AUTO Repair',
-                          style: ThemeConstant.textTheme.bodyText1!.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: TextStyle(fontWeight: FontWeight.w600)
                         ),
                       ],
                     ),
                   ),
                 ),
               ); 
-            }),
+            }
+        ),
       ),
     );
   }

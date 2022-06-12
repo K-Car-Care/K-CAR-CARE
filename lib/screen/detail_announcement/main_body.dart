@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:k_car_care_project/core/constant/app_images.dart';
 import 'package:k_car_care_project/core/shared/typography.dart';
 
@@ -59,13 +58,13 @@ class _DetailAnnocementState extends State<DetailAnnocement> {
                   ),
                 ),
               ),
-              const  SizedBox(height: 7,),
+              const  SizedBox(height: 14,),
               Text(
                 'Up to US \$20 off shipping',
                 textAlign:  TextAlign.justify,
                 style: titleTextStyleBlack.copyWith(fontWeight: FontWeight.w600, fontSize: 25)
               ),
-              const  SizedBox(height: 7,),
+              const  SizedBox(height: 14,),
               Text(
                 'March is going to pass to and April is comming that mean it Su,,er already! The Cooktail Store offered upyo 80%  for this summer season.Don;t miss this spacial offer! Go to checkthe menu at the Colltail Store now to get your drinl with the discount.',
                 textAlign:  TextAlign.justify,

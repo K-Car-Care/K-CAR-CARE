@@ -6,12 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
-import 'dart:io';
-import 'package:k_car_care_project/screen/profile_screen/components/textfield_item.dart';
 import 'package:k_car_care_project/screen/profile_screen/main_profile_screen.dart';
 import 'package:k_car_care_project/core/storage_data/user_profile_storage/store_care_information.dart';
 import '../../core/shared/typography.dart';
-import '../drawer_screen/main_drawer.dart';
 
 class AddMoreInfoScreen extends StatefulWidget {
   const AddMoreInfoScreen({Key? key}) : super(key: key);
@@ -32,6 +29,7 @@ class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
 
   XFile? imageFile;
   final ImagePicker _imagePicker = ImagePicker();
+  // ignore: unused_field
   StoreCarInformation _storeCarInfo = StoreCarInformation();
   GlobalKey<FormState> formKey =  GlobalKey<FormState> ();
 
@@ -62,7 +60,6 @@ class _AddMoreInfoScreenState extends State<AddMoreInfoScreen> {
       });
     // ignore: nullable_type_in_catch_clause
     } on PlatformException catch (e) {
-      // ignore: avoid_print
       print("Fail to pick image: $e");
     }
   }

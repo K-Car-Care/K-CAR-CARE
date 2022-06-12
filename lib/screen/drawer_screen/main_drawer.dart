@@ -2,7 +2,6 @@
 
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +21,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../core/data/check_connectivity/check_connectivity.dart';
 import '../../core/data/google_login/google_login_api.dart';
 import '../../core/services/auth_services/auth_services.dart';
+import '../authenication_screen/registration_screen.dart';
+import '../user_coupon/main_body.dart';
 import 'components/about_us.dart';
 import 'components/contact.dart';
 
@@ -33,10 +34,10 @@ class NavigationDrawerWidget extends StatefulWidget {
       // ignore: unnecessary_new
       new _NavigationDrawerWidgetState();
 }
-
 const expandedHeight = 180.0;
 
 class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
+
   // late ScrollController _scrollController;
   String text = 'https://sala.koompi.com';
   String subject = 'View here';
@@ -61,6 +62,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   }
 
   final Authentication _authentication = Get.put(Authentication());
+
   @override
   void dispose() {
     CheckInternet().listener?.cancel();
@@ -70,10 +72,8 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   ScrollController scrollController = ScrollController();
 
   bool get _showTitle {
-    return _scrollController.hasClients &&
-        _scrollController.offset > expandedHeight - (kToolbarHeight * 2);
+    return _scrollController.hasClients && _scrollController.offset > expandedHeight - (kToolbarHeight * 2);
   }
-
 
   //***************Select Image From Gellery Fuction**************/
   // String? imageUrlCover;
@@ -176,9 +176,9 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             Text(email.isEmpty ? 'Student Email':email, style:subTitleTextStyleBlack.copyWith(color:  Colors.white.withOpacity(0.5),)),
                           ],
                         ),
-                        ]
-                      )
-                      : null,
+                      ]
+                    )
+                  : null,
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: false,
                     title: AnimatedOpacity(
@@ -249,11 +249,20 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               delegate: SliverChildListDelegate([
                 BuildMenuItem(
                   text:'Setting',
-                      // _lang.translate('contact'),
-                      //'ការកំណត់',
+                  // _lang.translate('contact'),
+                  //'ការកំណត់',
                   icon: Icons.contacts_outlined,
                   onClicked: () {
                     // Navigator.push(context, MaterialPageRoute(builder: (_) => const Contact()));
+                  }
+                ),
+                BuildMenuItem(
+                  text:'My Coupon',
+                  // _lang.translate('contact'),
+                  //'ការកំណត់',
+                  icon: Icons.inbox_outlined,
+                  onClicked: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const UserCouponList()));
                   }
                 ),
                 BuildMenuItem(
@@ -381,13 +390,20 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                         ),
                                       ),
                                       const SizedBox(height: 20),
-                                      showEnrollButton(
-                                        onTap:()async{
-                                          //------Do Operation Rate App
-                                          // ignore: avoid_print
-                                          print('Do Operation Rate App');
-                                        }
-                                      ),
+                                      // showEnrollButton(
+                                      //   onTap:()async{
+                                      //     //------Do Operation Rate App
+                                      //     // ignore: avoid_print
+                                      //     print('Do Operation Rate App');
+                                      //   }
+                                      // ),
+                                      SubmitButton(
+                                        text: 'Submit',
+                                        onPressed: () async {
+                                            //Do Operation Rate App
+                                            
+                                          },
+                                        ),
                                       ],
                                     ),
                                   ),

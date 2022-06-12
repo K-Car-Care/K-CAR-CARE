@@ -5,6 +5,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:k_car_care_project/screen/promotion/components/main_promotion.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import '../../../core/data/promotion_api.dart';
+import '../../../core/model/promotion_category_model.dart';
+
 class CategoryDetail extends StatefulWidget {
   
 
@@ -16,15 +19,34 @@ class CategoryDetail extends StatefulWidget {
 
 class _CategoryDetailState extends State<CategoryDetail> {
   final _key = GlobalKey<ScaffoldState>();
+
+  PromotionServiceApi promotionServiceApi = PromotionServiceApi();
+  PromotionCategoryModel? readPromotionsCategory;
+  List<DataPromotionCategory>? listPromotionCategory;
+
   @override
   void initState() {
-    
     super.initState();
+    initList();
   }
 
+  void initList() async{
+    //garageByService  = (await _serviceApi.readGarageBYServiceApi()) as List<GarageByService>?;
+    readPromotionsCategory = await promotionServiceApi.readPromotionsCategory();
+    listPromotionCategory = readPromotionsCategory?.payload;
+    setState(() {
+    });
+  }
   @override
   Widget build(BuildContext context) {
-
+    if(listPromotionCategory == null){
+      return Container(
+        color: Colors.white,
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
       key: _key,
       body: SafeArea(
@@ -34,49 +56,49 @@ class _CategoryDetailState extends State<CategoryDetail> {
           children: <Widget>[
             Stack(
               children: <Widget>[
-                const Positioned.fill(
-                  child: Align(
-                  alignment: Alignment.center,
-                  child: Loading(), 
-                )),
+                // const Positioned.fill(
+                //   child: Align(
+                //   alignment: Alignment.center,
+                //   child: Loading(), 
+                // )),
                 Center(
                   child: FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image:'https://toyota.com.my/media/image/attachment/696/loyalt-carousel-mobile-1.jpg',
-                    fit: BoxFit.fill,
-                    height: 400,
+                    image:'https://resource.digitaldealer.com.au/image/8460085805e3cec9fd591a223634492_0_0-c.jpg',
+                    fit: BoxFit.fitHeight,
+                    // height: 400,
                     width: double.infinity,
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        // Box decoration takes a gradient
-                        gradient: LinearGradient(
-                          // Where the linear gradient begins and ends
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          // Add one stop for each color. Stops should increase from 0 to 1
-                          colors: [
-                            // Colors are easy thanks to Flutter's Colors class.
-                            Colors.white.withOpacity(0.7),
-                            Colors.white.withOpacity(0.5),
-                            Colors.white.withOpacity(0.07),
-                            Colors.white.withOpacity(0.05),
-                            Colors.white.withOpacity(0.025),
-                          ],
-                        ),
-                      ),
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Container())),
-                ),
+                // Align(
+                //   alignment: Alignment.topCenter,
+                //   child: Container(
+                //       height: 100,
+                //       decoration: BoxDecoration(
+                //         // Box decoration takes a gradient
+                //         gradient: LinearGradient(
+                //           // Where the linear gradient begins and ends
+                //           begin: Alignment.topCenter,
+                //           end: Alignment.bottomCenter,
+                //           // Add one stop for each color. Stops should increase from 0 to 1
+                //           colors: [
+                //             // Colors are easy thanks to Flutter's Colors class.
+                //             // Colors.white.withOpacity(0.7),
+                //             // Colors.white.withOpacity(0.5),
+                //             // Colors.white.withOpacity(0.07),
+                //             // Colors.white.withOpacity(0.05),
+                //             // Colors.white.withOpacity(0.025),
+                //           ],
+                //         ),
+                //       ),
+                //       child: Padding(
+                //           padding: const EdgeInsets.only(top: 8.0),
+                //           child: Container())),
+                // ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                      height: 400,
+                      height: 200,
                       decoration: BoxDecoration(
                         // Box decoration takes a gradient
                         gradient: LinearGradient(
@@ -110,13 +132,13 @@ class _CategoryDetailState extends State<CategoryDetail> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const  [
                           Padding(
-                            padding: EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(20.0),
                             child:  Text(
                               'ALL PROMOTION CATEGPRIES',
                               style:  TextStyle(
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 20),
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
                           ),
                         ],
@@ -169,7 +191,6 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 ),
               ],
             ),
-
             Expanded(
               child: Container(
                 decoration:const BoxDecoration(
@@ -189,15 +210,15 @@ class _CategoryDetailState extends State<CategoryDetail> {
                         physics: const BouncingScrollPhysics(),
                         crossAxisCount:  3,
                         shrinkWrap: true,
-                        childAspectRatio: 1.1,
+                        childAspectRatio: 0.9,
                         children: List.generate(
-                          categories.length,
+                          listPromotionCategory!.length,
                           (index) {
                             // Category category = listCategorie[index];
                             return ReuseListCardCategory(
                               getRandomColor: ColorRandom.getRandomColor(),
                               image: categories[index]['img'],
-                              title: categories[index]['name'],
+                              title: listPromotionCategory![index].name ?? '',
                               onTap: () {
                                 // Navigator.push(
                                 //     context,
@@ -217,7 +238,8 @@ class _CategoryDetailState extends State<CategoryDetail> {
             )         
           ],
         ),
-      )),
+      )
+      ),
     );
   }
 }

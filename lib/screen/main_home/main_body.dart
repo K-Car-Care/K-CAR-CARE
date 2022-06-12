@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/screen/history_screen.dart/main_history_screen.dart';
 import 'package:k_car_care_project/screen/home_screen/home_screen.dart';
 import 'package:k_car_care_project/screen/promotion/components/main_promotion.dart';
-import 'package:k_car_care_project/screen/service_screen/main_servce.dart';
+import '../towing_company/main_body.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -50,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 0:
         return const MyHomeScreen();
       case 1:
-        return const ServiceScreen();
+        return const TowingCompany();
       case 2:
         return const HisstoryScreen();
       case 3:
@@ -107,8 +106,8 @@ class AnimatedBottomNav extends StatelessWidget {
               onTap: () => onChange(1),
               child: BottomNavItem(
                 isPromotion:false,
-                icon: Icons.school_rounded,
-                title: "Service",
+                icon: Icons.commute_rounded,
+                title: "Towing",
                 isActive: currentIndex == 1,
                 inactiveColor: Colors.grey,
                 activeColor: defaultColor,
@@ -120,7 +119,7 @@ class AnimatedBottomNav extends StatelessWidget {
               onTap: () => onChange(2),
               child: BottomNavItem(
                 isPromotion:false,
-                icon: Icons.local_library_rounded,
+                icon: Icons.description_rounded,
                 title: "History",
                 isActive: currentIndex == 2,
                 inactiveColor: Colors.grey,
@@ -132,8 +131,8 @@ class AnimatedBottomNav extends StatelessWidget {
             child: InkWell(
               onTap: () => onChange(3),
               child: BottomNavItem(
-                isPromotion:isPromotion,
-                icon: Icons.favorite_outlined,
+                isPromotion:false,
+                icon: Icons.school_rounded,
                 title: "Promotion",
                 isActive: currentIndex == 3,
                 inactiveColor: Colors.grey,
@@ -145,8 +144,8 @@ class AnimatedBottomNav extends StatelessWidget {
       ),
     );
   }
+  
 }
-
 
 class BottomNavItem extends StatelessWidget {
   final bool isActive;

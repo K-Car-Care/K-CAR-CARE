@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:k_car_care_project/core/constant/app_images.dart';
 import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/shared/typography.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,6 +9,7 @@ class CardService extends StatelessWidget {
   final String title;
   final String phoneNumber;
   final String desc;
+  final double? price;
   const CardService({
     Key? key,
     required this.color,
@@ -18,6 +17,7 @@ class CardService extends StatelessWidget {
     required this.title,
     required this.phoneNumber,
     required this.desc,
+    this.price,
   }) : super(key: key);
 
   @override
@@ -35,93 +35,71 @@ class CardService extends StatelessWidget {
       margin: const EdgeInsets.all(5.0),
       child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: Row(
-          children: [
-            // Container(
-            // width: 50,
-            // height: 50,
-            // padding: const EdgeInsets.all(3.0),
-            // decoration: BoxDecoration(
-            //     color: color,
-            //     border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.5)),
-            //     // borderRadius: BorderRadius.circular(8),
-            //     shape: BoxShape.circle,
-            //     image: DecorationImage(
-            //       image: NetworkImage(icon),
-            //       fit: BoxFit.cover,
-            //     ),
-            //   ),
-            //   alignment: Alignment.center,
-            // ),
-            Expanded(
-              // flex: 7,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      // title ,
-                      title,
-                      style: subTitleTextStyleBlack.copyWith(fontWeight: FontWeight.w600)
-                    ),
-                    Text(
-                      // title ,
-                      'Phnom Penh, Terk Tlar',
-                      style: bodyTextStyleBlack.copyWith(color:Colors.grey,fontSize: 12),
-                    ),
-                    // const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('20\$',style: titleTextStyleBlack.copyWith(color:Colors.amber[700],fontWeight: FontWeight.w600)),
-                        GestureDetector(
-                          onTap: () async{
-                            final url = 'tel:$phoneNumber';
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            }
-                          },
-                          child: AnimatedContainer(
-                          margin: const EdgeInsets.all(2.5),
-                          // height: 30,
-                          // width: 30,
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          duration: const Duration(milliseconds: 300),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 20,
-                                offset: const Offset(2, 5),
-                              ),
-                            ],
-                            color: defaultColor.withOpacity(0.9),
-                            // shape: BoxShape.circle,
-                          ),
-                          child:  Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              children: [
-                                // Icon(
-                                //   Icons.request,
-                                //   color:Colors.grey.withOpacity(0.7),
-                                //   size: 20,
-                                // ),
-                                Text('Request',style:bodyTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
-                              ],
-                            ),
-                          ),
-                        )
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                // title ,
+                title,
+                style: subTitleTextStyleBlack.copyWith(fontWeight: FontWeight.w600)
+              ),
+              Text(
+                desc ,
+                //'Phnom Penh, Terk Tlar',
+                style: bodyTextStyleBlack.copyWith(color:Colors.grey,fontSize: 12),
+              ),
+              // const SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('$price\$',style: titleTextStyleBlack.copyWith(color:Colors.amber[700],fontWeight: FontWeight.w600)),
+                  GestureDetector(
+                    onTap: () async{
+                      final url = 'tel:$phoneNumber';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      }
+                    },
+                    child: AnimatedContainer(
+                    margin: const EdgeInsets.all(2.5),
+                    // height: 30,
+                    // width: 30,
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    duration: const Duration(milliseconds: 300),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 20,
+                          offset: const Offset(2, 5),
                         ),
                       ],
+                      color: defaultColor.withOpacity(0.9),
+                      // shape: BoxShape.circle,
                     ),
-                  ],
-                ),
+                    child:  Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        children: [
+                          // Icon(
+                          //   Icons.request,
+                          //   color:Colors.grey.withOpacity(0.7),
+                          //   size: 20,
+                          // ),
+                          Text('Contact',style:bodyTextStyleWhite.copyWith(fontWeight: FontWeight.w600)),
+                        ],
+                      ),
+                    ),
+                  )
+                  ),
+                ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         
         // ListTile(

@@ -1,14 +1,13 @@
 // To parse this JSON data, do
 //
 //     final notificationModel = notificationModelFromJson(jsonString);
-
 import 'dart:convert';
 
 NotificationModel notificationModelFromJson(String str) => NotificationModel.fromJson(json.decode(str));
-
 String notificationModelToJson(NotificationModel data) => json.encode(data.toJson());
 
 class NotificationModel {
+    
     NotificationModel({
         this.message,
         this.payload,
@@ -25,7 +24,7 @@ class NotificationModel {
     Map<String, dynamic> toJson() => {
         "message": message,
         "payload": List<dynamic>.from(payload!.map((x) => x.toJson())),
-    };
+    };   
 }
 
 class Payload {

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:k_car_care_project/core/constant/app_images.dart';
 
 class MainCardService extends StatelessWidget {
   final String image;
@@ -18,12 +16,11 @@ class MainCardService extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
-          width: 0.5,
-          color:Colors.grey.withOpacity(0.3)),
+            width: 0.5,
+            color:Colors.grey.withOpacity(0.3)
+          ),
         borderRadius:BorderRadius.circular(8),
       ),
-      // shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -46,23 +43,23 @@ class MainCardService extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey.withOpacity(0.2),
-                image: DecorationImage(
-                  image: NetworkImage(image),
-                  fit: BoxFit.fill,
-                ),
+                // image: DecorationImage(
+                //   image: NetworkImage(image),
+                //   fit: BoxFit.contain,
+                // ),
               ),
-              // child: Center(
-              //   child:  Image.network(
-              //       image,
-              //       width: 50,
-              //       height: 50,
-              //       color:Colors.white,
-              //     )
-              //   ),
+              child: Center(
+                child:  Image.network(
+                    image,
+                    width: 40,
+                    height: 40,
+                    // color:Colors.white,
+                  )
+                ),
             ),
           ListTile(
             title: Text(
-              title.toUpperCase(),
+              title,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 16,

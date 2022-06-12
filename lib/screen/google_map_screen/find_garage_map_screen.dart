@@ -3,10 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:k_car_care_project/core/constant/theme_constant.dart';
 import 'package:k_car_care_project/core/model/map_model/map_model.dart';
 import 'package:k_car_care_project/core/shared/typography.dart';
-
 import '../../core/data/map_apis/map_api.dart';
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({Key? key}) : super(key: key);
@@ -54,22 +52,26 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
   }
 
   final Set<Marker> _markers = {};
-
   BitmapDescriptor mapMarker = BitmapDescriptor.defaultMarker;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: defaultColor,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,color:Colors.black),
+          onPressed: (){Navigator.pop(context);},
+        ),
         title: Text(
-          "Find Place",
-          style: subTitleTextStyleWhite.copyWith(fontWeight: FontWeight.w600),
+          "Find the best Place here",
+          style: subTitleTextStyleBlack.copyWith(fontWeight: FontWeight.bold),
         ),
         actions: [
           Padding(
             padding: EdgeInsets.all(10),
             child: PopupMenuButton(
+              icon: Icon(Icons.more_vert_outlined,color: Colors.black),
               itemBuilder: (context) => [
                 PopupMenuItem(
                   onTap: () {
@@ -129,6 +131,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
             }
             if (snapshot.hasData) {
               return ListView.builder(
+                scrollDirection: Axis.horizontal,
                 itemCount: _listMap?.length,
                 itemBuilder: (context, index) {
                   return _boxes(
@@ -163,6 +166,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
       ),
     );
   }
+
   Widget _boxes(String _image, double lat, double lon, String title) {
     return InkWell(
       onTap: () async {
@@ -172,33 +176,36 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
         print(currentPosition?.latitude.toString());
         print(currentPosition?.longitude.toString());
       },
-      child: SizedBox(
-        height: 120,
-        child: FittedBox(
-          child: Material(
-            color: Colors.white,
-            elevation: 14.0,
-            borderRadius: BorderRadius.circular(6),
-            shadowColor: Color(0x802196f3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 180,
-                  height: 200,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(24.0),
-                    child: Image.network(
-                      _image,
-                      fit: BoxFit.fill,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 3),
+        child: SizedBox(
+          height: 120,
+          child: FittedBox(
+            child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(6),
+              shadowColor: Color(0x802196f3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 180,
+                    height: 200,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(24.0),
+                      child: Image.network(
+                        _image,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: myDetailsContainer1(title),
-                ),
-              ],
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: myDetailsContainer1(title),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -310,7 +317,6 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
       ],
     );
   }
-  
 
   _googleMap() {
     return InkWell(
@@ -334,6 +340,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
             secondPlace,
             thirdPlace,
             fourPlace,
+            fivePlace,
           },
           // markers: _markers,
         ),
@@ -370,6 +377,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
   //   ),
   //   icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
   // );
+
   Future<Position> getGeoLocationPosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -389,16 +397,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-    Position position = await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high)
-        .then((value) {
-      print(
-          "Get Current Location Success ${value.latitude}, ${value.longitude} ");
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) {
+      print("Get Current Location Success ${value.latitude}, ${value.longitude} ");
       setState(() {
         currentPosition = value;
         print("go");
       });
-
       return value;
     });
     return position;
@@ -408,7 +412,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
     markerId: MarkerId("secondPlace"),
     position: LatLng(11.575454, 104.920095),
     infoWindow: InfoWindow(
-      title: "Second Place",
+      title: "Garage 1",
     ),
     icon: BitmapDescriptor.defaultMarker,
   );
@@ -417,7 +421,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
     markerId: MarkerId("thirdPlace"),
     position: LatLng(11.575183, 104.913076),
     infoWindow: InfoWindow(
-      title: "Third Place",
+      title: "Garage 2",
     ),
     icon: BitmapDescriptor.defaultMarker,
   );
@@ -429,7 +433,19 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>
       104.883367,
     ),
     infoWindow: InfoWindow(
-      title: "Third Place",
+      title: "Garage 3",
+    ),
+    icon: BitmapDescriptor.defaultMarker,
+  );
+
+  Marker fivePlace = Marker(
+    markerId: MarkerId("fivePlace"),
+    position: LatLng(
+      11.5506864,
+      104.8903678,
+    ),
+    infoWindow: InfoWindow(
+      title: "Garage 5",
     ),
     icon: BitmapDescriptor.defaultMarker,
   );

@@ -2,40 +2,46 @@ import 'package:flutter/material.dart';
 // Add additional text styles
 
 TextStyle titleTextStyleBlack = const TextStyle(
-    fontSize: 18,
-    color: Colors.black,
-    fontWeight: FontWeight.w400,
-    fontFamily: "Kantumruy");
+  fontSize: 18,
+  color: Colors.black,
+  fontWeight: FontWeight.w400,
+  fontFamily: "Quicksand"
+);
 
 TextStyle titleTextStyleWhite = const TextStyle(
-    fontSize: 18,
-    color: Colors.white,
-    fontWeight: FontWeight.w400,
-    fontFamily: "Kantumruy");
+  fontSize: 18,
+  color: Colors.white,
+  fontWeight: FontWeight.w400,
+  fontFamily: "Quicksand"
+);
 
 TextStyle subTitleTextStyleBlack = const TextStyle(
-    fontSize: 16,
-    color: Colors.black,
-    fontWeight: FontWeight.w400,
-    fontFamily: "Kantumruy");
+  fontSize: 16,
+  color: Colors.black,
+  fontWeight: FontWeight.w600,
+  fontFamily: "Quicksand"
+);
 
 TextStyle subTitleTextStyleWhite = const TextStyle(
-    fontSize: 16,
-    color: Colors.white,
-    fontWeight: FontWeight.w400,
-    fontFamily: "Kantumruy");
+  fontSize: 16,
+  color: Colors.white,
+  fontWeight: FontWeight.w400,
+  fontFamily: "Quicksand"
+);
 
 TextStyle bodyTextStyleBlack = const TextStyle(
-    fontSize: 14,
-    color: Colors.black,
-    fontWeight: FontWeight.w400,
-    fontFamily: "Kantumruy");
+  fontSize: 14,
+  color: Colors.black,
+  fontWeight: FontWeight.w400,
+  fontFamily: "Quicksand"
+);
 
 TextStyle bodyTextStyleWhite = const TextStyle(
-    fontSize: 14,
-    color: Colors.white,
-    fontWeight: FontWeight.w400,
-    fontFamily: "Kantumruy");
+  fontSize: 14,
+  color: Colors.white,
+  fontWeight: FontWeight.w400,
+  fontFamily: "Quicksand"
+);
 
 // class TypographyHelper {
 //   static TextStyle getTitleTextStyleBlack(BuildContext context) {

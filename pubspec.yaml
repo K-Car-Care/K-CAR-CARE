@@ -104,9 +104,11 @@ dependencies:
   #Format Date
   intl: ^0.17.0
   scrollable_list_tabview: ^0.1.6
-  coupon_uikit: ^0.0.1
   flutter_spinkit: ^5.1.0
   transparent_image: ^2.0.0
+  flutter_easyloading: ^3.0.3
+  socket_io_client: 2.0.0-beta.4-nullsafety.0
+  # socket_io_client: ^0.9.10+2
 
 
   flutter_swiper:
@@ -156,26 +158,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-      - family: Poppins
+      - family: Quicksand
         fonts:
-          - asset: assets/fonts/Poppins-Black.ttf
-          - asset: assets/fonts/Poppins-BlackItalic.ttf
-          - asset: assets/fonts/Poppins-Bold.ttf
-          - asset: assets/fonts/Poppins-BoldItalic.ttf
-          - asset: assets/fonts/Poppins-ExtraBold.ttf
-          - asset: assets/fonts/Poppins-ExtraBoldItalic.ttf
-          - asset: assets/fonts/Poppins-ExtraLight.ttf
-          - asset: assets/fonts/Poppins-ExtraLightItalic.ttf
-          - asset: assets/fonts/Poppins-Italic.ttf
-          - asset: assets/fonts/Poppins-Light.ttf
-          - asset: assets/fonts/Poppins-LightItalic.ttf
-          - asset: assets/fonts/Poppins-Medium.ttf
-          - asset: assets/fonts/Poppins-MediumItalic.ttf
-          - asset: assets/fonts/Poppins-Regular.ttf
-          - asset: assets/fonts/Poppins-SemiBold.ttf
-          - asset: assets/fonts/Poppins-SemiBoldItalic.ttf
-          - asset: assets/fonts/Poppins-Thin.ttf
-          - asset: assets/fonts/Poppins-ThinItalic.ttf
+          - asset: assets/fonts/Quicksand-Regular.ttf
+          - asset: assets/fonts/Quicksand-Bold.ttf
+          - asset: assets/fonts/Quicksand-Light.ttf
+          - asset: assets/fonts/Quicksand-Medium.ttf
+          - asset: assets/fonts/Quicksand-VariableFont_wght.ttf
+          
       - family: Kantumruy
         fonts:
           - asset: assets/fonts/Kantumruy-Bold.ttf
